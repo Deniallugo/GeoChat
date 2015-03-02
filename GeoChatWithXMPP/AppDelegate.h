@@ -7,11 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XMPP.h"
+#import "SMChatDelegatE.h"
+#import "SMMessageDelegate.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@class ViewController;
+@interface AppDelegate : NSObject{
 
-@property (strong, nonatomic) UIWindow *window;
+    UIWindow *window;
+    ViewController *viewController;
 
+    XMPPStream *xmppStream;
+    NSString *password;
+    BOOL isOpen;
+
+    __unsafe_unretained NSObject <SMChatDelegate> *chatDelegate;
+    __unsafe_unretained NSObject <SMMessageDelegate> *messageDelegate;
+
+}
+
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet ViewController *viewController;
+@property (nonatomic, assign) id<SMChatDelegate>  _chatDelegate;
+@property (nonatomic, assign) id <SMMessageDelegate> _messageDelegate;
+
+@property (nonatomic, readonly) XMPPStream *xmppStream;
+
+- (BOOL)connect;
+- (void)disconnect;
 
 @end
-
