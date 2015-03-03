@@ -16,4 +16,5 @@
 
 - (IBAction)registr;
 
+- (IBAction)close:(id)sender;
 @end

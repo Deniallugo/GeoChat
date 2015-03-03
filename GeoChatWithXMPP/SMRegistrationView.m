@@ -15,67 +15,33 @@
 
 -(IBAction)registr{
     [self createAccount];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
-- (void)updateAccountInfo
-{
-
-
-    //NSString *domain = [[NSString alloc] initWithString:@"192.168.1.100"];
-
-    //int port = 5222;
-//    [[self appDelega]
-
-    NSString *usname =[[NSString alloc] initWithString:login.text];
-    NSString *juser =[[NSString alloc] initWithString:[usname stringByAppendingString:@"your server ip"]];
-
-    XMPPJID *jid = [XMPPJID jidWithString:juser];
-    [self  xmppStream].myJID =jid;
-    [[self appDelegate]setupStream];
-    //allowSelfSignedCertificates =  NSOnState;
-   // allowSSLHostNameMismatch    =  NSOnState;
-    NSUserDefaults *dflts = [NSUserDefaults standardUserDefaults];
-
-    //[dflts setObject:domain forKey:@"Account.Server"];
-
-    //  [dflts setObject:(port ? [NSNumber numberWithInt:port] : nil)
-    //    forKey:@"Account.Port"];
-
-    [dflts setObject:juser
-              forKey:@"Account.JID"];
-    [dflts setObject:@"ios"
-              forKey:@"Account.Resource"];
-
-//    [dflts setBool:useSSL                      forKey:@"Account.UseSSL"];
- //   [dflts setBool:allowSelfSignedCertificates forKey:@"Account.AllowSelfSignedCert"];
-   // [dflts setBool:allowSSLHostNameMismatch    forKey:@"Account.AllowSSLHostNameMismatch"];
-    [dflts setBool:YES forKey:@"Account.RememberPassword"];
-
-    [dflts setObject:password.text forKey:@"Account.Password"];
-    [dflts synchronize];
-
-
+- (IBAction)close:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
 - (void)createAccount
 {
-    [self updateAccountInfo];
     NSError *error = nil;
+    NSString *juser =[[NSString alloc] initWithString:[login.text stringByAppendingString:@"@kampus_gid"]];
 
-    [[self xmppStream] setMyJID:[XMPPJID jidWithString:@"username@server.example.com/ios-client"]];
+        NSMutableArray *elements = [NSMutableArray array];
+        [elements addObject:[NSXMLElement elementWithName:@"username" stringValue:juser]];
+        [elements addObject:[NSXMLElement elementWithName:@"password" stringValue:password.text]];
 
-    //success = [self.xmppStream registerWithPassword:password.text error:&error];
-    if (self.xmppStream.supportsInBandRegistration) {
-        if (![self.xmppStream registerWithPassword:password.text error:&error])
-        {
-            NSLog(@"Oops, I forgot something: %@", error);
-        }else{
-            NSLog(@"No Error");
-        }
+    if([[self xmppStream ] registerWithElements:elements error:&error]){
+        [self xmppStreamDidRegister:[self xmppStream]];
     }
+    else
+        [self xmppStream:[self xmppStream] didNotRegister:error];
+
+
+
 }
 
 
@@ -113,7 +79,16 @@
 - (XMPPStream *)xmppStream {
     return [[self appDelegate] xmppStream];
 }
+
+
+
+
+
+
+
+
 @end
+
 
 
 

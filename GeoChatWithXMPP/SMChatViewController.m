@@ -9,9 +9,14 @@
 #import "SMChatViewController.h"
 #import "AppDelegate.h"
 #import "SMLoginView.h"
-@implementation SMChatViewController
+@implementation SMChatViewController{
 
-@synthesize messageField, chatWithUser, tView;
+    CLLocationManager *locationManager;
+
+}
+
+@synthesize messageField, chatWithUser, tView, hLocation,wLocation;
+;
 
 - (void)viewDidLoad {
 
@@ -26,15 +31,60 @@
     del._messageDelegate = self;
     [self.messageField becomeFirstResponder];
 
+    if (self->locationManager == nil)
+    {
+        self->locationManager = [[CLLocationManager alloc] init];
+        self->locationManager.desiredAccuracy =
+        kCLLocationAccuracyNearestTenMeters;
+        self->locationManager.delegate = self;
+    }
+    [self->locationManager startUpdatingLocation];
+
 }
+
+
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    CLLocation *currentLocation = newLocation;
+
+    if (currentLocation != nil) {
+        hLocation = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+        wLocation = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+    }
+}
+- (void)stopUpdatingLocationWithMessage:(NSString *)state {
+    //self.stateString = state;
+    //[self.tableView reloadData];
+    [locationManager stopUpdatingLocation];
+    locationManager.delegate = nil;
+
+    UIBarButtonItem *resetItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Reset")
+                                                                  style:UIBarButtonItemStylePlain
+                                                                 target:self
+                                                                 action:@selector(reset)];
+    [self.navigationItem setLeftBarButtonItem:resetItem animated:YES];
+}
+
 
 #pragma mark -
 #pragma mark Actions
 
 - (IBAction) closeChat {
 
-    SMLoginView *loginController = [[SMLoginView alloc] init];
-    [self presentViewController:loginController animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 
 }
 
@@ -63,10 +113,16 @@
 
 
 
+
 - (IBAction)sendMessage {
 
     NSString *messageStr = self.messageField.text;
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 
+
+    [locationManager startUpdatingLocation];
+    hLocation;
     if([messageStr length]) {
 
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -81,7 +137,6 @@
 
         self.messageField.text = @"";
 
-     //   NSString *m = [NSString stringWithFormat:@"%@:%@", messageStr, @"you"];
 
         NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
         [m setObject:messageStr forKey:@"msg"];
@@ -91,6 +146,14 @@
         [self.tView reloadData];
 
     }
+
+//    locationManager.delegate = self;
+//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//
+//    [locationManager startUpdatingLocation];
+//    hLocation;
+
+
 }
 
 #pragma mark -
@@ -149,4 +212,7 @@
     return self;
 
 }
+
+
+
 @end

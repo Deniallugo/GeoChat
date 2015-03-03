@@ -26,7 +26,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.hostField.text forKey:@"host"];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }

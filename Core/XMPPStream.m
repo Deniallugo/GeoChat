@@ -1133,7 +1133,8 @@ enum XMPPStreamConfig
 			// Open TCP connection to the configured hostName.
 			
 			state = STATE_XMPP_CONNECTING;
-			
+       //     state = STATE_XMPP_BINDING;
+            
 			NSError *connectErr = nil;
 			result = [self connectToHost:hostName onPort:hostPort withTimeout:XMPPStreamTimeoutNone error:&connectErr];
 			
@@ -1620,12 +1621,12 @@ enum XMPPStreamConfig
 		
 		// The root element can be properly queried for authentication mechanisms anytime after the
 		// stream:features are received, and TLS has been setup (if required)
-		if (state >= STATE_XMPP_POST_NEGOTIATION)
+        if (state >= STATE_XMPP_POST_NEGOTIATION)
 		{
 			NSXMLElement *features = [rootElement elementForName:@"stream:features"];
 			NSXMLElement *reg = [features elementForName:@"register" xmlns:@"http://jabber.org/features/iq-register"];
 			
-			result = (reg != nil);
+			result = (reg == nil);
 		}
 	}};
 	

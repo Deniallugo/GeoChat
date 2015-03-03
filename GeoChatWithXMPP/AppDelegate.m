@@ -16,7 +16,16 @@
 #import "XMPPvCardCoreDataStorage.h"
 #import "ViewController.h"
 #import "DDLog.h"
+#import "XMPPLogging.h"
 #import "DDTTYLogger.h"
+
+// Log levels: off, error, warn, info, verbose
+#if DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_INFO;
+#endif
+
 
 @interface AppDelegate ()
 
@@ -30,12 +39,15 @@
 @synthesize xmppvCardAvatarModule;
 @synthesize xmppvCardTempModule;
 @synthesize xmppStream;
+ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Configure logging framework
 
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
+
 
     // Setup the view controllers
 
@@ -51,7 +63,6 @@
         [viewController presentViewController:loginViewController animated:YES completion:nil];
 
     }
-    
     return YES;
 }
 
@@ -129,12 +140,9 @@
     password = myPassword;
 
     NSError *error = nil;
-   // if ([xmppStream supportsInBandRegistration] )
-     //   [xmppStream registerWithPassword:password error:&error];
 
     if (!
        [xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]
-     // [xmppStream registerWithPassword:password error:&error]
         )
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -147,9 +155,6 @@
 
         return NO;
     }
-   // if ([xmppStream supportsInBandRegistration] )
-//        [xmppStream registerWithPassword:password error:&error];
-
 
 
     return YES;
@@ -212,7 +217,33 @@
 
 }
 
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:
+(NSXMLElement *)error;
+{
+    XMPPLogError(@"Did not authenticate");
 
+    [xmppStream registerWithPassword:[[NSUserDefaults
+                                       standardUserDefaults] stringForKey:@"userPassword"] error:nil];
+
+    NSError * err = nil;
+
+    if(![[self xmppStream] registerWithPassword:password error:&err])
+    {
+        XMPPLogError(@"Error registering: %@", err);
+    }
+
+}
+- (void)xmppStreamDidRegister:(XMPPStream *)sender{
+
+    XMPPLogError(@"I'm in register method");
+
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement
+                                                        *)error{ 
+    XMPPLogError(@"Sorry the registration is failed");
+    
+}
 
 
 @end
