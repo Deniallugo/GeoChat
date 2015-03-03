@@ -8,18 +8,24 @@
 
 #import "SMLoginView.h"
 #import "SMRegistrationView.h"
+#import "SMChatViewController.h"
 @implementation SMLoginView
 
-@synthesize loginField, passwordField;
+@synthesize loginField, passwordField,view;
 - (IBAction) login {
 
+    [[self appDelegate]connect];
+    
     [[NSUserDefaults standardUserDefaults] setObject:self.loginField.text forKey:@"userID"];
     [[NSUserDefaults standardUserDefaults] setObject:self.passwordField.text forKey:@"userPassword"];
     [[NSUserDefaults standardUserDefaults] setObject:self.hostField.text forKey:@"host"];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    SMChatViewController* ChatViewController = [[SMChatViewController alloc] init];
+    [self presentViewController:ChatViewController animated:YES completion:nil];
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
@@ -29,7 +35,7 @@
     
 
 }
-//
+
 - (IBAction)registration {
 
     SMRegistrationView* registrController = [[SMRegistrationView alloc] init];
@@ -37,7 +43,13 @@
 
 }
 
-- (IBAction)reg {
+
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (XMPPStream *)xmppStream {
+    return [[self appDelegate] xmppStream];
 }
 
 @end

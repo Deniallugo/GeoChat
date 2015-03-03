@@ -43,7 +43,7 @@
  * According to the XEP it is RECOMMENDED for the value of the 'node' attribute to be an HTTP URL.
 **/
 #ifndef DISCO_NODE
-	#define DISCO_NODE @"https://github.com/robbiehanson/XMPPFramework"
+	#define DISCO_NODE @"kampus_gid"
 #endif
 
 @interface GCDTimerWrapper : NSObject
@@ -1544,40 +1544,40 @@ static NSInteger sortFieldValues(NSXMLElement *value1, NSXMLElement *value2, voi
 	//     <feature var="feature2"/>
 	//   </query>
 	// </iq>
-	
-	NSXMLElement *query = [iq elementForName:@"query" xmlns:XMLNS_DISCO_INFO];
-	if (query == nil)
-	{
-		return NO;
-	}
-	
-	NSString *type = [[iq attributeStringValueForName:@"type"] lowercaseString];
-	if ([type isEqualToString:@"get"])
-	{
-		NSString *node = [query attributeStringValueForName:@"node"];
-		
-		if (node == nil || [node hasPrefix:myCapabilitiesNode])
-		{
-			[self handleDiscoRequest:iq];
-		}
-		else
-		{
-			return NO;
-		}
-	}
-	else if ([type isEqualToString:@"result"])
-	{
-		[self handleDiscoResponse:query fromJID:[iq from]];
-	}
-	else if ([type isEqualToString:@"error"])
-	{
-		[self handleDiscoErrorResponse:query fromJID:[iq from]];
-	}
-	else
-	{
-		return NO;
-	}
-	
+//	
+//	NSXMLElement *query = [iq elementForName:@"query" xmlns:XMLNS_DISCO_INFO];
+//	if (query == nil)
+//	{
+//		return NO;
+//	}
+//	
+//	NSString *type = [[iq attributeStringValueForName:@"type"] lowercaseString];
+//	if ([type isEqualToString:@"get"])
+//	{
+//		NSString *node = [query attributeStringValueForName:@"node"];
+//		
+//		if (node == nil || [node hasPrefix:myCapabilitiesNode])
+//		{
+//			[self handleDiscoRequest:iq];
+//		}
+//		else
+//		{
+//			return NO;
+//		}
+//	}
+//	else if ([type isEqualToString:@"result"])
+//	{
+//		[self handleDiscoResponse:query fromJID:[iq from]];
+//	}
+//	else if ([type isEqualToString:@"error"])
+//	{
+//		[self handleDiscoErrorResponse:query fromJID:[iq from]];
+//	}
+//	else
+//	{
+//		return NO;
+//	}
+//	
 	return YES;
 }
 

@@ -10,7 +10,7 @@
 #import "XMPP.h"
 #import "SMChatDelegatE.h"
 #import "SMMessageDelegate.h"
-
+#import "SMChatViewController.h"
 #import "XMPPRoster.h"
 
 @class SMLoginView;
@@ -30,7 +30,7 @@ XMPPRosterDelegate>
 {
 
     UIWindow *window;
-    ViewController *viewController;
+    SMChatViewController *viewController;
     SMLoginView* loginViewController;
 
     NSString *password;
@@ -71,7 +71,7 @@ XMPPRosterDelegate>
 
 
 
-
+-(void)setupStream;
 - (BOOL)connect;
 - (void)disconnect;
 

@@ -36,6 +36,31 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+
+    [super viewDidAppear:animated];
+
+    NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+
+    if (login) {
+
+        if ([[self appDelegate] connect]) {
+
+            NSLog(@"show buddy list");
+
+        }
+
+    } else {
+        
+        NSLog(@"all bad");
+    }
+    
+    
+    
+}
+
+
+
 - (IBAction)sendMessage {
 
     NSString *messageStr = self.messageField.text;

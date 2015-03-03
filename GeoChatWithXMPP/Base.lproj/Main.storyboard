@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Piy-W0-eft">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -26,9 +26,6 @@
                                             <state key="normal" title="Выйти">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <connections>
-                                                <segue destination="Piy-W0-eft" kind="show" id="lDM-lj-iwV"/>
-                                            </connections>
                                         </button>
                                         <connections>
                                             <action selector="showLogin" destination="vXZ-lx-hvc" id="FJp-6T-7Tw"/>
@@ -164,7 +161,7 @@
                                 </variation>
                                 <connections>
                                     <action selector="login" destination="Piy-W0-eft" eventType="touchUpInside" id="2q0-EC-rrR"/>
-                                    <segue destination="vXZ-lx-hvc" kind="show" id="1gY-ML-vwr"/>
+                                    <segue destination="iZE-aE-WI2" kind="show" id="jJp-fR-QaX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkO-u5-4pM">
@@ -220,7 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQT-2w-79g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1228.5" y="746"/>
+            <point key="canvasLocation" x="1153.5" y="820"/>
         </scene>
         <!--Registration View-->
         <scene sceneID="2tr-vd-mtq">
@@ -424,7 +421,6 @@
                                             </state>
                                             <connections>
                                                 <action selector="closeChat" destination="iZE-aE-WI2" eventType="touchUpInside" id="BGo-0R-TTq"/>
-                                                <segue destination="vXZ-lx-hvc" kind="show" id="QyN-LX-05z"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -469,10 +465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbM-dO-LHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="496.5" y="-17"/>
+            <point key="canvasLocation" x="1240.5" y="81"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="1gY-ML-vwr"/>
-    </inferredMetricsTieBreakers>
 </document>

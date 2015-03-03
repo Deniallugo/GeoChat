@@ -115,13 +115,7 @@
     NSString *jabberID = [[NSUserDefaults standardUserDefaults] stringForKey:@"userID"];
     NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"userPassword"];
 
-//    NSString * hostname = [[NSUserDefaults standardUserDefaults] stringForKey:@"host"];
-//
-//    if ([hostname  isEqual: @""]) {
-//        hostname =@"5.143.95.49";
-//    }
-//
-
+    jabberID = [jabberID stringByAppendingString:@"@kampus_gid"];
     if (![xmppStream isDisconnected]) {
         return YES;
     }
@@ -135,8 +129,11 @@
     password = myPassword;
 
     NSError *error = nil;
-     
-    if (![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
+    
+    if (!
+        [xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]
+//        [xmppStream registerWithPassword:password error:&error]
+        )
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                             message:[NSString stringWithFormat:@"Can't connect to server %@", [error localizedDescription]]

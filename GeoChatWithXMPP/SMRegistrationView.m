@@ -26,14 +26,14 @@
     //NSString *domain = [[NSString alloc] initWithString:@"192.168.1.100"];
 
     //int port = 5222;
-//    [[self appDelega];
+//    [[self appDelega]
 
     NSString *usname =[[NSString alloc] initWithString:login.text];
     NSString *juser =[[NSString alloc] initWithString:[usname stringByAppendingString:@"your server ip"]];
 
     XMPPJID *jid = [XMPPJID jidWithString:juser];
     [self  xmppStream].myJID =jid;
-
+    [[self appDelegate]setupStream];
     //allowSelfSignedCertificates =  NSOnState;
    // allowSSLHostNameMismatch    =  NSOnState;
     NSUserDefaults *dflts = [NSUserDefaults standardUserDefaults];
@@ -63,37 +63,18 @@
 - (void)createAccount
 {
     [self updateAccountInfo];
-    [[self xmppStream] setHostName:@"5.143.95.49"];
-    [[self xmppStream] setHostPort:5222];
     NSError *error = nil;
-    BOOL success;
 
-    if(![[[self appDelegate] xmppStream] isConnected])
-    {
+    [[self xmppStream] setMyJID:[XMPPJID jidWithString:@"username@server.example.com/ios-client"]];
 
-   //     if (useSSL)
-     //       success = [[self  xmppStream] oldSchoolSecureConnectWithTimeout:XMPPStreamTimeoutNone error:&error];
-       // else
-            success = [[self xmppStream] connectWithTimeout:XMPPStreamTimeoutNone error:&error];
-    }
-    else
-    {
-        //NSString *password = [[NSString alloc] initWithString:@"321" ];
-
-        success = [[self xmppStream] registerWithPassword:password.text error:&error];
-    }
-
-
-    if (success)
-    {
-//        [self appDelegate].isRegistering = YES;
-        NSLog(@" succeed ");
-
-    }
-    else
-    {
-        NSLog(@"not succeed ");
-
+    //success = [self.xmppStream registerWithPassword:password.text error:&error];
+    if (self.xmppStream.supportsInBandRegistration) {
+        if (![self.xmppStream registerWithPassword:password.text error:&error])
+        {
+            NSLog(@"Oops, I forgot something: %@", error);
+        }else{
+            NSLog(@"No Error");
+        }
     }
 }
 

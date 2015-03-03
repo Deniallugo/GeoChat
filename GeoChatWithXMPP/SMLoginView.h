@@ -7,17 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ViewController.h"
 @interface SMLoginView : UIViewController{
     UITextField *loginField;
     UITextField *passwordField;
     UITextField *hostField;
-
+    ViewController* view;
 }
 
 @property (nonatomic,retain) IBOutlet UITextField *loginField;
 @property (nonatomic,retain) IBOutlet UITextField *passwordField;
 @property (nonatomic,retain) IBOutlet UITextField *hostField;
+@property (nonatomic,retain) IBOutlet ViewController* view;
 
 - (IBAction) login;
 - (IBAction) hideLogin;
