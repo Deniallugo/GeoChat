@@ -11,7 +11,12 @@
 #import "SMChatViewController.h"
 @implementation SMLoginView
 
-@synthesize loginField, passwordField,view;
+@synthesize loginField, passwordField;
+
+
+
+
+
 - (IBAction) login {
 
     [[self appDelegate]connect];
@@ -22,10 +27,7 @@
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    SMChatViewController* ChatViewController = [[SMChatViewController alloc] init];
-    [self presentViewController:ChatViewController animated:YES completion:nil];
-
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 

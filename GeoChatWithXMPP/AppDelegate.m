@@ -49,7 +49,7 @@
     if (![self connect]) {
 
         [viewController presentViewController:loginViewController animated:YES completion:nil];
-        
+
     }
     
     return YES;
@@ -129,10 +129,12 @@
     password = myPassword;
 
     NSError *error = nil;
-    
+   // if ([xmppStream supportsInBandRegistration] )
+     //   [xmppStream registerWithPassword:password error:&error];
+
     if (!
-        [xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]
-//        [xmppStream registerWithPassword:password error:&error]
+       [xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]
+     // [xmppStream registerWithPassword:password error:&error]
         )
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -145,6 +147,9 @@
 
         return NO;
     }
+   // if ([xmppStream supportsInBandRegistration] )
+//        [xmppStream registerWithPassword:password error:&error];
+
 
 
     return YES;

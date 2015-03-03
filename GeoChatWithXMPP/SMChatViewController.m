@@ -8,6 +8,7 @@
 
 #import "SMChatViewController.h"
 #import "AppDelegate.h"
+#import "SMLoginView.h"
 @implementation SMChatViewController
 
 @synthesize messageField, chatWithUser, tView;
@@ -32,7 +33,8 @@
 
 - (IBAction) closeChat {
 
-    [self dismissModalViewControllerAnimated:YES];
+    SMLoginView *loginController = [[SMLoginView alloc] init];
+    [self presentViewController:loginController animated:YES completion:nil];
 
 }
 

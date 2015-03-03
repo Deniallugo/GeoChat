@@ -30,7 +30,7 @@ XMPPRosterDelegate>
 {
 
     UIWindow *window;
-    SMChatViewController *viewController;
+    ViewController *viewController;
     SMLoginView* loginViewController;
 
     NSString *password;
