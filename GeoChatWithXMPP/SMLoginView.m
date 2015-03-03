@@ -1,4 +1,4 @@
-//
+
 //  SMLoginView.m
 //  GeoChatWithXMPP
 //
@@ -7,25 +7,37 @@
 //
 
 #import "SMLoginView.h"
-
+#import "SMRegistrationView.h"
 @implementation SMLoginView
 
 @synthesize loginField, passwordField;
-
 - (IBAction) login {
 
     [[NSUserDefaults standardUserDefaults] setObject:self.loginField.text forKey:@"userID"];
     [[NSUserDefaults standardUserDefaults] setObject:self.passwordField.text forKey:@"userPassword"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.hostField.text forKey:@"host"];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
 - (IBAction) hideLogin {
 
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 
+}
+//
+- (IBAction)registration {
+
+    SMRegistrationView* registrController = [[SMRegistrationView alloc] init];
+    [self presentViewController:registrController animated:YES completion:nil];
+
+}
+
+- (IBAction)reg {
 }
 
 @end

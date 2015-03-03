@@ -8,6 +8,16 @@
 
 #import "AppDelegate.h"
 
+#import "GCDAsyncSocket.h"
+#import "XMPP.h"
+#import "XMPPCapabilitiesCoreDataStorage.h"
+#import "XMPPRosterCoreDataStorage.h"
+#import "XMPPvCardAvatarModule.h"
+#import "XMPPvCardCoreDataStorage.h"
+#import "ViewController.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+
 @interface AppDelegate ()
 
 @end
@@ -15,13 +25,77 @@
 @implementation AppDelegate
 
 @synthesize _chatDelegate, _messageDelegate;
+@synthesize xmppCapabilities;
+@synthesize xmppRoster;
+@synthesize xmppvCardAvatarModule;
+@synthesize xmppvCardTempModule;
+@synthesize xmppStream;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Configure logging framework
+
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
+    // Setup the view controllers
+
+    [window setRootViewController:viewController];
+    [window makeKeyAndVisible];
+
+    // Setup the XMPP stream
+
+    [self setupStream];
+
+    if (![self connect]) {
+
+        [viewController presentViewController:loginViewController animated:YES completion:nil];
+        
+    }
+    
+    return YES;
+}
+
+
+
 
 - (void)setupStream {
+
     xmppStream = [[XMPPStream alloc] init];
+    xmppCapabilities = [[XMPPCapabilities alloc] initWithCapabilitiesStorage:[XMPPCapabilitiesCoreDataStorage sharedInstance]];
+    xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterCoreDataStorage sharedInstance]];
+    xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:[XMPPvCardCoreDataStorage sharedInstance]];
+    xmppvCardAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:xmppvCardTempModule];
+
+    // Configure modules
+
+    xmppCapabilities.autoFetchHashedCapabilities = YES;
+    xmppCapabilities.autoFetchNonHashedCapabilities = NO;
+    [xmppRoster setAutoFetchRoster:YES];
+//    [xmppRoster setAutoRoster:YES];
     [xmppStream setHostName:@"5.143.95.49"];
     [xmppStream setHostPort:5222];
 
+    /**
+     * Add XMPPRoster as a delegate of XMPPvCardAvatarModule to cache roster photos in the roster.
+     * This frees the view controller from having to save photos on the main thread.
+     **/
+    [xmppvCardAvatarModule addDelegate:xmppRoster delegateQueue:xmppRoster.moduleQueue];
+
+
+    // Activate xmpp modules
+
+    [xmppCapabilities activate:xmppStream];
+    [xmppRoster activate:xmppStream];
+    [xmppvCardTempModule activate:xmppStream];
+    [xmppvCardAvatarModule activate:xmppStream];
+
+    // Add ourself as a delegate to anything we may be interested in
+
     [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
+
+    allowSelfSignedCertificates = NO;
+    allowSSLHostNameMismatch = NO;
 }
 
 - (void)goOnline {
@@ -41,8 +115,12 @@
     NSString *jabberID = [[NSUserDefaults standardUserDefaults] stringForKey:@"userID"];
     NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"userPassword"];
 
-
-
+//    NSString * hostname = [[NSUserDefaults standardUserDefaults] stringForKey:@"host"];
+//
+//    if ([hostname  isEqual: @""]) {
+//        hostname =@"5.143.95.49";
+//    }
+//
 
     if (![xmppStream isDisconnected]) {
         return YES;
@@ -74,6 +152,8 @@
 
     return YES;
 }
+
+
 
 
 
@@ -129,6 +209,7 @@
     [_messageDelegate newMessageReceived:m];
 
 }
+
 
 
 

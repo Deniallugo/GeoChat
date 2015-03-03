@@ -24,7 +24,7 @@
     onlineBuddies = [[NSMutableArray alloc ] init];
     AppDelegate *del = [self appDelegate];
     del._chatDelegate = self;
-
+    
 
 }
 
@@ -117,4 +117,6 @@
 - (XMPPStream *)xmppStream {
     return [[self appDelegate] xmppStream];
 }
+
+
 @end

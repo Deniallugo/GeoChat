@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83BC44A51AA3F1DC002B9EA6 /* WorkingWithCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */; };
+		83D268BF1AA5556900305C3A /* SMRegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D268BE1AA5556900305C3A /* SMRegistrationView.m */; };
 		83E6EC981A9F51CB00E004E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC971A9F51CB00E004E1 /* main.m */; };
 		83E6EC9B1A9F51CB00E004E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC9A1A9F51CB00E004E1 /* AppDelegate.m */; };
 		83E6EC9E1A9F51CB00E004E1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC9D1A9F51CB00E004E1 /* ViewController.m */; };
@@ -181,6 +182,8 @@
 /* Begin PBXFileReference section */
 		83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkingWithCamera.m; sourceTree = "<group>"; };
 		83BC44A61AA3F241002B9EA6 /* WorkingWithCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkingWithCamera.h; sourceTree = "<group>"; };
+		83D268BD1AA5556900305C3A /* SMRegistrationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMRegistrationView.h; sourceTree = "<group>"; };
+		83D268BE1AA5556900305C3A /* SMRegistrationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMRegistrationView.m; sourceTree = "<group>"; };
 		83E6EC921A9F51CB00E004E1 /* GeoChatWithXMPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoChatWithXMPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E6EC961A9F51CB00E004E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83E6EC971A9F51CB00E004E1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -585,6 +588,8 @@
 				83E6EECF1A9F5ADE00E004E1 /* SMMessageDelegate.h */,
 				83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */,
 				83BC44A61AA3F241002B9EA6 /* WorkingWithCamera.h */,
+				83D268BD1AA5556900305C3A /* SMRegistrationView.h */,
+				83D268BE1AA5556900305C3A /* SMRegistrationView.m */,
 			);
 			path = GeoChatWithXMPP;
 			sourceTree = "<group>";
@@ -1646,6 +1651,7 @@
 				83E6EECD1A9F59B500E004E1 /* SMChatViewController.m in Sources */,
 				83E6EE6A1A9F51DA00E004E1 /* XMPPvCardTempLabel.m in Sources */,
 				83E6EE831A9F51DA00E004E1 /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
+				83D268BF1AA5556900305C3A /* SMRegistrationView.m in Sources */,
 				83E6EE271A9F51DA00E004E1 /* XMPPAnonymousAuthentication.m in Sources */,
 				83E6EE371A9F51DA00E004E1 /* XMPPParser.m in Sources */,
 				83E6EE801A9F51DA00E004E1 /* XMPPMessageArchiving.xcdatamodeld in Sources */,
