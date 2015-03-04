@@ -16,15 +16,18 @@
     NSString        *chatWithUser;
     UITableView     *tView;
     NSMutableArray  *messages;
-    NSString        *hLocation;
-    NSString        *wLocation;
+    NSString        *GeoLtitude;
+    NSString        *GeoLength;
 
 }
 
 @property (nonatomic,retain) IBOutlet UITextField *messageField;
 @property (nonatomic,retain) NSString *chatWithUser;
-@property (nonatomic,retain) NSString *hLocation;
-@property (nonatomic,retain) NSString *wLocation;
+@property (nonatomic,retain) NSString *GeoLtitude;
+@property (nonatomic,retain) NSString *GeoLength;
+@property (strong, nonatomic) CLLocation *currentLocation;
+
+- (void)startUpdatingCurrentLocation;
 
 @property (nonatomic,retain) IBOutlet UITableView *tView;
 

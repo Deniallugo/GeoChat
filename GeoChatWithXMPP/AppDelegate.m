@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
 #import "GCDAsyncSocket.h"
 #import "XMPP.h"
@@ -57,6 +58,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // Setup the XMPP stream
 
     [self setupStream];
+    if (![CLLocationManager locationServicesEnabled]) {
+        // location services is disabled, alert user
+        UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DisabledTitle", @"DisabledTitle")
+                                                                        message:NSLocalizedString(@"DisabledMessage", @"DisabledMessage")
+                                                                       delegate:nil
+                                                              cancelButtonTitle:NSLocalizedString(@"OKButtonTitle", @"OKButtonTitle")
+                                                              otherButtonTitles:nil];
+        [servicesDisabledAlert show];
+    }
 
     if (![self connect]) {
 

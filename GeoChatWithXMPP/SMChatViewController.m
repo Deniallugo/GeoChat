@@ -15,8 +15,9 @@
 
 }
 
-@synthesize messageField, chatWithUser, tView, hLocation,wLocation;
+@synthesize messageField, chatWithUser, tView, GeoLength,GeoLtitude;
 ;
+
 
 - (void)viewDidLoad {
 
@@ -31,13 +32,14 @@
     del._messageDelegate = self;
     [self.messageField becomeFirstResponder];
 
-    if (self->locationManager == nil)
-    {
-        self->locationManager = [[CLLocationManager alloc] init];
-        self->locationManager.desiredAccuracy =
-        kCLLocationAccuracyNearestTenMeters;
-        self->locationManager.delegate = self;
+
+    self->locationManager = [[CLLocationManager alloc] init];
+    self->locationManager.delegate = self;
+    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self->locationManager requestWhenInUseAuthorization];
     }
+
     [self->locationManager startUpdatingLocation];
 
 }
@@ -45,6 +47,8 @@
 
 
 #pragma mark - CLLocationManagerDelegate
+
+
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -56,12 +60,12 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"didUpdateToLocation: %@", newLocation);
+//    NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
 
     if (currentLocation != nil) {
-        hLocation = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        wLocation = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        GeoLtitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+        GeoLength = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
     }
 }
 - (void)stopUpdatingLocationWithMessage:(NSString *)state {
@@ -117,12 +121,9 @@
 - (IBAction)sendMessage {
 
     NSString *messageStr = self.messageField.text;
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 
 
-    [locationManager startUpdatingLocation];
-    hLocation;
+
     if([messageStr length]) {
 
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -131,6 +132,8 @@
         NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
         [message addAttributeWithName:@"type" stringValue:@"chat"];
         [message addAttributeWithName:@"to" stringValue:chatWithUser];
+        [message addAttributeWithName:@"latitude" stringValue:GeoLtitude];
+        [message addAttributeWithName:@"length" stringValue:GeoLength];
         [message addChild:body];
 
         [self.xmppStream sendElement:message];
@@ -147,11 +150,6 @@
 
     }
 
-//    locationManager.delegate = self;
-//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//
-//    [locationManager startUpdatingLocation];
-//    hLocation;
 
 
 }
