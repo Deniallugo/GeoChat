@@ -50,11 +50,12 @@ XMPPRosterDelegate>
 
         BOOL allowSelfSignedCertificates;
         BOOL allowSSLHostNameMismatch;
-
+    NSError *error;
 
 
 }
 
+@property (nonatomic, retain) NSError *error;
 
 
 

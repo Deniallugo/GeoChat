@@ -15,19 +15,18 @@
 
 
 
-
-
 - (IBAction) login {
 
-    [[self appDelegate]connect];
-    
+
+
     [[NSUserDefaults standardUserDefaults] setObject:self.loginField.text forKey:@"userID"];
     [[NSUserDefaults standardUserDefaults] setObject:self.passwordField.text forKey:@"userPassword"];
     [[NSUserDefaults standardUserDefaults] setObject:self.hostField.text forKey:@"host"];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([[self appDelegate]connect])
+        [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 

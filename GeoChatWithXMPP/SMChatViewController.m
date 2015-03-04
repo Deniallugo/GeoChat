@@ -15,8 +15,8 @@
 
 }
 
-@synthesize messageField, chatWithUser, tView, GeoLength,GeoLtitude;
-;
+@synthesize messageField, chatWithUser, tView, GeoLength,GeoLtitude,cameraView;
+
 
 
 - (void)viewDidLoad {
@@ -42,6 +42,14 @@
 
     [self->locationManager startUpdatingLocation];
 
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(20.0f, 186.0f, 280.0f, 88.0f);
+    [button setTitle:@"Show Action Sheet" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.tintColor = [UIColor darkGrayColor];
+    [button addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+
 }
 
 
@@ -60,7 +68,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-//    NSLog(@"didUpdateToLocation: %@", newLocation);
+    //NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
 
     if (currentLocation != nil) {
@@ -69,16 +77,11 @@
     }
 }
 - (void)stopUpdatingLocationWithMessage:(NSString *)state {
-    //self.stateString = state;
-    //[self.tableView reloadData];
+
     [locationManager stopUpdatingLocation];
     locationManager.delegate = nil;
 
-    UIBarButtonItem *resetItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Reset")
-                                                                  style:UIBarButtonItemStylePlain
-                                                                 target:self
-                                                                 action:@selector(reset)];
-    [self.navigationItem setLeftBarButtonItem:resetItem animated:YES];
+
 }
 
 
@@ -87,30 +90,38 @@
 
 - (IBAction) closeChat {
 
+    [[self appDelegate] disconnect];
+
+    //SMLoginView *loginViewController = [[SMLoginView alloc]init];
     [self dismissViewControllerAnimated:YES completion:nil];
+    //[UIViewController presentViewController:loginViewController animated:YES completion:nil];
 
 
+
+}
+
+- (IBAction)radiusChange:(id)sender {
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 
     [super viewDidAppear:animated];
 
-    NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+//    NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+//
+//    if (login) {
+//
+//        if ([[self appDelegate] connect]) {
+//
+//            NSLog(@"show buddy list");
+//
+//        }
+//
+//    } else {
+//        
+//        NSLog(@"all bad");
+//    }
 
-    if (login) {
-
-        if ([[self appDelegate] connect]) {
-
-            NSLog(@"show buddy list");
-
-        }
-
-    } else {
-        
-        NSLog(@"all bad");
-    }
-    
     
     
 }
@@ -208,6 +219,102 @@
     }
 
     return self;
+
+}
+
+
+
+- (IBAction)openCamera:(id)sender {
+
+    NSString *actionSheetTitle = @"Выбор камеры"; //Action Sheet Title
+    NSString *destructiveTitle = @"Destructive Button"; //Action Sheet Button Titles
+    NSString *other1 = @"Сфотографировать";
+    NSString *other2 = @"Выбрать из галлереи";
+    NSString *cancelTitle = @"Отмена";
+
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:actionSheetTitle
+                                  delegate:self
+                                  cancelButtonTitle:cancelTitle
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:other1, other2, nil];
+
+    [actionSheet showInView:self.view];
+
+
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+
+    if  ([buttonTitle isEqualToString:@"Destructive Button"]) {
+        NSLog(@"Destructive pressed --> Delete Something");
+    }
+
+
+
+    if ([buttonTitle isEqualToString:@"Сфотографировать"]) {
+        [self takePhoto];
+    }
+    if ([buttonTitle isEqualToString:@"Выбрать из галлереи"]) {
+        [self selectPhoto];
+    }
+
+}
+
+- (void)takePhoto {
+
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                              message:@"Device has no camera"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles: nil];
+
+        [myAlertView show];
+        [self selectPhoto];
+
+    }
+    else{
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+
+
+}
+
+- (void)selectPhoto {
+
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+    [self presentViewController:picker animated:YES completion:NULL];
+
+
+}
+
+#pragma mark - Image Picker Controller delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //self.imageView.image = chosenImage;
+
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 
 }
 

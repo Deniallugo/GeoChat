@@ -34,7 +34,8 @@
         [elements addObject:[NSXMLElement elementWithName:@"username" stringValue:juser]];
         [elements addObject:[NSXMLElement elementWithName:@"password" stringValue:password.text]];
 
-    if([[self xmppStream ] registerWithElements:elements error:&error]){
+    if(
+    [[self xmppStream ] registerWithElements:elements error:&error]){
         [self xmppStreamDidRegister:[self xmppStream]];
     }
     else

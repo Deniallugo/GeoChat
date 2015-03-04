@@ -15,7 +15,7 @@
 #import "XMPPRosterCoreDataStorage.h"
 #import "XMPPvCardAvatarModule.h"
 #import "XMPPvCardCoreDataStorage.h"
-#import "ViewController.h"
+#import "SMLoginView.h"
 #import "DDLog.h"
 #import "XMPPLogging.h"
 #import "DDTTYLogger.h"
@@ -49,7 +49,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
 
-
+    loginViewController = [[SMLoginView alloc]init];
     // Setup the view controllers
 
     [window setRootViewController:viewController];
@@ -68,11 +68,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [servicesDisabledAlert show];
     }
 
-    if (![self connect]) {
+    if([self connect])
+    [viewController presentViewController:loginViewController animated:YES completion:nil];
 
-        [viewController presentViewController:loginViewController animated:YES completion:nil];
-
-    }
     return YES;
 }
 
@@ -162,7 +160,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                   otherButtonTitles:nil];
         [alertView show];
 
-
         return NO;
     }
 
@@ -227,22 +224,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 }
 
-- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:
-(NSXMLElement *)error;
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate: (NSXMLElement *)error;
 {
     XMPPLogError(@"Did not authenticate");
 
-    [xmppStream registerWithPassword:[[NSUserDefaults
-                                       standardUserDefaults] stringForKey:@"userPassword"] error:nil];
-
-    NSError * err = nil;
-
-    if(![[self xmppStream] registerWithPassword:password error:&err])
-    {
-        XMPPLogError(@"Error registering: %@", err);
-    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                        message:@"Неправильно введено имя пользователя или пароль"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    [alertView show];
+   // [viewController dismissViewControllerAnimated:YES completion:nil];
 
 }
+
 - (void)xmppStreamDidRegister:(XMPPStream *)sender{
 
     XMPPLogError(@"I'm in register method");

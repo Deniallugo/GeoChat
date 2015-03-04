@@ -10,7 +10,7 @@
 #import "SMMessageDelegate.h"   
 #import <CoreLocation/CoreLocation.h>
 
-@interface SMChatViewController : UIViewController<SMMessageDelegate, CLLocationManagerDelegate>{
+@interface SMChatViewController : UIViewController<SMMessageDelegate, CLLocationManagerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
 
     UITextField     *messageField;
     NSString        *chatWithUser;
@@ -18,6 +18,10 @@
     NSMutableArray  *messages;
     NSString        *GeoLtitude;
     NSString        *GeoLength;
+
+    IBOutlet UIButton *openCamera;
+    int draw1;
+
 
 }
 
@@ -34,6 +38,9 @@
 - (id) initWithUser:(NSString *) userName;
 - (IBAction) sendMessage;
 - (IBAction) closeChat;
+- (IBAction)radiusChange:(id)sender;
+@property (retain, nonatomic) IBOutlet UIScrollView *cameraView;
+- (IBAction)openCamera;
 
 
 @end
