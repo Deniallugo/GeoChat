@@ -367,11 +367,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hKR-SH-2O2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hKR-SH-2O2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="6" y="124" width="353" height="362"/>
+                                    <rect key="frame" x="6" y="143" width="353" height="362"/>
                                 </variation>
                             </tableView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WMh-jN-Bf4">
@@ -462,6 +462,15 @@
                                     <rect key="frame" x="0.0" y="28" width="400" height="44"/>
                                 </variation>
                             </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lable" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89a-Ta-Gtl">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="162" y="111" width="89" height="24"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -475,6 +484,7 @@
                                 <exclude reference="O8b-rf-DfA"/>
                                 <exclude reference="g49-VU-Vyx"/>
                                 <exclude reference="ByD-2R-V8k"/>
+                                <exclude reference="89a-Ta-Gtl"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -488,17 +498,20 @@
                                 <include reference="O8b-rf-DfA"/>
                                 <include reference="g49-VU-Vyx"/>
                                 <include reference="ByD-2R-V8k"/>
+                                <include reference="89a-Ta-Gtl"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="messageField" destination="iWC-Rd-Bxd" id="b6c-YY-x37"/>
+                        <outlet property="radius1" destination="89a-Ta-Gtl" id="JVi-8P-z5R"/>
+                        <outlet property="slider" destination="WMh-jN-Bf4" id="Qgb-4i-3VU"/>
                         <outlet property="tView" destination="hKR-SH-2O2" id="6m3-Ks-Vte"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbM-dO-LHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1165.5" y="-65"/>
+            <point key="canvasLocation" x="1162.5" y="7"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

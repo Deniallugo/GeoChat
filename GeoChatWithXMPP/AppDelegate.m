@@ -134,7 +134,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSString *jabberID = [[NSUserDefaults standardUserDefaults] stringForKey:@"userID"];
     NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"userPassword"];
 
-    jabberID = [jabberID stringByAppendingString:@"@kampus_gid"];
+    login = [jabberID stringByAppendingString:@"@kampus_gid"];
     if (![xmppStream isDisconnected]) {
         return YES;
     }
@@ -144,7 +144,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         return NO;
     }
 
-    [xmppStream setMyJID:[XMPPJID jidWithString:jabberID]];
+    [xmppStream setMyJID:[XMPPJID jidWithString:login]];
     password = myPassword;
 
     NSError *error = nil;

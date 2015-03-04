@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		838CB12A1AA72B8900552E87 /* SMMessageViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */; };
+		838CB12D1AA72F7A00552E87 /* aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 838CB12B1AA72F7A00552E87 /* aqua.png */; };
+		838CB12E1AA72F7A00552E87 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 838CB12C1AA72F7A00552E87 /* orange.png */; };
+		838CB1351AA734F300552E87 /* NSString + Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1341AA734F300552E87 /* NSString + Utils.m */; };
 		83BC44A51AA3F1DC002B9EA6 /* WorkingWithCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */; };
 		83D268BF1AA5556900305C3A /* SMRegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D268BE1AA5556900305C3A /* SMRegistrationView.m */; };
 		83E6EC981A9F51CB00E004E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC971A9F51CB00E004E1 /* main.m */; };
@@ -180,6 +184,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		838CB1281AA72B8900552E87 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
+		838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMMessageViewTableCell.m; sourceTree = "<group>"; };
+		838CB12B1AA72F7A00552E87 /* aqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aqua.png; path = ../Vendor/aqua.png; sourceTree = "<group>"; };
+		838CB12C1AA72F7A00552E87 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.png; path = ../Vendor/orange.png; sourceTree = "<group>"; };
+		838CB1331AA734F300552E87 /* NSString + Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString + Utils.h"; sourceTree = "<group>"; };
+		838CB1341AA734F300552E87 /* NSString + Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString + Utils.m"; sourceTree = "<group>"; };
 		83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkingWithCamera.m; sourceTree = "<group>"; };
 		83BC44A61AA3F241002B9EA6 /* WorkingWithCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkingWithCamera.h; sourceTree = "<group>"; };
 		83D268BD1AA5556900305C3A /* SMRegistrationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMRegistrationView.h; sourceTree = "<group>"; };
@@ -534,7 +544,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		83E6EC891A9F51CB00E004E1 = {
+		838CB1301AA72FA300552E87 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
 				83E6EEC61A9F52BC00E004E1 /* CoreGraphics.framework */,
@@ -548,15 +558,40 @@
 				83E6EEB61A9F522400E004E1 /* CoreFoundation.framework */,
 				83E6EEB41A9F521500E004E1 /* CoreData.framework */,
 				83E6EEB31A9F51E600E004E1 /* XMPPFramework.h */,
-				83E6EC941A9F51CB00E004E1 /* GeoChatWithXMPP */,
-				83E6ECAE1A9F51CB00E004E1 /* GeoChatWithXMPPTests */,
-				83E6EC931A9F51CB00E004E1 /* Products */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		838CB1311AA72FB800552E87 /* XMPP */ = {
+			isa = PBXGroup;
+			children = (
 				83E6ECBB1A9F51D900E004E1 /* Authentication */,
 				83E6ECD31A9F51D900E004E1 /* Categories */,
 				83E6ECDA1A9F51D900E004E1 /* Core */,
 				83E6ECF01A9F51D900E004E1 /* Extensions */,
 				83E6EDEE1A9F51DA00E004E1 /* Utilities */,
 				83E6EDFD1A9F51DA00E004E1 /* Vendor */,
+			);
+			name = XMPP;
+			sourceTree = "<group>";
+		};
+		838CB1321AA72FD900552E87 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				838CB12B1AA72F7A00552E87 /* aqua.png */,
+				838CB12C1AA72F7A00552E87 /* orange.png */,
+			);
+			name = Resourses;
+			sourceTree = "<group>";
+		};
+		83E6EC891A9F51CB00E004E1 = {
+			isa = PBXGroup;
+			children = (
+				838CB1311AA72FB800552E87 /* XMPP */,
+				838CB1301AA72FA300552E87 /* Framework */,
+				83E6EC941A9F51CB00E004E1 /* GeoChatWithXMPP */,
+				83E6ECAE1A9F51CB00E004E1 /* GeoChatWithXMPPTests */,
+				83E6EC931A9F51CB00E004E1 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -572,14 +607,11 @@
 		83E6EC941A9F51CB00E004E1 /* GeoChatWithXMPP */ = {
 			isa = PBXGroup;
 			children = (
+				838CB1321AA72FD900552E87 /* Resourses */,
 				83E6EC991A9F51CB00E004E1 /* AppDelegate.h */,
 				83E6EC9A1A9F51CB00E004E1 /* AppDelegate.m */,
 				83E6EC9C1A9F51CB00E004E1 /* ViewController.h */,
 				83E6EC9D1A9F51CB00E004E1 /* ViewController.m */,
-				83E6EC9F1A9F51CB00E004E1 /* Main.storyboard */,
-				83E6ECA21A9F51CB00E004E1 /* Images.xcassets */,
-				83E6ECA41A9F51CB00E004E1 /* LaunchScreen.xib */,
-				83E6EC951A9F51CB00E004E1 /* Supporting Files */,
 				83E6EEC81A9F592A00E004E1 /* SMLoginView.h */,
 				83E6EEC91A9F592A00E004E1 /* SMLoginView.m */,
 				83E6EECB1A9F59B500E004E1 /* SMChatViewController.h */,
@@ -590,6 +622,14 @@
 				83BC44A61AA3F241002B9EA6 /* WorkingWithCamera.h */,
 				83D268BD1AA5556900305C3A /* SMRegistrationView.h */,
 				83D268BE1AA5556900305C3A /* SMRegistrationView.m */,
+				838CB1281AA72B8900552E87 /* SMMessageViewTableCell.h */,
+				838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */,
+				83E6EC9F1A9F51CB00E004E1 /* Main.storyboard */,
+				83E6ECA21A9F51CB00E004E1 /* Images.xcassets */,
+				83E6ECA41A9F51CB00E004E1 /* LaunchScreen.xib */,
+				83E6EC951A9F51CB00E004E1 /* Supporting Files */,
+				838CB1331AA734F300552E87 /* NSString + Utils.h */,
+				838CB1341AA734F300552E87 /* NSString + Utils.m */,
 			);
 			path = GeoChatWithXMPP;
 			sourceTree = "<group>";
@@ -1549,6 +1589,8 @@
 				83E6ECA61A9F51CB00E004E1 /* LaunchScreen.xib in Resources */,
 				83E6EEAC1A9F51DA00E004E1 /* README.txt in Resources */,
 				83E6ECA31A9F51CB00E004E1 /* Images.xcassets in Resources */,
+				838CB12D1AA72F7A00552E87 /* aqua.png in Resources */,
+				838CB12E1AA72F7A00552E87 /* orange.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1579,6 +1621,7 @@
 				83E6EE7B1A9F51DA00E004E1 /* XMPPCapabilities.xcdatamodel in Sources */,
 				83E6EE331A9F51DA00E004E1 /* XMPPIQ.m in Sources */,
 				83E6EE5E1A9F51DA00E004E1 /* XMPPMUC.m in Sources */,
+				838CB12A1AA72B8900552E87 /* SMMessageViewTableCell.m in Sources */,
 				83E6EE441A9F51DA00E004E1 /* XMPPRoster.xcdatamodel in Sources */,
 				83E6EE671A9F51DA00E004E1 /* XMPPvCardTempAdrTypes.m in Sources */,
 				83E6EE4E1A9F51DA00E004E1 /* XMPPJabberRPCModule.m in Sources */,
@@ -1640,6 +1683,7 @@
 				83E6EE6B1A9F51DA00E004E1 /* XMPPvCardTempModule.m in Sources */,
 				83E6EE3E1A9F51DA00E004E1 /* XMPPOutgoingFileTransfer.m in Sources */,
 				83E6EE901A9F51DA00E004E1 /* XMPPAutoTime.m in Sources */,
+				838CB1351AA734F300552E87 /* NSString + Utils.m in Sources */,
 				83E6EE641A9F51DA00E004E1 /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
 				83E6EE501A9F51DA00E004E1 /* XMPPLastActivity.m in Sources */,
 				83E6EE7D1A9F51DA00E004E1 /* XMPPCapsCoreDataStorageObject.m in Sources */,

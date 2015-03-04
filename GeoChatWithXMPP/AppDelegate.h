@@ -32,7 +32,7 @@ XMPPRosterDelegate>
     UIWindow *window;
     ViewController *viewController;
     SMLoginView* loginViewController;
-
+    NSString *login;
     NSString *password;
     BOOL isOpen;
 
@@ -50,12 +50,12 @@ XMPPRosterDelegate>
 
         BOOL allowSelfSignedCertificates;
         BOOL allowSSLHostNameMismatch;
-    NSError *error;
+        NSError *error;
 
 
 }
 
-@property (nonatomic, retain) NSError *error;
+@property (nonatomic, retain) NSString *login;
 
 
 

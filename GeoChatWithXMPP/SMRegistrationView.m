@@ -39,7 +39,7 @@
         [self xmppStreamDidRegister:[self xmppStream]];
     }
     else
-        [self xmppStream:[self xmppStream] didNotRegister:error];
+        [self xmppStream:[self xmppStream] didNotRegister:[NSXMLElement alloc]];
 
 
 

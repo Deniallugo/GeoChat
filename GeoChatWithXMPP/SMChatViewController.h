@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SMMessageDelegate.h"   
 #import <CoreLocation/CoreLocation.h>
-
+#import "SMMessageViewTableCell.h"
 @interface SMChatViewController : UIViewController<SMMessageDelegate, CLLocationManagerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
 
     UITextField     *messageField;
@@ -18,10 +18,10 @@
     NSMutableArray  *messages;
     NSString        *GeoLtitude;
     NSString        *GeoLength;
+    float           Radius;
+    IBOutlet UIButton  *openCamera ;
 
-    IBOutlet UIButton *openCamera;
-    int draw1;
-
+    NSMutableArray *turnSockets;
 
 }
 
@@ -30,6 +30,8 @@
 @property (nonatomic,retain) NSString *GeoLtitude;
 @property (nonatomic,retain) NSString *GeoLength;
 @property (strong, nonatomic) CLLocation *currentLocation;
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (weak, nonatomic) IBOutlet UILabel *radius1;
 
 - (void)startUpdatingCurrentLocation;
 
@@ -39,8 +41,8 @@
 - (IBAction) sendMessage;
 - (IBAction) closeChat;
 - (IBAction)radiusChange:(id)sender;
-@property (retain, nonatomic) IBOutlet UIScrollView *cameraView;
-- (IBAction)openCamera;
+- (IBAction)openCamera: (id)sender;
 
++ (NSString *) getCurrentTime;
 
 @end
