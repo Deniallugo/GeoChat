@@ -10,6 +10,11 @@
 #import "SMMessageDelegate.h"   
 #import <CoreLocation/CoreLocation.h>
 #import "SMMessageViewTableCell.h"
+
+#import "UIBubbleTableView.h"
+#import "UIBubbleTableViewDataSource.h"
+#import "NSBubbleData.h"
+
 @interface SMChatViewController : UIViewController<SMMessageDelegate, CLLocationManagerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
 
     UITextField     *messageField;
@@ -23,6 +28,14 @@
 
     NSMutableArray *turnSockets;
 
+    IBOutlet UIBubbleTableView *bubbleTable;
+    IBOutlet UIView *textInputView;
+    IBOutlet UITextField *textField;
+
+
+
+    
+
 }
 
 @property (nonatomic,retain) IBOutlet UITextField *messageField;
@@ -35,7 +48,6 @@
 
 - (void)startUpdatingCurrentLocation;
 
-@property (nonatomic,retain) IBOutlet UITableView *tView;
 
 - (id) initWithUser:(NSString *) userName;
 - (IBAction) sendMessage;

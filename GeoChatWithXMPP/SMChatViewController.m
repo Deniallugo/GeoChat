@@ -10,29 +10,43 @@
 #import "AppDelegate.h"
 #import "SMLoginView.h"
 #import "TURNSocket.h"
+
+
 @implementation SMChatViewController{
 
     CLLocationManager *locationManager;
 
 }
 
-@synthesize messageField, chatWithUser, tView, GeoLength,GeoLtitude,radius1,slider;
+@synthesize messageField, chatWithUser, GeoLength,GeoLtitude,radius1,slider;
 
 
 
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    self.tView.delegate = self;
-    self.tView.dataSource = self;
     messages = [[NSMutableArray alloc ] init];
+//BubbleView
 
-    [self.messageField becomeFirstResponder];
+    bubbleTable.bubbleDataSource = self;
+    bubbleTable.delegate = self;
+
+    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+
+    bubbleTable.showAvatars = NO;
+
+
+    [bubbleTable reloadData];
+
+// Keyboard events
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+
     XMPPJID *jid = [XMPPJID jidWithString:[[self appDelegate] login ]];
 
     AppDelegate *del = [self appDelegate];
     del._messageDelegate = self;
-    [self.messageField becomeFirstResponder];
     TURNSocket *turnSocket = [[TURNSocket alloc] initWithStream:[self xmppStream] toJID:jid];
 
     [turnSockets addObject:turnSocket];
@@ -40,7 +54,7 @@
     [turnSocket startWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 
 
-
+//GeoLocation
 
     self->locationManager = [[CLLocationManager alloc] init];
     self->locationManager.delegate = self;
@@ -51,10 +65,10 @@
     [self->locationManager startUpdatingLocation];
 
 
-
+//open camera
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(20.0f, 186.0f, 280.0f, 88.0f);
-    [button setTitle:@"Show Action Sheet" forState:UIControlStateNormal];
+    //[button setTitle:@"Show Action Sheet" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.tintColor = [UIColor darkGrayColor];
     [button addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
@@ -140,20 +154,16 @@
 }
 
 
-- (void)newMessageReceived:(NSDictionary *)messageContent {
+- (void)newMessageReceived:(NSBubbleData *)messageContent {
 
-    NSString *m = [messageContent objectForKey:@"msg"];
-    NSString  *f = [self getCurrentTime];
-    [messageContent setValue:m  forKey:@"msg"];
-    [messageContent setValue:f forKey:@"time"];
 
     [messages addObject:messageContent];
-    [self.tView reloadData];
+    [bubbleTable reloadData];
 
     NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
                                                    inSection:0];
 
-    [self.tView scrollToRowAtIndexPath:topIndexPath
+    [bubbleTable scrollToRowAtIndexPath:topIndexPath
                       atScrollPosition:UITableViewScrollPositionMiddle
                               animated:YES];
 }
@@ -161,8 +171,9 @@
 
 - (IBAction)sendMessage {
 
-    NSString *messageStr = self.messageField.text;
+    NSString *messageStr = textField.text;
 
+    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
 
     if([messageStr length]) {
@@ -183,156 +194,97 @@
 
         [self.xmppStream sendElement:message];
 
-        self.messageField.text = @"";
+        textField.text = @"";
 
 
-        NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
-        [m setObject:messageStr forKey:@"msg"];
-        [m setObject:@"you" forKey:@"sender"];
-        [m setObject:f forKey:@"time"];
+
+
+        NSBubbleData *m = [NSBubbleData dataWithText:messageStr date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+
         [messages addObject:m];
-        [self.tView reloadData];
 
     }
+
+    [bubbleTable reloadData];
 
     NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
                                                    inSection:0];
 
-    [self.tView scrollToRowAtIndexPath:topIndexPath
-                      atScrollPosition:UITableViewScrollPositionMiddle
-                              animated:YES];
+    [bubbleTable scrollToRowAtIndexPath:topIndexPath
+                       atScrollPosition:UITableViewScrollPositionMiddle
+                               animated:YES];
 }
 
 #pragma mark -
 #pragma mark Table view delegates
 
 
-static float padding = 20.0;
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-
-    NSDictionary *s = (NSDictionary *) [messages objectAtIndex:indexPath.row];
-
-    static NSString *CellIdentifier = @"MessageCellIdentifier";
-
-    SMMessageViewTableCell *cell = (SMMessageViewTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    if (cell == nil) {
-        cell = [[SMMessageViewTableCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] ;
-    }
-
-    NSString *sender = [s objectForKey:@"sender"];
-    NSString *message = [s objectForKey:@"msg"];
-    NSString *time = [s objectForKey:@"time"];
-    UIImage *img =[s objectForKey:@"img"];
-
-    UIImage *bgImage = nil;
-    CGSize  textSize = { 260.0, 10000.0 };
-
-    CGSize size = [message sizeWithFont:[UIFont boldSystemFontOfSize:20]
-                      constrainedToSize:textSize
-                          lineBreakMode:UILineBreakModeWordWrap];
-
-
-    size.width += (padding/2);
-
-    int originX,originY;
-
-    cell.messageContentView.text  = message;
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.userInteractionEnabled = NO;
-
-
-    if ([sender isEqualToString:@"you"]) { // left aligned
-
-        bgImage = [[UIImage imageNamed:@"orange.png"] stretchableImageWithLeftCapWidth:24  topCapHeight:15];
-
-        [cell.messageContentView setFrame:CGRectMake(padding, padding*2, size.width, size.height)];
-        if ( img){
-            originX = img.size.height;
-            originY = img.size.width;
-        }
-        else{
-            originX = cell.messageContentView.frame.origin.x;
-            originY = cell.messageContentView.frame.origin.y;
-            
-        }
-        [cell.bgImageView setFrame:CGRectMake( originX - padding/2,
-                                              originY - padding/2,
-                                              size.width+padding,
-                                              size.height+padding)];
-
-        
-    } else {
-
-        bgImage = [[UIImage imageNamed:@"aqua.png"] stretchableImageWithLeftCapWidth:24  topCapHeight:15];
-
-        [cell.messageContentView setFrame:CGRectMake(320 - size.width - padding,
-                                                     padding*2,
-                                                     size.width,
-                                                     size.height)];
-
-        if ( img){
-            originX = img.size.height;
-            originY = img.size.width;
-        }
-        else{
-            originX = cell.messageContentView.frame.origin.x;
-            originY = cell.messageContentView.frame.origin.y;
-            
-        }
-
-        [cell.bgImageView setFrame:CGRectMake(originX - padding/2,
-                                              originY - padding/2,
-                                              size.width+padding, 
-                                              size.height+padding)];
-        
-    }
-
-    cell.imageView.image = img;
-    cell.bgImageView.image = bgImage;
-    cell.senderAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@", sender, time];
-    return cell;
-    
-}
-
-
-
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return [messages count];
-
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    NSDictionary *dict = (NSDictionary *)[messages objectAtIndex:indexPath.row];
-    NSString *msg = [dict objectForKey:@"msg"];
-
-    CGSize  textSize = { 260.0, 10000.0 };
-
-    CGSize size = [msg sizeWithFont:[UIFont boldSystemFontOfSize:13]
-                  constrainedToSize:textSize
-                      lineBreakMode:UILineBreakModeWordWrap];
-
-    size.height += padding*3;
-
-    CGFloat height = size.height < 65 ? 65 : size.height;
-    return height;
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UIBubbleTableView *)tableView {
 
     return 1;
 
 }
 
-#pragma mark -
+
+
+#pragma mark - Bubble View
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+#pragma mark - UIBubbleTableViewDataSource implementation
+
+- (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView
+{
+    return [messages count];
+}
+
+- (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
+{
+    return [messages objectAtIndex:row];
+}
+
+#pragma mark - Keyboard events
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    [UIView animateWithDuration:0.2f animations:^{
+
+        CGRect frame = textInputView.frame;
+        frame.origin.y -= kbSize.height;
+        textInputView.frame = frame;
+
+        frame = bubbleTable.frame;
+        frame.size.height -= kbSize.height;
+        bubbleTable.frame = frame;
+    }];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    [UIView animateWithDuration:0.2f animations:^{
+
+        CGRect frame = textInputView.frame;
+        frame.origin.y += kbSize.height;
+        textInputView.frame = frame;
+
+        frame = bubbleTable.frame;
+        frame.size.height += kbSize.height;
+        bubbleTable.frame = frame;
+    }];
+}
+
+
 #pragma mark Chat delegates
 
 - (AppDelegate *)appDelegate {
@@ -479,7 +431,6 @@ static float padding = 20.0;
 
         [body setStringValue:messageStr];
 
-        NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
 
         NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
 
@@ -496,8 +447,6 @@ static float padding = 20.0;
         if([imagePic isKindOfClass:[UIImage class]])
 
         {
-
-            [m setObject:imagePic forKey:@"mage"];
 
             NSData *dataPic =  UIImagePNGRepresentation(imagePic);
 
@@ -518,18 +467,22 @@ static float padding = 20.0;
         [self.xmppStream sendElement:message];
 
     }
-    self.messageField.text = @"";
+    textField.text = @"";
 
-
-    NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
-    [m setObject:imagePic forKey:@"img"];
-    [m setObject:messageStr forKey:@"msg"];
-    [m setObject:@"you" forKey:@"sender"];
-    [m setObject:f forKey:@"time"];
-
+    NSBubbleData *m = [NSBubbleData dataWithImage:imagePic date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
 
     [messages addObject:m];
-    [self.tView reloadData];
+
+    [bubbleTable reloadData];
+
+    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
+                                                   inSection:0];
+
+    [bubbleTable scrollToRowAtIndexPath:topIndexPath
+                       atScrollPosition:UITableViewScrollPositionMiddle
+                               animated:YES];
+
+
 
 }
 

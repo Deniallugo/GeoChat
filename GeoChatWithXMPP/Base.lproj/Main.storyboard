@@ -367,11 +367,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hKR-SH-2O2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bJt-J4-eqr" customClass="UIBubbleTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="425"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="6" y="143" width="353" height="362"/>
+                                    <rect key="frame" x="16" y="151" width="343" height="361"/>
                                 </variation>
                             </tableView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WMh-jN-Bf4">
@@ -392,26 +392,6 @@
                                     <rect key="frame" x="16" y="90" width="58" height="21"/>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWC-Rd-Bxd">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="14" y="513" width="287" height="30"/>
-                                </variation>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tL-lO-BkL">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Send">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="323" y="513" width="36" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="sendMessage" destination="iZE-aE-WI2" eventType="touchUpInside" id="2Xw-5D-kNc"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D5k-JZ-9z0">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Настройки">
@@ -462,7 +442,7 @@
                                     <rect key="frame" x="0.0" y="28" width="400" height="44"/>
                                 </variation>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lable" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89a-Ta-Gtl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89a-Ta-Gtl">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -471,42 +451,80 @@
                                     <rect key="frame" x="162" y="111" width="89" height="24"/>
                                 </variation>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoS-11-wsn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWC-Rd-Bxd">
+                                        <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="8" width="287" height="30"/>
+                                        </variation>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tL-lO-BkL">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="304" y="8" width="36" height="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="sendMessage" destination="iZE-aE-WI2" eventType="touchUpInside" id="2Xw-5D-kNc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="iWC-Rd-Bxd"/>
+                                        <exclude reference="0tL-lO-BkL"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="508" width="368" height="44"/>
+                                    <mask key="subviews">
+                                        <include reference="iWC-Rd-Bxd"/>
+                                        <include reference="0tL-lO-BkL"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="hKR-SH-2O2"/>
+                                <exclude reference="bJt-J4-eqr"/>
                                 <exclude reference="WMh-jN-Bf4"/>
                                 <exclude reference="Niw-B0-RMx"/>
-                                <exclude reference="iWC-Rd-Bxd"/>
-                                <exclude reference="0tL-lO-BkL"/>
                                 <exclude reference="D5k-JZ-9z0"/>
                                 <exclude reference="O8b-rf-DfA"/>
                                 <exclude reference="g49-VU-Vyx"/>
                                 <exclude reference="ByD-2R-V8k"/>
                                 <exclude reference="89a-Ta-Gtl"/>
+                                <exclude reference="uoS-11-wsn"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="hKR-SH-2O2"/>
+                                <include reference="bJt-J4-eqr"/>
                                 <include reference="WMh-jN-Bf4"/>
                                 <include reference="Niw-B0-RMx"/>
-                                <include reference="iWC-Rd-Bxd"/>
-                                <include reference="0tL-lO-BkL"/>
                                 <include reference="D5k-JZ-9z0"/>
                                 <include reference="O8b-rf-DfA"/>
                                 <include reference="g49-VU-Vyx"/>
                                 <include reference="ByD-2R-V8k"/>
                                 <include reference="89a-Ta-Gtl"/>
+                                <include reference="uoS-11-wsn"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="messageField" destination="iWC-Rd-Bxd" id="b6c-YY-x37"/>
+                        <outlet property="bubbleTable" destination="bJt-J4-eqr" id="ejE-Dp-C1D"/>
                         <outlet property="radius1" destination="89a-Ta-Gtl" id="JVi-8P-z5R"/>
                         <outlet property="slider" destination="WMh-jN-Bf4" id="Qgb-4i-3VU"/>
-                        <outlet property="tView" destination="hKR-SH-2O2" id="6m3-Ks-Vte"/>
+                        <outlet property="textField" destination="iWC-Rd-Bxd" id="qmm-hU-c9G"/>
+                        <outlet property="textInputView" destination="uoS-11-wsn" id="bkU-v5-uy7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbM-dO-LHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
