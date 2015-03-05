@@ -18,7 +18,7 @@
 
 }
 
-@synthesize messageField, chatWithUser, GeoLength,GeoLtitude,radius1,slider;
+@synthesize  chatWithUser, GeoLength,GeoLtitude,radius1,slider;
 
 
 
@@ -26,24 +26,23 @@
 
     [super viewDidLoad];
     messages = [[NSMutableArray alloc ] init];
-//BubbleView
 
+//bubble view
     bubbleTable.bubbleDataSource = self;
-    bubbleTable.delegate = self;
 
-    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
     bubbleTable.showAvatars = NO;
 
 
+
+    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+
     [bubbleTable reloadData];
 
-// Keyboard events
+    // Keyboard events
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
-
-    XMPPJID *jid = [XMPPJID jidWithString:[[self appDelegate] login ]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];    XMPPJID *jid = [XMPPJID jidWithString:[[self appDelegate] login ]];
 
     AppDelegate *del = [self appDelegate];
     del._messageDelegate = self;
@@ -68,7 +67,6 @@
 //open camera
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(20.0f, 186.0f, 280.0f, 88.0f);
-    //[button setTitle:@"Show Action Sheet" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.tintColor = [UIColor darkGrayColor];
     [button addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
@@ -175,12 +173,11 @@
 
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
-
+    NSString *f = [self getCurrentTime];
     if([messageStr length]) {
 
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
         [body setStringValue:messageStr];
-        NSString *f =[self getCurrentTime];
 
 
         NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
@@ -215,20 +212,10 @@
                                animated:YES];
 }
 
-#pragma mark -
-#pragma mark Table view delegates
-
-
-
-- (NSInteger)numberOfSectionsInTableView:(UIBubbleTableView *)tableView {
-
-    return 1;
-
-}
-
 
 
 #pragma mark - Bubble View
+
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -284,7 +271,6 @@
     }];
 }
 
-
 #pragma mark Chat delegates
 
 - (AppDelegate *)appDelegate {
@@ -310,17 +296,6 @@
 #pragma mark -
 #pragma mark Chat delegates
 
-- (NSString *) getCurrentTime {
-
-    NSDate *nowUTC = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    return [dateFormatter stringFromDate:nowUTC];
-    
-}
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -335,6 +310,16 @@
 
 
 
+- (NSString *) getCurrentTime {
+
+    NSDate *nowUTC = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    return [dateFormatter stringFromDate:nowUTC];
+    
+}
 #pragma mark - Send image method
 
 
@@ -362,9 +347,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
 
-    if  ([buttonTitle isEqualToString:@"Destructive Button"]) {
-        NSLog(@"Destructive pressed --> Delete Something");
-    }
+
 
 
 
@@ -420,9 +403,9 @@
 
 -(void) sendImage: (UIImage*) imagePic{
 
-    NSString *messageStr =  self.messageField.text;
+    NSString *messageStr =  textField.text;
+    NSString *f = [self getCurrentTime];
 
-    NSString *f =[self getCurrentTime];
 
     if([messageStr length] > 0 || [imagePic isKindOfClass:[UIImage class]] )
 
@@ -478,10 +461,7 @@
     NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
                                                    inSection:0];
 
-    [bubbleTable scrollToRowAtIndexPath:topIndexPath
-                       atScrollPosition:UITableViewScrollPositionMiddle
-                               animated:YES];
-
+    
 
 
 }
@@ -493,7 +473,6 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-//    self.imageView.image = chosenImage;
 
     [self sendImage:chosenImage];
 

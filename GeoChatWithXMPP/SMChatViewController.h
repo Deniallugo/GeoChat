@@ -10,12 +10,11 @@
 #import "SMMessageDelegate.h"   
 #import <CoreLocation/CoreLocation.h>
 #import "SMMessageViewTableCell.h"
-
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
 
-@interface SMChatViewController : UIViewController<SMMessageDelegate, CLLocationManagerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+@interface SMChatViewController : UIViewController<SMMessageDelegate, CLLocationManagerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIBubbleTableViewDataSource,UITableViewDelegate>{
 
     UITextField     *messageField;
     NSString        *chatWithUser;
@@ -24,7 +23,6 @@
     NSString        *GeoLtitude;
     NSString        *GeoLength;
     float           Radius;
-    IBOutlet UIButton  *openCamera ;
 
     NSMutableArray *turnSockets;
 
@@ -38,7 +36,6 @@
 
 }
 
-@property (nonatomic,retain) IBOutlet UITextField *messageField;
 @property (nonatomic,retain) NSString *chatWithUser;
 @property (nonatomic,retain) NSString *GeoLtitude;
 @property (nonatomic,retain) NSString *GeoLength;
@@ -46,7 +43,6 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *radius1;
 
-- (void)startUpdatingCurrentLocation;
 
 
 - (id) initWithUser:(NSString *) userName;
@@ -54,7 +50,5 @@
 - (IBAction) closeChat;
 - (IBAction)radiusChange:(id)sender;
 - (IBAction)openCamera: (id)sender;
-
-+ (NSString *) getCurrentTime;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation NSString (Utils)
 
-+ (NSString *) getCurrentTim21e {
++ (NSString *) getCurrentTime {
 
     NSDate *nowUTC = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

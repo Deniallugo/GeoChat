@@ -367,7 +367,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bJt-J4-eqr" customClass="UIBubbleTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bJt-J4-eqr" customClass="UIBubbleTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="425"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -520,7 +520,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="bubbleTable" destination="bJt-J4-eqr" id="ejE-Dp-C1D"/>
+                        <outlet property="bubbleTable" destination="bJt-J4-eqr" id="lQ1-H9-16Q"/>
                         <outlet property="radius1" destination="89a-Ta-Gtl" id="JVi-8P-z5R"/>
                         <outlet property="slider" destination="WMh-jN-Bf4" id="Qgb-4i-3VU"/>
                         <outlet property="textField" destination="iWC-Rd-Bxd" id="qmm-hU-c9G"/>

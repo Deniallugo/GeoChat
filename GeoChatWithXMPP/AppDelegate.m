@@ -215,7 +215,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     NSString *msg = [[message elementForName:@"body"] stringValue];
     NSString *from = [[message attributeForName:@"from"] stringValue];
-
+//    UIImage * image  = [[message elementForName:@"img"] ];
     NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
     [m setObject:msg forKey:@"msg"];
     [m setObject:from forKey:@"sender"];

@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		83268F271AA7C89D005A3B3C /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 83268F1D1AA7C89D005A3B3C /* NSBubbleData.m */; };
-		83268F281AA7C89D005A3B3C /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83268F1F1AA7C89D005A3B3C /* UIBubbleHeaderTableViewCell.m */; };
-		83268F291AA7C89D005A3B3C /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83268F211AA7C89D005A3B3C /* UIBubbleTableView.m */; };
-		83268F2A1AA7C89D005A3B3C /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83268F231AA7C89D005A3B3C /* UIBubbleTableViewCell.m */; };
-		83268F2B1AA7C89D005A3B3C /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83268F261AA7C89D005A3B3C /* UIBubbleTypingTableViewCell.m */; };
 		83268F371AA7C900005A3B3C /* bubbleMine.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2D1AA7C900005A3B3C /* bubbleMine.png */; };
 		83268F381AA7C900005A3B3C /* bubbleMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2E1AA7C900005A3B3C /* bubbleMine@2x.png */; };
 		83268F391AA7C900005A3B3C /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2F1AA7C900005A3B3C /* bubbleSomeone.png */; };
@@ -22,9 +17,13 @@
 		83268F3E1AA7C900005A3B3C /* typingMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F341AA7C900005A3B3C /* typingMine@2x.png */; };
 		83268F3F1AA7C900005A3B3C /* typingSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F351AA7C900005A3B3C /* typingSomeone.png */; };
 		83268F401AA7C900005A3B3C /* typingSomeone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F361AA7C900005A3B3C /* typingSomeone@2x.png */; };
+		832F6A321AA83CC100A8DA6B /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A281AA83CC100A8DA6B /* NSBubbleData.m */; };
+		832F6A331AA83CC100A8DA6B /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2A1AA83CC100A8DA6B /* UIBubbleHeaderTableViewCell.m */; };
+		832F6A341AA83CC100A8DA6B /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2C1AA83CC100A8DA6B /* UIBubbleTableView.m */; };
+		832F6A351AA83CC100A8DA6B /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2E1AA83CC100A8DA6B /* UIBubbleTableViewCell.m */; };
+		832F6A361AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */; };
 		838CB12A1AA72B8900552E87 /* SMMessageViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */; };
 		838CB1351AA734F300552E87 /* NSString + Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1341AA734F300552E87 /* NSString + Utils.m */; };
-		83BC44A51AA3F1DC002B9EA6 /* WorkingWithCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */; };
 		83D268BF1AA5556900305C3A /* SMRegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D268BE1AA5556900305C3A /* SMRegistrationView.m */; };
 		83E6EC981A9F51CB00E004E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC971A9F51CB00E004E1 /* main.m */; };
 		83E6EC9B1A9F51CB00E004E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC9A1A9F51CB00E004E1 /* AppDelegate.m */; };
@@ -197,17 +196,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		83268F1C1AA7C89D005A3B3C /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBubbleData.h; sourceTree = "<group>"; };
-		83268F1D1AA7C89D005A3B3C /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBubbleData.m; sourceTree = "<group>"; };
-		83268F1E1AA7C89D005A3B3C /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
-		83268F1F1AA7C89D005A3B3C /* UIBubbleHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleHeaderTableViewCell.m; sourceTree = "<group>"; };
-		83268F201AA7C89D005A3B3C /* UIBubbleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableView.h; sourceTree = "<group>"; };
-		83268F211AA7C89D005A3B3C /* UIBubbleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTableView.m; sourceTree = "<group>"; };
-		83268F221AA7C89D005A3B3C /* UIBubbleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewCell.h; sourceTree = "<group>"; };
-		83268F231AA7C89D005A3B3C /* UIBubbleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTableViewCell.m; sourceTree = "<group>"; };
-		83268F241AA7C89D005A3B3C /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
-		83268F251AA7C89D005A3B3C /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
-		83268F261AA7C89D005A3B3C /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
 		83268F2D1AA7C900005A3B3C /* bubbleMine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleMine.png; sourceTree = "<group>"; };
 		83268F2E1AA7C900005A3B3C /* bubbleMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleMine@2x.png"; sourceTree = "<group>"; };
 		83268F2F1AA7C900005A3B3C /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
@@ -218,12 +206,21 @@
 		83268F341AA7C900005A3B3C /* typingMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typingMine@2x.png"; sourceTree = "<group>"; };
 		83268F351AA7C900005A3B3C /* typingSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = typingSomeone.png; sourceTree = "<group>"; };
 		83268F361AA7C900005A3B3C /* typingSomeone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typingSomeone@2x.png"; sourceTree = "<group>"; };
+		832F6A271AA83CC100A8DA6B /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBubbleData.h; sourceTree = "<group>"; };
+		832F6A281AA83CC100A8DA6B /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBubbleData.m; sourceTree = "<group>"; };
+		832F6A291AA83CC100A8DA6B /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
+		832F6A2A1AA83CC100A8DA6B /* UIBubbleHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleHeaderTableViewCell.m; sourceTree = "<group>"; };
+		832F6A2B1AA83CC100A8DA6B /* UIBubbleTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableView.h; sourceTree = "<group>"; };
+		832F6A2C1AA83CC100A8DA6B /* UIBubbleTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTableView.m; sourceTree = "<group>"; };
+		832F6A2D1AA83CC100A8DA6B /* UIBubbleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewCell.h; sourceTree = "<group>"; };
+		832F6A2E1AA83CC100A8DA6B /* UIBubbleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTableViewCell.m; sourceTree = "<group>"; };
+		832F6A2F1AA83CC100A8DA6B /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
+		832F6A301AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
+		832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
 		838CB1281AA72B8900552E87 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
 		838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMMessageViewTableCell.m; sourceTree = "<group>"; };
 		838CB1331AA734F300552E87 /* NSString + Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString + Utils.h"; sourceTree = "<group>"; };
 		838CB1341AA734F300552E87 /* NSString + Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString + Utils.m"; sourceTree = "<group>"; };
-		83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkingWithCamera.m; sourceTree = "<group>"; };
-		83BC44A61AA3F241002B9EA6 /* WorkingWithCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkingWithCamera.h; sourceTree = "<group>"; };
 		83D268BD1AA5556900305C3A /* SMRegistrationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMRegistrationView.h; sourceTree = "<group>"; };
 		83D268BE1AA5556900305C3A /* SMRegistrationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMRegistrationView.m; sourceTree = "<group>"; };
 		83E6EC921A9F51CB00E004E1 /* GeoChatWithXMPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoChatWithXMPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -576,25 +573,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		83268F1B1AA7C89D005A3B3C /* BubbleChatView */ = {
-			isa = PBXGroup;
-			children = (
-				83268F1C1AA7C89D005A3B3C /* NSBubbleData.h */,
-				83268F1D1AA7C89D005A3B3C /* NSBubbleData.m */,
-				83268F1E1AA7C89D005A3B3C /* UIBubbleHeaderTableViewCell.h */,
-				83268F1F1AA7C89D005A3B3C /* UIBubbleHeaderTableViewCell.m */,
-				83268F201AA7C89D005A3B3C /* UIBubbleTableView.h */,
-				83268F211AA7C89D005A3B3C /* UIBubbleTableView.m */,
-				83268F221AA7C89D005A3B3C /* UIBubbleTableViewCell.h */,
-				83268F231AA7C89D005A3B3C /* UIBubbleTableViewCell.m */,
-				83268F241AA7C89D005A3B3C /* UIBubbleTableViewDataSource.h */,
-				83268F251AA7C89D005A3B3C /* UIBubbleTypingTableViewCell.h */,
-				83268F261AA7C89D005A3B3C /* UIBubbleTypingTableViewCell.m */,
-			);
-			name = BubbleChatView;
-			path = src;
-			sourceTree = "<group>";
-		};
 		83268F2C1AA7C900005A3B3C /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +588,24 @@
 				83268F361AA7C900005A3B3C /* typingSomeone@2x.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		832F6A261AA83CC100A8DA6B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				832F6A271AA83CC100A8DA6B /* NSBubbleData.h */,
+				832F6A281AA83CC100A8DA6B /* NSBubbleData.m */,
+				832F6A291AA83CC100A8DA6B /* UIBubbleHeaderTableViewCell.h */,
+				832F6A2A1AA83CC100A8DA6B /* UIBubbleHeaderTableViewCell.m */,
+				832F6A2B1AA83CC100A8DA6B /* UIBubbleTableView.h */,
+				832F6A2C1AA83CC100A8DA6B /* UIBubbleTableView.m */,
+				832F6A2D1AA83CC100A8DA6B /* UIBubbleTableViewCell.h */,
+				832F6A2E1AA83CC100A8DA6B /* UIBubbleTableViewCell.m */,
+				832F6A2F1AA83CC100A8DA6B /* UIBubbleTableViewDataSource.h */,
+				832F6A301AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.h */,
+				832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		838CB1301AA72FA300552E87 /* Framework */ = {
@@ -659,7 +655,7 @@
 				83E6EC941A9F51CB00E004E1 /* GeoChatWithXMPP */,
 				83E6ECAE1A9F51CB00E004E1 /* GeoChatWithXMPPTests */,
 				83E6EC931A9F51CB00E004E1 /* Products */,
-				83268F1B1AA7C89D005A3B3C /* BubbleChatView */,
+				832F6A261AA83CC100A8DA6B /* src */,
 			);
 			sourceTree = "<group>";
 		};
@@ -686,8 +682,6 @@
 				83E6EECC1A9F59B500E004E1 /* SMChatViewController.m */,
 				83E6EECE1A9F5AC200E004E1 /* SMChatDelegatE.h */,
 				83E6EECF1A9F5ADE00E004E1 /* SMMessageDelegate.h */,
-				83BC44A41AA3F1DC002B9EA6 /* WorkingWithCamera.m */,
-				83BC44A61AA3F241002B9EA6 /* WorkingWithCamera.h */,
 				83D268BD1AA5556900305C3A /* SMRegistrationView.h */,
 				83D268BE1AA5556900305C3A /* SMRegistrationView.m */,
 				838CB1281AA72B8900552E87 /* SMMessageViewTableCell.h */,
@@ -1690,9 +1684,9 @@
 				83E6EE611A9F51DA00E004E1 /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
 				83E6EE691A9F51DA00E004E1 /* XMPPvCardTempEmail.m in Sources */,
 				83E6EE651A9F51DA00E004E1 /* XMPPvCardTemp.m in Sources */,
+				832F6A331AA83CC100A8DA6B /* UIBubbleHeaderTableViewCell.m in Sources */,
 				83E6EE351A9F51DA00E004E1 /* XMPPMessage.m in Sources */,
 				83E6EE2F1A9F51DA00E004E1 /* NSNumber+XMPP.m in Sources */,
-				83268F271AA7C89D005A3B3C /* NSBubbleData.m in Sources */,
 				83E6EE2E1A9F51DA00E004E1 /* NSData+XMPP.m in Sources */,
 				83E6EE9B1A9F51DA00E004E1 /* NSXMLElement+XEP_0335.m in Sources */,
 				83E6EE7B1A9F51DA00E004E1 /* XMPPCapabilities.xcdatamodel in Sources */,
@@ -1711,17 +1705,15 @@
 				83E6EE721A9F51DA00E004E1 /* XMPPIQ+XEP_0066.m in Sources */,
 				83E6EE511A9F51DA00E004E1 /* XMPPPrivacy.m in Sources */,
 				83E6EE551A9F51DA00E004E1 /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
-				83268F2B1AA7C89D005A3B3C /* UIBubbleTypingTableViewCell.m in Sources */,
 				83E6EE911A9F51DA00E004E1 /* XMPPTime.m in Sources */,
-				83268F291AA7C89D005A3B3C /* UIBubbleTableView.m in Sources */,
 				83E6EE5B1A9F51DA00E004E1 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
 				83E6EE401A9F51DA00E004E1 /* XMPPProcessOne.m in Sources */,
 				83E6EC9E1A9F51CB00E004E1 /* ViewController.m in Sources */,
 				83E6EE4D1A9F51DA00E004E1 /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				83E6EE7F1A9F51DA00E004E1 /* XMPPCapabilities.m in Sources */,
 				83E6EE961A9F51DA00E004E1 /* XMPPMessage+XEP_0280.m in Sources */,
-				83268F281AA7C89D005A3B3C /* UIBubbleHeaderTableViewCell.m in Sources */,
 				83E6EE6D1A9F51DA00E004E1 /* NSXMLElement+XEP_0059.m in Sources */,
+				832F6A341AA83CC100A8DA6B /* UIBubbleTableView.m in Sources */,
 				83E6EE7C1A9F51DA00E004E1 /* XMPPCapabilitiesCoreDataStorage.m in Sources */,
 				83E6EE8A1A9F51DA00E004E1 /* XMPPBlocking.m in Sources */,
 				83E6EECA1A9F592A00E004E1 /* SMLoginView.m in Sources */,
@@ -1738,6 +1730,7 @@
 				83E6EE871A9F51DA00E004E1 /* XMPPPresence+XEP_0172.m in Sources */,
 				83E6EE6E1A9F51DA00E004E1 /* XMPPResultSet.m in Sources */,
 				83E6EE891A9F51DA00E004E1 /* XMPPMessageDeliveryReceipts.m in Sources */,
+				832F6A361AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m in Sources */,
 				83E6EE881A9F51DA00E004E1 /* XMPPMessage+XEP_0184.m in Sources */,
 				83E6EE381A9F51DA00E004E1 /* XMPPPresence.m in Sources */,
 				83E6EEAA1A9F51DA00E004E1 /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -1801,6 +1794,7 @@
 				83E6EEA21A9F51DA00E004E1 /* XMPPTimer.m in Sources */,
 				83E6EE621A9F51DA00E004E1 /* XMPPvCardCoreDataStorage.m in Sources */,
 				83E6EE8F1A9F51DA00E004E1 /* XMPPPing.m in Sources */,
+				832F6A351AA83CC100A8DA6B /* UIBubbleTableViewCell.m in Sources */,
 				83E6EE321A9F51DA00E004E1 /* XMPPElement.m in Sources */,
 				83E6EE981A9F51DA00E004E1 /* NSXMLElement+XEP_0297.m in Sources */,
 				83E6EE3F1A9F51DA00E004E1 /* XMPPGoogleSharedStatus.m in Sources */,
@@ -1810,6 +1804,7 @@
 				83E6EEA81A9F51DA00E004E1 /* DDTTYLogger.m in Sources */,
 				83E6EE3A1A9F51DA00E004E1 /* XMPPBandwidthMonitor.m in Sources */,
 				83E6EE4C1A9F51DA00E004E1 /* XMPPIQ+JabberRPC.m in Sources */,
+				832F6A321AA83CC100A8DA6B /* NSBubbleData.m in Sources */,
 				83E6EE2C1A9F51DA00E004E1 /* XMPPSCRAMSHA1Authentication.m in Sources */,
 				83E6EE8E1A9F51DA00E004E1 /* XMPPAutoPing.m in Sources */,
 				83E6EE9F1A9F51DA00E004E1 /* XMPPIDTracker.m in Sources */,
@@ -1819,7 +1814,6 @@
 				83E6EE851A9F51DA00E004E1 /* XMPPvCardAvatarModule.m in Sources */,
 				83E6EE9E1A9F51DA00E004E1 /* RFImageToDataTransformer.m in Sources */,
 				83E6EE931A9F51DA00E004E1 /* XEP_0223.m in Sources */,
-				83BC44A51AA3F1DC002B9EA6 /* WorkingWithCamera.m in Sources */,
 				83E6EE391A9F51DA00E004E1 /* XMPPStream.m in Sources */,
 				83E6EE6F1A9F51DA00E004E1 /* XMPPIQ+XEP_0060.m in Sources */,
 				83E6EE531A9F51DA00E004E1 /* XMPPRoomCoreDataStorage.m in Sources */,
@@ -1830,7 +1824,6 @@
 				83E6EE7A1A9F51DA00E004E1 /* NSString+XEP_0106.m in Sources */,
 				83E6EC981A9F51CB00E004E1 /* main.m in Sources */,
 				83E6EE971A9F51DA00E004E1 /* XMPPMessageCarbons.m in Sources */,
-				83268F2A1AA7C89D005A3B3C /* UIBubbleTableViewCell.m in Sources */,
 				83E6EEAB1A9F51DA00E004E1 /* DDMultiFormatter.m in Sources */,
 				83E6EE951A9F51DA00E004E1 /* XMPPMessage+XEP_0224.m in Sources */,
 				83E6EE821A9F51DA00E004E1 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
