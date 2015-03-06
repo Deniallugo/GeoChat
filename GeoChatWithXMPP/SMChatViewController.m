@@ -46,14 +46,13 @@
 
     AppDelegate *del = [self appDelegate];
     del._messageDelegate = self;
-    TURNSocket *turnSocket = [[TURNSocket alloc] initWithStream:[self xmppStream] toJID:jid];
+    [self waitingConnection].alpha = 0;
+//  TURNSocket *turnSocket = [[TURNSocket alloc] initWithStream:[self xmppStream] toJID:jid];
+//  [turnSockets addObject:turnSocket];
+//  [turnSocket startWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 
-    [turnSockets addObject:turnSocket];
 
-    [turnSocket startWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-
-
-//GeoLocation
+//  GeoLocation
 
     self->locationManager = [[CLLocationManager alloc] init];
     self->locationManager.delegate = self;
@@ -63,15 +62,18 @@
     }
     [self->locationManager startUpdatingLocation];
 
+    GeoLtitude = [NSString stringWithFormat:@"%.8f", [locationManager location].coordinate.longitude];
+    GeoLength = [NSString stringWithFormat:@"%.8f", [locationManager location].coordinate.latitude];
 
-//open camera
+    //open camera
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.frame = CGRectMake(20.0f, 186.0f, 280.0f, 88.0f);
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.tintColor = [UIColor darkGrayColor];
     [button addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
-
+    firstUpdateLocation = true;
+    [self sendQuery];
 }
 
 
@@ -102,7 +104,7 @@
     NSLog(@"didFailWithError: %@", error);
     UIAlertView *errorAlert = [[UIAlertView alloc]
                                initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    //[errorAlert show];
+    [errorAlert show];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -114,7 +116,16 @@
         GeoLtitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
         GeoLength = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
     }
+
+    if (firstUpdateLocation){
+        [self sendQuery];
+        firstUpdateLocation = false;
+    }
+
+
 }
+
+
 - (void)stopUpdatingLocationWithMessage:(NSString *)state {
 
     [locationManager stopUpdatingLocation];
@@ -143,6 +154,7 @@
     float value = self.slider.value * 1000;
     self.radius1.text = [NSString stringWithFormat:@"%f",value ];
     Radius = value;
+    [self sendQuery];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -216,6 +228,85 @@
                                animated:YES];
 }
 
+
+-(void) sendImage: (UIImage*) imagePic{
+
+    NSString *messageStr =  textField.text;
+    NSString *f = [self getCurrentTime];
+
+
+    if([messageStr length] > 0 || [imagePic isKindOfClass:[UIImage class]] )
+
+    {
+        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+
+        [body setStringValue:messageStr];
+
+
+        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+
+        [message addAttributeWithName:@"type"stringValue:@"chat"];
+
+        [message addAttributeWithName:@"to"stringValue:nil];
+        [message addAttributeWithName:@"latitude" stringValue:GeoLtitude];
+        [message addAttributeWithName:@"length" stringValue:GeoLength];
+        [message addAttributeWithName:@"time" stringValue:f];
+
+
+        [message addChild:body];
+
+        if([imagePic isKindOfClass:[UIImage class]])
+
+        {
+
+            NSData *dataPic =  UIImagePNGRepresentation(imagePic);
+
+            NSXMLElement *photo = [NSXMLElement elementWithName:@"PHOTO"];
+
+            NSXMLElement *binval = [NSXMLElement elementWithName:@"BINVAL"];
+
+            [photo addChild:binval];
+
+            NSString *base64String = [dataPic base64EncodedStringWithOptions:0];
+
+            [binval setStringValue:base64String];
+
+            [message addChild:photo];
+
+        }
+
+        [self.xmppStream sendElement:message];
+
+    }
+    textField.text = @"";
+
+    NSBubbleData *m = [NSBubbleData dataWithImage:imagePic date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+
+    [messages addObject:m];
+
+    [bubbleTable reloadData];
+
+    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
+                                                   inSection:0];
+    
+    [bubbleTable scrollToRowAtIndexPath:topIndexPath
+                       atScrollPosition:UITableViewScrollPositionMiddle
+                               animated:YES];
+    
+    
+}
+
+
+-(void) sendQuery{
+    XMPPIQ *iq = [[XMPPIQ alloc] initWithType:@"get"];
+    DDXMLElement *query = [DDXMLElement elementWithName:@"query" xmlns:@"kampus_gid:push:messages"];
+    [query addAttributeWithName:@"latitude" stringValue:GeoLtitude];
+    [query addAttributeWithName:@"length" stringValue:GeoLength];
+    [query addAttributeWithName:@"radius" doubleValue:Radius];
+
+    [iq addChild:query];
+    [[[self appDelegate] xmppStream] sendElement:iq];
+}
 
 
 #pragma mark - Bubble View
@@ -404,73 +495,6 @@
 }
 
 
-
--(void) sendImage: (UIImage*) imagePic{
-
-    NSString *messageStr =  textField.text;
-    NSString *f = [self getCurrentTime];
-
-
-    if([messageStr length] > 0 || [imagePic isKindOfClass:[UIImage class]] )
-
-    {
-        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-
-        [body setStringValue:messageStr];
-
-
-        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
-
-        [message addAttributeWithName:@"type"stringValue:@"chat"];
-
-        [message addAttributeWithName:@"to"stringValue:nil];
-        [message addAttributeWithName:@"latitude" stringValue:GeoLtitude];
-        [message addAttributeWithName:@"length" stringValue:GeoLength];
-        [message addAttributeWithName:@"time" stringValue:f];
-
-
-        [message addChild:body];
-
-        if([imagePic isKindOfClass:[UIImage class]])
-
-        {
-
-            NSData *dataPic =  UIImagePNGRepresentation(imagePic);
-
-            NSXMLElement *photo = [NSXMLElement elementWithName:@"PHOTO"];
-
-            NSXMLElement *binval = [NSXMLElement elementWithName:@"BINVAL"];
-
-            [photo addChild:binval];
-
-            NSString *base64String = [dataPic base64EncodedStringWithOptions:0];
-            
-            [binval setStringValue:base64String];
-            
-            [message addChild:photo];
-            
-        }
-        
-        [self.xmppStream sendElement:message];
-
-    }
-    textField.text = @"";
-
-    NSBubbleData *m = [NSBubbleData dataWithImage:imagePic date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
-
-    [messages addObject:m];
-
-    [bubbleTable reloadData];
-
-    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
-                                                   inSection:0];
-
-    [bubbleTable scrollToRowAtIndexPath:topIndexPath
-                       atScrollPosition:UITableViewScrollPositionMiddle
-                               animated:YES];
-
-
-}
 
 
 

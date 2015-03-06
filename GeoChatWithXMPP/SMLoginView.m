@@ -24,7 +24,6 @@
 
     [[NSUserDefaults standardUserDefaults] setObject:self.loginField.text forKey:@"userID"];
     [[NSUserDefaults standardUserDefaults] setObject:self.passwordField.text forKey:@"userPassword"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.hostField.text forKey:@"host"];
     if ([self.loginField.text isEqualToString:@""]){
         [[NSUserDefaults standardUserDefaults] synchronize];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"

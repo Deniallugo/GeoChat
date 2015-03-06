@@ -23,7 +23,7 @@
     NSString        *GeoLtitude;
     NSString        *GeoLength;
     float           Radius;
-
+    bool            firstUpdateLocation;
     NSMutableArray *turnSockets;
 
     IBOutlet UIBubbleTableView *bubbleTable;
@@ -35,6 +35,7 @@
     
 
 }
+@property (weak, nonatomic) IBOutlet UILabel *waitingConnection;
 
 @property (nonatomic,retain) NSString *chatWithUser;
 @property (nonatomic,retain) NSString *GeoLtitude;

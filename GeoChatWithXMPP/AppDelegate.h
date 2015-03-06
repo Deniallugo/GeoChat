@@ -12,6 +12,7 @@
 #import "SMMessageDelegate.h"
 #import "SMChatViewController.h"
 #import "XMPPRoster.h"
+#import "XMPPReconnect.h"
 
 @class SMLoginView;
 @class XMPPStream;
@@ -25,13 +26,14 @@
 
 @interface AppDelegate : NSObject <
 UIApplicationDelegate,
-XMPPRosterDelegate>
+XMPPRosterDelegate,XMPPReconnectDelegate>
 
 {
 
     UIWindow *window;
     ViewController *viewController;
     SMLoginView* loginViewController;
+    SMChatViewController  *chatViewController;
     NSString *login;
     NSString *password;
     BOOL isOpen;
@@ -43,7 +45,7 @@ XMPPRosterDelegate>
         XMPPStream *xmppStream;
         XMPPCapabilities *xmppCapabilities;
         XMPPRoster *xmppRoster;
-
+        XMPPReconnect* xmppReconnect;
         XMPPvCardAvatarModule *xmppvCardAvatarModule;
         XMPPvCardTempModule *xmppvCardTempModule;
 

@@ -218,6 +218,7 @@ typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
 		block();
 	else
 		dispatch_async(moduleQueue, block);
+
 }
 
 - (void)stop

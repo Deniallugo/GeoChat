@@ -10,7 +10,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "GCDAsyncSocket.h"
-#import "XMPP.h"
 #import "XMPPCapabilitiesCoreDataStorage.h"
 #import "XMPPRosterCoreDataStorage.h"
 #import "XMPPvCardAvatarModule.h"
@@ -54,6 +53,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
     loginViewController = [Main instantiateViewControllerWithIdentifier:@"login"] ;
+    chatViewController = [Main instantiateViewControllerWithIdentifier:@"chat"] ;
 
    // self.window.rootViewController = loginViewController;
 
@@ -116,6 +116,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
 
+    xmppReconnect = [[XMPPReconnect alloc] init];
+    [xmppReconnect activate:xmppStream];
+    [xmppReconnect addDelegate:self delegateQueue:dispatch_get_main_queue()];
+
     allowSelfSignedCertificates = NO;
     allowSSLHostNameMismatch = NO;
 }
@@ -148,6 +152,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
     [[self xmppStream] sendElement:presence];
 }
+
 
 - (BOOL)connect {
 
@@ -246,6 +251,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 }
 
+
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate: (NSXMLElement *)error;
 {
     XMPPLogError(@"Did not authenticate");
@@ -262,20 +268,22 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     self.window.rootViewController = loginView;
 //    [self.window.rootViewController presentViewController:loginViewController animated:YES completion:nil];
-
 }
 
-- (void)xmppStreamDidRegister:(XMPPStream *)sender{
 
-    XMPPLogError(@"I'm in register method");
+- (void)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(SCNetworkReachabilityFlags)connectionFlags
+{
+    NSLog(@"didDetectAccidentalDisconnect:%u",connectionFlags);
+    chatViewController.waitingConnection.alpha = 1;
 
 }
+- (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkReachabilityFlags)reachabilityFlags
+{
+    NSLog(@"shouldAttemptAutoReconnect:%u",reachabilityFlags);
 
-- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement
-                                                        *)error{ 
-    XMPPLogError(@"Sorry the registration is failed");
-    
+
+
+    return YES;
 }
-
 
 @end
