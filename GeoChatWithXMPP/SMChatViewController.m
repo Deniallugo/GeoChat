@@ -26,7 +26,7 @@
 
     [super viewDidLoad];
     messages = [[NSMutableArray alloc ] init];
-
+    Radius = 500.0;
 //bubble view
     bubbleTable.bubbleDataSource = self;
 
@@ -102,12 +102,12 @@
     NSLog(@"didFailWithError: %@", error);
     UIAlertView *errorAlert = [[UIAlertView alloc]
                                initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
+    //[errorAlert show];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    //NSLog(@"didUpdateToLocation: %@", newLocation);
+
     CLLocation *currentLocation = newLocation;
 
     if (currentLocation != nil) {
@@ -129,11 +129,11 @@
 
 - (IBAction) closeChat {
 
-    [[self appDelegate] disconnect];
+    //[[self appDelegate] disconnect];
 
-    //SMLoginView *loginViewController = [[SMLoginView alloc]init];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    //[UIViewController presentViewController:loginViewController animated:YES completion:nil];
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SMLoginView * loginView = [Main instantiateViewControllerWithIdentifier:@"login"] ;
+    [self presentViewController:loginView animated:YES completion:nil];
 
 
 
@@ -154,8 +154,12 @@
 
 - (void)newMessageReceived:(NSBubbleData *)messageContent {
 
+    NSString *msg = [messageContent valueForKey:@"msg"];
+    //NSString *sender = [messageContent valueForKey:@"sender"];
+    NSBubbleData *m = [NSBubbleData dataWithText:msg date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
 
-    [messages addObject:messageContent];
+    [messages addObject:m];
+
     [bubbleTable reloadData];
 
     NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
@@ -461,7 +465,9 @@
     NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
                                                    inSection:0];
 
-    
+    [bubbleTable scrollToRowAtIndexPath:topIndexPath
+                       atScrollPosition:UITableViewScrollPositionMiddle
+                               animated:YES];
 
 
 }

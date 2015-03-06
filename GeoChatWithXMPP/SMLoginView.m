@@ -13,7 +13,10 @@
 
 @synthesize loginField, passwordField;
 
-
+-(void) viewDidLoad{
+    [self wait].alpha = 0;
+    [self labelWait].alpha = 0;
+}
 
 - (IBAction) login {
 
@@ -22,11 +25,19 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.loginField.text forKey:@"userID"];
     [[NSUserDefaults standardUserDefaults] setObject:self.passwordField.text forKey:@"userPassword"];
     [[NSUserDefaults standardUserDefaults] setObject:self.hostField.text forKey:@"host"];
+    if ([self.loginField.text isEqualToString:@""]){
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Введите login и пароль"
+                                                       delegate:nil
+                                                    cancelButtonTitle:@"Ok"
+                                                    otherButtonTitles:nil];
+        [alertView show];
+    }
+    [[self appDelegate]connect];
+    [self wait].alpha = 1;
+    [self labelWait].alpha = 1;
 
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    if ([[self appDelegate]connect])
-        [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
@@ -39,8 +50,12 @@
 
 - (IBAction)registration {
 
-    SMRegistrationView* registrController = [[SMRegistrationView alloc] init];
-    [self presentViewController:registrController animated:YES completion:nil];
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SMRegistrationView * regView = [Main instantiateViewControllerWithIdentifier:@"registration"] ;
+
+
+    [self presentViewController:regView animated:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
+
 
 }
 

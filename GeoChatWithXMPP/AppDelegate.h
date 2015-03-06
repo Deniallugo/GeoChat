@@ -47,19 +47,22 @@ XMPPRosterDelegate>
         XMPPvCardAvatarModule *xmppvCardAvatarModule;
         XMPPvCardTempModule *xmppvCardTempModule;
 
-
         BOOL allowSelfSignedCertificates;
         BOOL allowSSLHostNameMismatch;
         NSError *error;
-
+        NSString *host;
 
 }
 
 @property (nonatomic, retain) NSString *login;
 
+@property (nonatomic, retain) NSString *host;
 
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+
+@property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) IBOutlet SMChatViewController *chatViewController;
 @property (nonatomic, retain) IBOutlet ViewController *viewController;
 @property (nonatomic, assign) id <SMChatDelegate>  _chatDelegate;
 @property (nonatomic, assign) id <SMMessageDelegate> _messageDelegate;

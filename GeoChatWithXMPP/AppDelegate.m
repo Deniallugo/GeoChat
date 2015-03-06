@@ -17,6 +17,7 @@
 #import "XMPPvCardCoreDataStorage.h"
 #import "SMLoginView.h"
 #import "DDLog.h"
+#import "GCDAsyncSocket.h"
 #import "XMPPLogging.h"
 #import "DDTTYLogger.h"
 
@@ -34,7 +35,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @implementation AppDelegate
 
-@synthesize _chatDelegate, _messageDelegate;
+@synthesize _chatDelegate, _messageDelegate,chatViewController;
 @synthesize xmppCapabilities;
 @synthesize xmppRoster;
 @synthesize xmppvCardAvatarModule;
@@ -49,13 +50,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
 
-    loginViewController = [[SMLoginView alloc]init];
-    // Setup the view controllers
+  //// Setup the view controllers
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    [window setRootViewController:viewController];
-    [window makeKeyAndVisible];
+    loginViewController = [Main instantiateViewControllerWithIdentifier:@"login"] ;
+
+   // self.window.rootViewController = loginViewController;
 
     // Setup the XMPP stream
+    host = @"5.143.95.49";
 
     [self setupStream];
     if (![CLLocationManager locationServicesEnabled]) {
@@ -68,12 +71,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [servicesDisabledAlert show];
     }
 
-    if([self connect])
-    [viewController presentViewController:loginViewController animated:YES completion:nil];
+
+    [self connect];
+
 
     return YES;
 }
-
 
 
 
@@ -91,7 +94,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     xmppCapabilities.autoFetchNonHashedCapabilities = NO;
     [xmppRoster setAutoFetchRoster:YES];
 //    [xmppRoster setAutoRoster:YES];
-    [xmppStream setHostName:@"5.143.95.49"];
+    [xmppStream setHostName:host];
     [xmppStream setHostPort:5222];
 
     /**
@@ -118,6 +121,25 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 - (void)goOnline {
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    chatViewController = [Main instantiateViewControllerWithIdentifier:@"chat"] ;
+
+
+    [UIView transitionFromView:self.window.rootViewController.view
+                        toView:chatViewController.view
+                      duration:0.65f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+
+                    completion:^(BOOL finished) {
+                        self.window.rootViewController = chatViewController;
+                    }];
+
+
+
+
+
+
     XMPPPresence *presence = [XMPPPresence presence];
     [[self xmppStream] sendElement:presence];
 }
@@ -227,14 +249,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate: (NSXMLElement *)error;
 {
     XMPPLogError(@"Did not authenticate");
+    if( ![login  isEqual: @""]){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"Неправильно введено имя пользователя или пароль"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SMLoginView * loginView = [Main instantiateViewControllerWithIdentifier:@"login"] ;
 
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                        message:@"Неправильно введено имя пользователя или пароль"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-    [alertView show];
-   // [viewController dismissViewControllerAnimated:YES completion:nil];
+    self.window.rootViewController = loginView;
+//    [self.window.rootViewController presentViewController:loginViewController animated:YES completion:nil];
 
 }
 

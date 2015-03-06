@@ -22,5 +22,7 @@
 - (IBAction) login;
 - (IBAction) hideLogin;
 - (IBAction) registration;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *wait;
+@property (weak, nonatomic) IBOutlet UILabel *labelWait;
 
 @end

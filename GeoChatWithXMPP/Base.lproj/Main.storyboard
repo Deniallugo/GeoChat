@@ -70,7 +70,7 @@
         <!--Login View-->
         <scene sceneID="X8F-bj-Lr0">
             <objects>
-                <viewController id="Piy-W0-eft" customClass="SMLoginView" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" id="Piy-W0-eft" customClass="SMLoginView" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K5r-Kv-zVU"/>
                         <viewControllerLayoutGuide type="bottom" id="rhh-F1-IiM"/>
@@ -87,22 +87,6 @@
                                     <rect key="frame" x="125" y="208" width="150" height="30"/>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="danil" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nj1-HU-uIe">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="125" y="302" width="150" height="30"/>
-                                </variation>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iik-xT-3o0">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="125" y="363" width="150" height="30"/>
-                                </variation>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOk-qF-w67">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -110,15 +94,6 @@
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="16" y="217" width="36" height="21"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCI-xZ-x3N">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="311" width="76" height="21"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кампус Гид Чат" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BX6-Uq-qcG">
@@ -143,15 +118,6 @@
                                     <rect key="frame" x="0.0" y="20" width="400" height="44"/>
                                 </variation>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ix3-k7-fnU">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="372" width="37" height="21"/>
-                                </variation>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ryo-tA-OH8">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Войти">
@@ -162,7 +128,6 @@
                                 </variation>
                                 <connections>
                                     <action selector="login" destination="Piy-W0-eft" eventType="touchUpInside" id="2q0-EC-rrR"/>
-                                    <segue destination="iZE-aE-WI2" kind="show" id="AHb-AG-SAr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkO-u5-4pM">
@@ -178,42 +143,75 @@
                                     <segue destination="9qF-t0-zW8" kind="show" id="YB9-2a-QgC"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-uz-9QF">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="190" y="261" width="20" height="20"/>
+                                </variation>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="connecting please wait" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef0-ID-BL3">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="112" y="273" width="177" height="54"/>
+                                </variation>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="danil" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nj1-HU-uIe">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="125" y="330" width="150" height="30"/>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCI-xZ-x3N">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="339" width="76" height="21"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="oCC-Ff-EA9"/>
-                                <exclude reference="Nj1-HU-uIe"/>
-                                <exclude reference="iik-xT-3o0"/>
                                 <exclude reference="NOk-qF-w67"/>
-                                <exclude reference="VCI-xZ-x3N"/>
                                 <exclude reference="BX6-Uq-qcG"/>
                                 <exclude reference="R2o-he-TNM"/>
-                                <exclude reference="Ix3-k7-fnU"/>
                                 <exclude reference="Ryo-tA-OH8"/>
                                 <exclude reference="fkO-u5-4pM"/>
+                                <exclude reference="GU9-uz-9QF"/>
+                                <exclude reference="ef0-ID-BL3"/>
+                                <exclude reference="Nj1-HU-uIe"/>
+                                <exclude reference="VCI-xZ-x3N"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="oCC-Ff-EA9"/>
-                                <include reference="Nj1-HU-uIe"/>
-                                <include reference="iik-xT-3o0"/>
                                 <include reference="NOk-qF-w67"/>
-                                <include reference="VCI-xZ-x3N"/>
                                 <include reference="BX6-Uq-qcG"/>
                                 <include reference="R2o-he-TNM"/>
-                                <include reference="Ix3-k7-fnU"/>
                                 <include reference="Ryo-tA-OH8"/>
                                 <include reference="fkO-u5-4pM"/>
+                                <include reference="GU9-uz-9QF"/>
+                                <include reference="ef0-ID-BL3"/>
+                                <include reference="Nj1-HU-uIe"/>
+                                <include reference="VCI-xZ-x3N"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Rj6-3Q-YTI"/>
                     <connections>
-                        <outlet property="hostField" destination="iik-xT-3o0" id="ysj-qq-BPb"/>
+                        <outlet property="labelWait" destination="ef0-ID-BL3" id="SRw-FP-t01"/>
                         <outlet property="loginField" destination="oCC-Ff-EA9" id="90L-TF-pXH"/>
                         <outlet property="passwordField" destination="Nj1-HU-uIe" id="gmS-He-2ib"/>
+                        <outlet property="wait" destination="GU9-uz-9QF" id="h1D-1h-mgD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQT-2w-79g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -223,7 +221,7 @@
         <!--Registration View-->
         <scene sceneID="2tr-vd-mtq">
             <objects>
-                <viewController id="9qF-t0-zW8" customClass="SMRegistrationView" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="registration" id="9qF-t0-zW8" customClass="SMRegistrationView" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sfA-on-6ye"/>
                         <viewControllerLayoutGuide type="bottom" id="xB2-1X-z07"/>
@@ -358,7 +356,7 @@
         <!--Chat View Controller-->
         <scene sceneID="xin-Vz-q0d">
             <objects>
-                <viewController id="iZE-aE-WI2" customClass="SMChatViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chat" id="iZE-aE-WI2" customClass="SMChatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4D6-SL-HUJ"/>
                         <viewControllerLayoutGuide type="bottom" id="5tk-IU-MNe"/>
@@ -442,13 +440,13 @@
                                     <rect key="frame" x="0.0" y="28" width="400" height="44"/>
                                 </variation>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89a-Ta-Gtl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500.0000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89a-Ta-Gtl">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="162" y="111" width="89" height="24"/>
+                                    <rect key="frame" x="162" y="111" width="100" height="24"/>
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoS-11-wsn">

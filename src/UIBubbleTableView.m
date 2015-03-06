@@ -113,7 +113,7 @@
         for (int i = 0; i < count; i++)
         {
             NSObject *object = [self.bubbleDataSource bubbleTableView:self dataForRow:i];
-            assert([object isKindOfClass:[NSBubbleData class]]);
+         //   assert([object isKindOfClass:[NSBubbleData class]]);
             [bubbleData addObject:object];
         }
         

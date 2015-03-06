@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SMMessageDelegate.h"   
 #import <CoreLocation/CoreLocation.h>
-#import "SMMessageViewTableCell.h"
+
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *radius1;
 
+@property (nonatomic, retain) IBOutlet UIWindow *window;
 
 
 - (id) initWithUser:(NSString *) userName;

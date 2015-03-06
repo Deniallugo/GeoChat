@@ -22,7 +22,6 @@
 		832F6A341AA83CC100A8DA6B /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2C1AA83CC100A8DA6B /* UIBubbleTableView.m */; };
 		832F6A351AA83CC100A8DA6B /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2E1AA83CC100A8DA6B /* UIBubbleTableViewCell.m */; };
 		832F6A361AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */; };
-		838CB12A1AA72B8900552E87 /* SMMessageViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */; };
 		838CB1351AA734F300552E87 /* NSString + Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1341AA734F300552E87 /* NSString + Utils.m */; };
 		83D268BF1AA5556900305C3A /* SMRegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D268BE1AA5556900305C3A /* SMRegistrationView.m */; };
 		83E6EC981A9F51CB00E004E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC971A9F51CB00E004E1 /* main.m */; };
@@ -217,8 +216,6 @@
 		832F6A2F1AA83CC100A8DA6B /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
 		832F6A301AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
 		832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
-		838CB1281AA72B8900552E87 /* SMMessageViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMMessageViewTableCell.h; sourceTree = "<group>"; };
-		838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMMessageViewTableCell.m; sourceTree = "<group>"; };
 		838CB1331AA734F300552E87 /* NSString + Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString + Utils.h"; sourceTree = "<group>"; };
 		838CB1341AA734F300552E87 /* NSString + Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString + Utils.m"; sourceTree = "<group>"; };
 		83D268BD1AA5556900305C3A /* SMRegistrationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMRegistrationView.h; sourceTree = "<group>"; };
@@ -684,8 +681,6 @@
 				83E6EECF1A9F5ADE00E004E1 /* SMMessageDelegate.h */,
 				83D268BD1AA5556900305C3A /* SMRegistrationView.h */,
 				83D268BE1AA5556900305C3A /* SMRegistrationView.m */,
-				838CB1281AA72B8900552E87 /* SMMessageViewTableCell.h */,
-				838CB1291AA72B8900552E87 /* SMMessageViewTableCell.m */,
 				83E6EC9F1A9F51CB00E004E1 /* Main.storyboard */,
 				83E6ECA21A9F51CB00E004E1 /* Images.xcassets */,
 				83E6ECA41A9F51CB00E004E1 /* LaunchScreen.xib */,
@@ -1692,7 +1687,6 @@
 				83E6EE7B1A9F51DA00E004E1 /* XMPPCapabilities.xcdatamodel in Sources */,
 				83E6EE331A9F51DA00E004E1 /* XMPPIQ.m in Sources */,
 				83E6EE5E1A9F51DA00E004E1 /* XMPPMUC.m in Sources */,
-				838CB12A1AA72B8900552E87 /* SMMessageViewTableCell.m in Sources */,
 				83E6EE441A9F51DA00E004E1 /* XMPPRoster.xcdatamodel in Sources */,
 				83E6EE671A9F51DA00E004E1 /* XMPPvCardTempAdrTypes.m in Sources */,
 				83E6EE4E1A9F51DA00E004E1 /* XMPPJabberRPCModule.m in Sources */,
@@ -1952,6 +1946,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GeoChatWithXMPP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1970,6 +1965,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GeoChatWithXMPP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

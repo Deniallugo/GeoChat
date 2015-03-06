@@ -58,16 +58,27 @@
 
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error{
 
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration with XMPP   Failed!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    if (error) {
+        [alert setMessage:@"error "];
+        [alert show];
+        return;
+    }
+
     DDXMLElement *errorXML = [error elementForName:@"error"];
     NSString *errorCode  = [[errorXML attributeForName:@"code"] stringValue];
 
     NSString *regError = [NSString stringWithFormat:@"ERROR :- %@",error.description];
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration with XMPP   Failed!" message:regError delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alert = [[UIAlertView alloc] initWithTitle:@"Registration with XMPP   Failed!" message:regError delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 
     if([errorCode isEqualToString:@"409"]){
         
         [alert setMessage:@"Username Already Exists!"];
+    }
+    if([errorCode isEqualToString:@"405"]){
+
+        [alert setMessage:@"Bad login or password"];
     }
     [alert show];
 }

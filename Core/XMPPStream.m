@@ -1136,6 +1136,7 @@ enum XMPPStreamConfig
        //     state = STATE_XMPP_BINDING;
             
 			NSError *connectErr = nil;
+            
 			result = [self connectToHost:hostName onPort:hostPort withTimeout:XMPPStreamTimeoutNone error:&connectErr];
 			
 			if (!result)

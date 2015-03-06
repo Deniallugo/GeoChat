@@ -30,9 +30,9 @@
 
 - (IBAction) showLogin {
     [[self appDelegate] disconnect];
-    SMLoginView *loginController = [[SMLoginView alloc] init];
-    [self presentViewController:loginController animated:YES completion:nil];
-    
+//    SMLoginView *loginController = [[SMLoginView alloc] init];
+//    [self presentViewController:loginController animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -

@@ -1065,6 +1065,7 @@ extern const NSTimeInterval XMPPStreamTimeoutNone;
  * @see xmppStreamConnectDidTimeout:
 **/
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error;
+- (BOOL)connectToHost:(NSString *)host onPort:(UInt16)port withTimeout:(NSTimeInterval)timeout error:(NSError **)errPtr;
 
 /**
  * This method is only used in P2P mode when the connectTo:withAddress: method was used.
