@@ -55,7 +55,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     loginViewController = [Main instantiateViewControllerWithIdentifier:@"login"] ;
     chatViewController = [Main instantiateViewControllerWithIdentifier:@"chat"] ;
 
-   // self.window.rootViewController = loginViewController;
+//    self.window.rootViewController = loginViewController;
 
     // Setup the XMPP stream
     host = @"5.143.95.49";

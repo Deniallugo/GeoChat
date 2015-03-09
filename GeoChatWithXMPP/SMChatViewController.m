@@ -512,6 +512,11 @@
 
 }
 
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[self view] endEditing:YES];
+}
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 
     [picker dismissViewControllerAnimated:YES completion:NULL];

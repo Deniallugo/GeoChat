@@ -11,12 +11,10 @@
 @interface SMLoginView : UIViewController{
     UITextField *loginField;
     UITextField *passwordField;
-    UITextField *hostField;
 }
 
 @property (nonatomic,retain) IBOutlet UITextField *loginField;
 @property (nonatomic,retain) IBOutlet UITextField *passwordField;
-@property (nonatomic,retain) IBOutlet UITextField *hostField;
 
 
 - (IBAction) login;
