@@ -34,54 +34,21 @@
         [elements addObject:[NSXMLElement elementWithName:@"username" stringValue:juser]];
         [elements addObject:[NSXMLElement elementWithName:@"password" stringValue:password.text]];
 
-    if(
-    [[self xmppStream ] registerWithElements:elements error:&error]){
-        [self xmppStreamDidRegister:[self xmppStream]];
-    }
-    else
-        [self xmppStream:[self xmppStream] didNotRegister:[NSXMLElement alloc]];
-
+//    if(
+//    [
+     [[self xmppStream ] registerWithElements:elements error:&error]
+    ;
+//    ){
+//        [self xmppStreamDidRegister:[self xmppStream]];
+//    }
+//    else
+//        [self xmppStream:[self xmppStream] didNotRegister:[NSXMLElement alloc]];
+//
 
 
 }
 
 
-- (void)xmppStreamDidRegister:(XMPPStream *)sender{
-
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration" message:@"Registration with XMPP Successful!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-
-}
-
-
-
-- (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error{
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration with XMPP   Failed!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    if (error) {
-        [alert setMessage:@"error "];
-        [alert show];
-        return;
-    }
-
-    DDXMLElement *errorXML = [error elementForName:@"error"];
-    NSString *errorCode  = [[errorXML attributeForName:@"code"] stringValue];
-
-    NSString *regError = [NSString stringWithFormat:@"ERROR :- %@",error.description];
-
-    alert = [[UIAlertView alloc] initWithTitle:@"Registration with XMPP   Failed!" message:regError delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-
-    if([errorCode isEqualToString:@"409"]){
-        
-        [alert setMessage:@"Username Already Exists!"];
-    }
-    if([errorCode isEqualToString:@"405"]){
-
-        [alert setMessage:@"Bad login or password"];
-    }
-    [alert show];
-}
 
 
 - (AppDelegate *)appDelegate {

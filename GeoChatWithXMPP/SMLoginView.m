@@ -27,10 +27,10 @@
     if ([self.loginField.text isEqualToString:@""]){
         [[NSUserDefaults standardUserDefaults] synchronize];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"Введите login и пароль"
-                                                       delegate:nil
-                                                    cancelButtonTitle:@"Ok"
-                                                    otherButtonTitles:nil];
+                                                            message:@"Введите login и пароль"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
         [alertView show];
     }
     [[self appDelegate]connect];
@@ -43,7 +43,7 @@
 - (IBAction) hideLogin {
 
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+
 
 }
 

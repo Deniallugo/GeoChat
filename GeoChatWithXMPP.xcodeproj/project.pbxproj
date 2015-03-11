@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8316C31F1AAF1FC90090A993 /* Iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8316C31E1AAF1FC90090A993 /* Iphone4.storyboard */; };
 		83268F371AA7C900005A3B3C /* bubbleMine.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2D1AA7C900005A3B3C /* bubbleMine.png */; };
 		83268F381AA7C900005A3B3C /* bubbleMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2E1AA7C900005A3B3C /* bubbleMine@2x.png */; };
 		83268F391AA7C900005A3B3C /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2F1AA7C900005A3B3C /* bubbleSomeone.png */; };
@@ -195,6 +196,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8316C31E1AAF1FC90090A993 /* Iphone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Iphone4.storyboard; sourceTree = "<group>"; };
 		83268F2D1AA7C900005A3B3C /* bubbleMine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleMine.png; sourceTree = "<group>"; };
 		83268F2E1AA7C900005A3B3C /* bubbleMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleMine@2x.png"; sourceTree = "<group>"; };
 		83268F2F1AA7C900005A3B3C /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 				83E6EECF1A9F5ADE00E004E1 /* SMMessageDelegate.h */,
 				83D268BD1AA5556900305C3A /* SMRegistrationView.h */,
 				83D268BE1AA5556900305C3A /* SMRegistrationView.m */,
+				8316C31E1AAF1FC90090A993 /* Iphone4.storyboard */,
 				83E6EC9F1A9F51CB00E004E1 /* Main.storyboard */,
 				83E6ECA21A9F51CB00E004E1 /* Images.xcassets */,
 				83E6ECA41A9F51CB00E004E1 /* LaunchScreen.xib */,
@@ -1641,6 +1644,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8316C31F1AAF1FC90090A993 /* Iphone4.storyboard in Resources */,
 				83E6EEB11A9F51DA00E004E1 /* build-libidn.sh in Resources */,
 				83268F3C1AA7C900005A3B3C /* missingAvatar@2x.png in Resources */,
 				83268F3B1AA7C900005A3B3C /* missingAvatar.png in Resources */,

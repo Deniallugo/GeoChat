@@ -27,7 +27,7 @@
     [super viewDidLoad];
     messages = [[NSMutableArray alloc ] init];
     Radius = 500.0;
-//bubble view
+    //bubble view
     bubbleTable.bubbleDataSource = self;
 
 
@@ -42,17 +42,18 @@
     // Keyboard events
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];    XMPPJID *jid = [XMPPJID jidWithString:[[self appDelegate] login ]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+    XMPPJID *jid = [XMPPJID jidWithString:[[self appDelegate] login ]];
 
     AppDelegate *del = [self appDelegate];
     del._messageDelegate = self;
     [self waitingConnection].alpha = 0;
-//  TURNSocket *turnSocket = [[TURNSocket alloc] initWithStream:[self xmppStream] toJID:jid];
-//  [turnSockets addObject:turnSocket];
-//  [turnSocket startWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    //  TURNSocket *turnSocket = [[TURNSocket alloc] initWithStream:[self xmppStream] toJID:jid];
+    //  [turnSockets addObject:turnSocket];
+    //  [turnSocket startWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 
 
-//  GeoLocation
+    //  GeoLocation
 
     self->locationManager = [[CLLocationManager alloc] init];
     self->locationManager.delegate = self;
@@ -89,7 +90,7 @@
 
     NSLog(@"TURN Connection failed!");
     [turnSockets removeObject:sender];
-    
+
 }
 
 
@@ -140,13 +141,11 @@
 
 - (IBAction) closeChat {
 
-    //[[self appDelegate] disconnect];
 
     UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SMLoginView * loginView = [Main instantiateViewControllerWithIdentifier:@"login"] ;
+
     [self presentViewController:loginView animated:YES completion:nil];
-
-
 
 }
 
@@ -160,27 +159,48 @@
 - (void)viewDidAppear:(BOOL)animated {
 
     [super viewDidAppear:animated];
-    
+
 }
 
 
-- (void)newMessageReceived:(NSBubbleData *)messageContent {
+- (void)newMessageReceived:(NSBubbleData *)messageContent animated:(BOOL)animated {
 
     NSString *msg = [messageContent valueForKey:@"msg"];
-    //NSString *sender = [messageContent valueForKey:@"sender"];
-    NSBubbleData *m = [NSBubbleData dataWithText:msg date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
+    NSString *sender = [messageContent valueForKey:@"sender"];
+    NSDate *data = [messageContent valueForKey:@"date"];
+    NSDate * data1 = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSBubbleData *m;
 
+    if([sender  isEqual: @"you"]){
+        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeMine];
+    }
+    else
+        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeSomeoneElse];
     [messages addObject:m];
 
     [bubbleTable reloadData];
 
-    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
-                                                   inSection:0];
+   // NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
+                             //                      inSection:0];
+    [bubbleTable scrollBubbleViewToBottomAnimated:animated];
 
-    [bubbleTable scrollToRowAtIndexPath:topIndexPath
-                      atScrollPosition:UITableViewScrollPositionMiddle
-                              animated:YES];
+//    [bubbleTable scrollToRowAtIndexPath:topIndexPath
+//                       atScrollPosition:UITableViewScrollPositionTop
+//                               animated:YES];
 }
+
+
+- (void)newMessagesReceived:(NSMutableArray *)messagesRecv {
+
+    [messages removeAllObjects];
+    for(NSBubbleData* i in messagesRecv){
+
+        [self newMessageReceived:i animated:NO];
+    }
+   // [bubbleTable reloadData];
+
+}
+
 
 
 - (IBAction)sendMessage {
@@ -189,7 +209,7 @@
 
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
-    NSString *f = [self getCurrentTime];
+    //NSString *f = [self getCurrentTime];
     if([messageStr length]) {
 
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -197,35 +217,30 @@
 
 
         NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
-        [message addAttributeWithName:@"type" stringValue:@"chat"];
-        [message addAttributeWithName:@"to" stringValue:chatWithUser];
-        [message addAttributeWithName:@"latitude" stringValue:GeoLtitude];
-        [message addAttributeWithName:@"length" stringValue:GeoLength];
-        [message addAttributeWithName:@"time" stringValue:f];
+
+
+
+        NSXMLElement * latitude = [NSXMLElement elementWithName:@"latitude" stringValue:GeoLtitude];
+        NSXMLElement * longitude = [NSXMLElement elementWithName:@"longitude" stringValue:GeoLength];
+
 
         [message addChild:body];
+        [message addChild:latitude];
+        [message addChild:longitude];
+
 
         [self.xmppStream sendElement:message];
 
         textField.text = @"";
-
-
-
-
         NSBubbleData *m = [NSBubbleData dataWithText:messageStr date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
-
         [messages addObject:m];
 
     }
 
     [bubbleTable reloadData];
 
-    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count-1
-                                                   inSection:0];
+    [bubbleTable scrollBubbleViewToBottomAnimated:YES];
 
-    [bubbleTable scrollToRowAtIndexPath:topIndexPath
-                       atScrollPosition:UITableViewScrollPositionMiddle
-                               animated:YES];
 }
 
 
@@ -286,25 +301,24 @@
 
     [bubbleTable reloadData];
 
-    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
-                                                   inSection:0];
-    
-    [bubbleTable scrollToRowAtIndexPath:topIndexPath
-                       atScrollPosition:UITableViewScrollPositionMiddle
-                               animated:YES];
-    
-    
+    [bubbleTable scrollBubbleViewToBottomAnimated:YES];
+
+
 }
 
 
 -(void) sendQuery{
     XMPPIQ *iq = [[XMPPIQ alloc] initWithType:@"get"];
-    DDXMLElement *query = [DDXMLElement elementWithName:@"query" xmlns:@"kampus_gid:push:messages"];
-    [query addAttributeWithName:@"latitude" stringValue:GeoLtitude];
-    [query addAttributeWithName:@"length" stringValue:GeoLength];
-    [query addAttributeWithName:@"radius" doubleValue:Radius];
-
+    DDXMLElement *query = [DDXMLElement elementWithName:@"query" xmlns:@"geo:list:messages"];
+    NSXMLElement * latitude = [NSXMLElement elementWithName:@"latitude" stringValue:GeoLtitude];
+    NSXMLElement * longitude = [NSXMLElement elementWithName:@"longitude" stringValue:GeoLength];
+    NSXMLElement * radius = [NSXMLElement elementWithName:@"radius" stringValue:[NSString stringWithFormat:@"%.20lf", Radius ] ];
+    [query addChild:latitude];
+    [query addChild:longitude];
+    [query addChild:radius];
     [iq addChild:query];
+
+
     [[[self appDelegate] xmppStream] sendElement:iq];
 }
 
@@ -413,7 +427,7 @@
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     return [dateFormatter stringFromDate:nowUTC];
-    
+
 }
 #pragma mark - Send image method
 
@@ -488,10 +502,10 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
+    
     [self presentViewController:picker animated:YES completion:NULL];
-
-
+    
+    
 }
 
 
@@ -501,15 +515,15 @@
 #pragma mark - Image Picker Controller delegate methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-
+    
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-
+    
     [self sendImage:chosenImage];
-
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
-
-
-
+    
+    
+    
 }
 
 
@@ -518,9 +532,9 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
-
+    
 }
 
 

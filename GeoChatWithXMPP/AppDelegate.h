@@ -37,6 +37,7 @@ XMPPRosterDelegate,XMPPReconnectDelegate>
     NSString *login;
     NSString *password;
     BOOL isOpen;
+    NSString* device;
 
     __unsafe_unretained NSObject <SMChatDelegate> *chatDelegate;
     __unsafe_unretained NSObject <SMMessageDelegate> *messageDelegate;
