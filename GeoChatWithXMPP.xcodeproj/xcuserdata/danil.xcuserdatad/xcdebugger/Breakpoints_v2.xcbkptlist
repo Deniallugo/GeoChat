@@ -413,8 +413,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
             endingLineNumber = "47"
-            landmarkName = "-createAccount"
-            landmarkType = "5">
+            landmarkName = "@implementation SMRegistrationView"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1101,22 +1101,6 @@
             startingLineNumber = "19"
             endingLineNumber = "19"
             landmarkName = "-registr"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GeoChatWithXMPP/SMRegistrationView.m"
-            timestampString = "447267361.95733"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-createAccount"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

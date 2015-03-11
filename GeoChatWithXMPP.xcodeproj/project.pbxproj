@@ -182,6 +182,7 @@
 		83E6EEC71A9F52BC00E004E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E6EEC61A9F52BC00E004E1 /* CoreGraphics.framework */; };
 		83E6EECA1A9F592A00E004E1 /* SMLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EEC91A9F592A00E004E1 /* SMLoginView.m */; };
 		83E6EECD1A9F59B500E004E1 /* SMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EECC1A9F59B500E004E1 /* SMChatViewController.m */; };
+		9C70E718477045490F98ABC8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E48D266A5A213C5BB7FE068E /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +196,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		200F14CDDFF43794A13E0686 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		83268F2D1AA7C900005A3B3C /* bubbleMine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleMine.png; sourceTree = "<group>"; };
 		83268F2E1AA7C900005A3B3C /* bubbleMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleMine@2x.png"; sourceTree = "<group>"; };
 		83268F2F1AA7C900005A3B3C /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
@@ -540,6 +542,8 @@
 		83E6EECC1A9F59B500E004E1 /* SMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMChatViewController.m; sourceTree = "<group>"; };
 		83E6EECE1A9F5AC200E004E1 /* SMChatDelegatE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMChatDelegatE.h; sourceTree = "<group>"; };
 		83E6EECF1A9F5ADE00E004E1 /* SMMessageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMMessageDelegate.h; sourceTree = "<group>"; };
+		982DD42260DA020629762FE7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E48D266A5A213C5BB7FE068E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,6 +561,7 @@
 				83E6EEB91A9F524000E004E1 /* Foundation.framework in Frameworks */,
 				83E6EEB51A9F521500E004E1 /* CoreData.framework in Frameworks */,
 				83E6EEB21A9F51DA00E004E1 /* libidn.a in Frameworks */,
+				9C70E718477045490F98ABC8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +575,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05AF549AA83E049CDEF67C55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E48D266A5A213C5BB7FE068E /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83268F2C1AA7C900005A3B3C /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +666,8 @@
 				83E6ECAE1A9F51CB00E004E1 /* GeoChatWithXMPPTests */,
 				83E6EC931A9F51CB00E004E1 /* Products */,
 				832F6A261AA83CC100A8DA6B /* src */,
+				05AF549AA83E049CDEF67C55 /* Frameworks */,
+				B9935F7D621B26CE313AA8FE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1561,6 +1576,15 @@
 			path = libidn;
 			sourceTree = "<group>";
 		};
+		B9935F7D621B26CE313AA8FE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				200F14CDDFF43794A13E0686 /* Pods.debug.xcconfig */,
+				982DD42260DA020629762FE7 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1568,9 +1592,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83E6ECB51A9F51CB00E004E1 /* Build configuration list for PBXNativeTarget "GeoChatWithXMPP" */;
 			buildPhases = (
+				9E54EB3551D398FA80F0A6E6 /* Check Pods Manifest.lock */,
 				83E6EC8E1A9F51CB00E004E1 /* Sources */,
 				83E6EC8F1A9F51CB00E004E1 /* Frameworks */,
 				83E6EC901A9F51CB00E004E1 /* Resources */,
+				937983F30F24F1E6CDD99BF1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1606,7 +1632,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "Данил";
+				ORGANIZATIONNAME = "&#1044;&#1072;&#1085;&#1080;&#1083;";
 				TargetAttributes = {
 					83E6EC911A9F51CB00E004E1 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1624,6 +1650,19 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				es,
+				fr,
+				he,
+				it,
+				nl,
+				pl,
+				pt,
+				ro,
+				ru,
+				tr,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 83E6EC891A9F51CB00E004E1;
 			productRefGroup = 83E6EC931A9F51CB00E004E1 /* Products */;
@@ -1667,6 +1706,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		937983F30F24F1E6CDD99BF1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E54EB3551D398FA80F0A6E6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		83E6EC8E1A9F51CB00E004E1 /* Sources */ = {
@@ -1941,10 +2013,11 @@
 		};
 		83E6ECB61A9F51CB00E004E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 200F14CDDFF43794A13E0686 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = GeoChatWithXMPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1952,18 +2025,22 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/libidn",
 				);
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-lxml2",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				USER_HEADER_SEARCH_PATHS = "/usr/include/libxml2 $(inherited)";
 			};
 			name = Debug;
 		};
 		83E6ECB71A9F51CB00E004E1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 982DD42260DA020629762FE7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = GeoChatWithXMPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1971,9 +2048,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/libidn",
 				);
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-lxml2",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				USER_HEADER_SEARCH_PATHS = "/usr/include/libxml2 $(inherited)";
 			};
 			name = Release;
 		};
