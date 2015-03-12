@@ -1,0 +1,51 @@
+
+/* Class = "UILabel"; text = "500.0000000"; ObjectID = "89a-Ta-Gtl"; */
+"89a-Ta-Gtl.text" = "500.0000000";
+
+/* Class = "UILabel"; text = "Кампус Гид Чат"; ObjectID = "BX6-Uq-qcG"; */
+"BX6-Uq-qcG.text" = "Кампус Гид Чат";
+
+/* Class = "UILabel"; text = "User"; ObjectID = "NOk-qF-w67"; */
+"NOk-qF-w67.text" = "User";
+
+/* Class = "UILabel"; text = "Радиус"; ObjectID = "Niw-B0-RMx"; */
+"Niw-B0-RMx.text" = "Радиус";
+
+/* Class = "UITextField"; text = "danil"; ObjectID = "Nj1-HU-uIe"; */
+"Nj1-HU-uIe.text" = "danil";
+
+/* Class = "UILabel"; text = "Имя"; ObjectID = "QaZ-Kb-T1F"; */
+"QaZ-Kb-T1F.text" = "Имя";
+
+/* Class = "UIButton"; normalTitle = "Войти"; ObjectID = "Ryo-tA-OH8"; */
+"Ryo-tA-OH8.normalTitle" = "Войти";
+
+/* Class = "UIButton"; normalTitle = "зарегестрировать"; ObjectID = "SY0-2a-Xju"; */
+"SY0-2a-Xju.normalTitle" = "зарегестрировать";
+
+/* Class = "UIBarButtonItem"; title = "Close"; ObjectID = "T9e-8l-fep"; */
+"T9e-8l-fep.title" = "Close";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "VCI-xZ-x3N"; */
+"VCI-xZ-x3N.text" = "Password";
+
+/* Class = "UILabel"; text = "Соединение..................."; ObjectID = "YHY-e2-vCJ"; */
+"YHY-e2-vCJ.text" = "Соединение...................";
+
+/* Class = "UILabel"; text = "password"; ObjectID = "dUT-hB-wmr"; */
+"dUT-hB-wmr.text" = "password";
+
+/* Class = "UILabel"; text = "connecting please wait"; ObjectID = "ef0-ID-BL3"; */
+"ef0-ID-BL3.text" = "connecting please wait";
+
+/* Class = "UIButton"; normalTitle = "Регистрация"; ObjectID = "fkO-u5-4pM"; */
+"fkO-u5-4pM.normalTitle" = "Регистрация";
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "gcY-Le-5Fu"; */
+"gcY-Le-5Fu.normalTitle" = "Close";
+
+/* Class = "UITextField"; text = "danil"; ObjectID = "oCC-Ff-EA9"; */
+"oCC-Ff-EA9.text" = "danil";
+
+/* Class = "UILabel"; text = " login"; ObjectID = "oD1-Yg-lNk"; */
+"oD1-Yg-lNk.text" = " login";

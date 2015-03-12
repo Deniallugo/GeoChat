@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "-connect"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-goOnline"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "-connect"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-goOnline"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -200,12 +200,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447290835.528015"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-setupStream"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-appNameAndVersionNumberDisplayString"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -216,12 +216,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-connect"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-goOnline"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -232,12 +232,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-connect"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-goOnline"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -264,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447290835.528015"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "-setupStream"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,12 +296,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-connect"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "-goOnline"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -392,12 +392,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "-xmppStream:didNotAuthenticate:"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-xmppStream:didReceivePresence:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -413,8 +413,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
             endingLineNumber = "47"
-            landmarkName = "@implementation SMRegistrationView"
-            landmarkType = "3">
+            landmarkName = "-appDelegate"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -624,11 +624,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "-connect"
             landmarkType = "5">
          </BreakpointContent>
@@ -640,11 +640,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "-connect"
             landmarkType = "5">
          </BreakpointContent>
@@ -951,11 +951,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-connect"
             landmarkType = "5">
          </BreakpointContent>
@@ -1111,11 +1111,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "-connect"
             landmarkType = "5">
          </BreakpointContent>
@@ -1127,12 +1127,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "-xmppStreamDidAuthenticate:"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "-disconnect"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1143,13 +1143,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
+            timestampString = "447834720.024309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
-            landmarkName = "@implementation SMChatViewController"
-            landmarkType = "3">
+            startingLineNumber = "548"
+            endingLineNumber = "548"
+            landmarkName = "-touchesBegan:withEvent:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1164,7 +1164,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
             endingLineNumber = "45"
-            landmarkName = "-createAccount"
+            landmarkName = "-appDelegate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1212,8 +1212,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
-            landmarkName = "@implementation AppDelegate"
-            landmarkType = "3">
+            landmarkName = "@synthesize _chatDelegate, _messageDelegate,chatViewController;"
+            landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1223,12 +1223,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "-xmppStream:didReceiveMessage:"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "-xmppStream:didReceivePresence:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1534,12 +1534,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
+            timestampString = "447834720.024309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
-            landmarkName = "-sendImage:"
+            startingLineNumber = "497"
+            endingLineNumber = "497"
+            landmarkName = "-takePhoto"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1550,12 +1550,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
+            timestampString = "447834720.024309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
-            landmarkName = "-sendImage:"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
+            landmarkName = "-takePhoto"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1566,29 +1566,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
+            timestampString = "447834720.024309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "484"
-            endingLineNumber = "484"
+            startingLineNumber = "511"
+            endingLineNumber = "511"
+            landmarkName = "-selectPhoto"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447834720.024309"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
             landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
-            landmarkName = "@implementation SMChatViewController"
-            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1614,12 +1614,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "-xmppStream:didReceiveMessage:"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "-xmppStream:didReceivePresence:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1630,12 +1630,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
+            timestampString = "447834720.024309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
-            landmarkName = "-sendMessage"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "-appDelegate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1646,12 +1646,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
+            timestampString = "447834720.024309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "-newMessageReceived:"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "-stopUpdatingLocationWithMessage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1662,12 +1662,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.m"
-            timestampString = "447291389.835216"
+            timestampString = "447834720.024309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-newMessageReceived:"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "-stopUpdatingLocationWithMessage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1806,12 +1806,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/AppDelegate.m"
-            timestampString = "447291278.746395"
+            timestampString = "447780958.340345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
-            landmarkName = "-disconnect"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "-connect"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1870,11 +1870,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GeoChatWithXMPP/SMChatViewController.h"
-            timestampString = "447271080.252911"
+            timestampString = "447834164.669336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "@interface SMChatViewController"
             landmarkType = "2">
          </BreakpointContent>
@@ -1892,6 +1892,182 @@
             startingLineNumber = "55"
             endingLineNumber = "55"
             landmarkName = "-registration"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447834720.024309"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "-didPressSendButton:withMessageText:senderId:senderDisplayName:date:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447834720.024309"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
+            landmarkName = "-didPressSendButton:withMessageText:senderId:senderDisplayName:date:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447816132.420971"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447816132.420971"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/DemoModelData.m"
+            timestampString = "447781598.007866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-init"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/DemoModelData.m"
+            timestampString = "447784181.644197"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-init"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447834720.024309"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447816132.420971"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447816132.420971"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447816132.420971"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GeoChatWithXMPP/SMChatViewController.m"
+            timestampString = "447815511.717384"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

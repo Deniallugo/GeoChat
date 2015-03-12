@@ -8,6 +8,6 @@
 
 @protocol SMMessageDelegate
 
-- (void)newMessageReceived:(NSDictionary *)messageContent;
-
+- (void)newMessageReceived:(NSDictionary *)messageConten animated:(BOOL) animated;
+- (void)newMessagesReceived:(NSMutableArray*)messageContent;
 @end

@@ -22,6 +22,9 @@
 		832F6A341AA83CC100A8DA6B /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2C1AA83CC100A8DA6B /* UIBubbleTableView.m */; };
 		832F6A351AA83CC100A8DA6B /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2E1AA83CC100A8DA6B /* UIBubbleTableViewCell.m */; };
 		832F6A361AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */; };
+		836AE43B1AB0968800CEB7CE /* DemoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 836AE43A1AB0968800CEB7CE /* DemoModelData.m */; };
+		836AE43E1AB096A900CEB7CE /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 836AE43D1AB096A900CEB7CE /* NSUserDefaults+DemoSettings.m */; };
+		836AE4401AB09B4F00CEB7CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 836AE43F1AB09B4F00CEB7CE /* Images.xcassets */; };
 		838CB1351AA734F300552E87 /* NSString + Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1341AA734F300552E87 /* NSString + Utils.m */; };
 		83D268BF1AA5556900305C3A /* SMRegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D268BE1AA5556900305C3A /* SMRegistrationView.m */; };
 		83E6EC981A9F51CB00E004E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC971A9F51CB00E004E1 /* main.m */; };
@@ -218,8 +221,14 @@
 		832F6A2F1AA83CC100A8DA6B /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
 		832F6A301AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
 		832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
+		836AE4391AB0968800CEB7CE /* DemoModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoModelData.h; sourceTree = "<group>"; };
+		836AE43A1AB0968800CEB7CE /* DemoModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoModelData.m; sourceTree = "<group>"; };
+		836AE43C1AB096A900CEB7CE /* NSUserDefaults+DemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+DemoSettings.h"; sourceTree = "<group>"; };
+		836AE43D1AB096A900CEB7CE /* NSUserDefaults+DemoSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+DemoSettings.m"; sourceTree = "<group>"; };
+		836AE43F1AB09B4F00CEB7CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		838CB1331AA734F300552E87 /* NSString + Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString + Utils.h"; sourceTree = "<group>"; };
 		838CB1341AA734F300552E87 /* NSString + Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString + Utils.m"; sourceTree = "<group>"; };
+		83BB8E991AB154AA007631CD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		83D268BD1AA5556900305C3A /* SMRegistrationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMRegistrationView.h; sourceTree = "<group>"; };
 		83D268BE1AA5556900305C3A /* SMRegistrationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMRegistrationView.m; sourceTree = "<group>"; };
 		83E6EC921A9F51CB00E004E1 /* GeoChatWithXMPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoChatWithXMPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -695,12 +704,16 @@
 				83E6EECE1A9F5AC200E004E1 /* SMChatDelegatE.h */,
 				83E6EECF1A9F5ADE00E004E1 /* SMMessageDelegate.h */,
 				83D268BD1AA5556900305C3A /* SMRegistrationView.h */,
+				836AE4391AB0968800CEB7CE /* DemoModelData.h */,
+				836AE43A1AB0968800CEB7CE /* DemoModelData.m */,
 				83D268BE1AA5556900305C3A /* SMRegistrationView.m */,
 				83E6EC9F1A9F51CB00E004E1 /* Main.storyboard */,
 				83E6ECA21A9F51CB00E004E1 /* Images.xcassets */,
 				83E6ECA41A9F51CB00E004E1 /* LaunchScreen.xib */,
 				83E6EC951A9F51CB00E004E1 /* Supporting Files */,
 				838CB1331AA734F300552E87 /* NSString + Utils.h */,
+				836AE43C1AB096A900CEB7CE /* NSUserDefaults+DemoSettings.h */,
+				836AE43D1AB096A900CEB7CE /* NSUserDefaults+DemoSettings.m */,
 				838CB1341AA734F300552E87 /* NSString + Utils.m */,
 			);
 			path = GeoChatWithXMPP;
@@ -1579,6 +1592,7 @@
 		B9935F7D621B26CE313AA8FE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				836AE43F1AB09B4F00CEB7CE /* Images.xcassets */,
 				200F14CDDFF43794A13E0686 /* Pods.debug.xcconfig */,
 				982DD42260DA020629762FE7 /* Pods.release.xcconfig */,
 			);
@@ -1681,6 +1695,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E6EEB11A9F51DA00E004E1 /* build-libidn.sh in Resources */,
+				836AE4401AB09B4F00CEB7CE /* Images.xcassets in Resources */,
 				83268F3C1AA7C900005A3B3C /* missingAvatar@2x.png in Resources */,
 				83268F3B1AA7C900005A3B3C /* missingAvatar.png in Resources */,
 				83E6ECA11A9F51CB00E004E1 /* Main.storyboard in Resources */,
@@ -1803,6 +1818,7 @@
 				83E6EE861A9F51DA00E004E1 /* XMPPMessage+XEP_0172.m in Sources */,
 				83E6EE701A9F51DA00E004E1 /* XMPPPubSub.m in Sources */,
 				83E6EE9A1A9F51DA00E004E1 /* XMPPMessage+XEP_0333.m in Sources */,
+				836AE43B1AB0968800CEB7CE /* DemoModelData.m in Sources */,
 				83E6EE4F1A9F51DA00E004E1 /* XMPPIQ+LastActivity.m in Sources */,
 				83E6EE601A9F51DA00E004E1 /* XMPPvCard.xcdatamodeld in Sources */,
 				83E6EE5A1A9F51DA00E004E1 /* XMPPRoomMemoryStorage.m in Sources */,
@@ -1812,6 +1828,7 @@
 				83E6EE811A9F51DA00E004E1 /* XMPPMessageArchiving_Contact_CoreDataObject.m in Sources */,
 				83E6EE481A9F51DA00E004E1 /* XMPPRosterMemoryStorage.m in Sources */,
 				83E6EE2B1A9F51DA00E004E1 /* XMPPPlainAuthentication.m in Sources */,
+				836AE43E1AB096A900CEB7CE /* NSUserDefaults+DemoSettings.m in Sources */,
 				83E6EE8D1A9F51DA00E004E1 /* XMPPStreamManagement.m in Sources */,
 				83E6EEA71A9F51DA00E004E1 /* DDLog.m in Sources */,
 				83E6EE361A9F51DA00E004E1 /* XMPPModule.m in Sources */,
@@ -1920,6 +1937,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				83E6ECA01A9F51CB00E004E1 /* Base */,
+				83BB8E991AB154AA007631CD /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

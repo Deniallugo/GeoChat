@@ -10,7 +10,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "GCDAsyncSocket.h"
-#import "XMPP.h"
 #import "XMPPCapabilitiesCoreDataStorage.h"
 #import "XMPPRosterCoreDataStorage.h"
 #import "XMPPvCardAvatarModule.h"
@@ -41,21 +40,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize xmppvCardAvatarModule;
 @synthesize xmppvCardTempModule;
 @synthesize xmppStream;
- static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
+static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Configure logging framework
+    device = @"Main";
 
+    //  device = [self appNameAndVersionNumberDisplayString ];
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
 
-  //// Setup the view controllers
-    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //// Setup the view controllers
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:device bundle:nil];
 
     loginViewController = [Main instantiateViewControllerWithIdentifier:@"login"] ;
+    chatViewController = [Main instantiateViewControllerWithIdentifier:@"chat"] ;
 
-   // self.window.rootViewController = loginViewController;
+    self.window.rootViewController = chatViewController;
+    [NSUserDefaults saveIncomingAvatarSetting:YES];
+    [NSUserDefaults saveOutgoingAvatarSetting:YES];
 
     // Setup the XMPP stream
     host = @"5.143.95.49";
@@ -74,11 +78,33 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     [self connect];
 
+    chatViewController = [Main instantiateViewControllerWithIdentifier:@"chat"] ;
+
+
+    [UIView transitionFromView:self.window.rootViewController.view
+                        toView:chatViewController.view
+                      duration:0.65f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+
+                    completion:^(BOOL finished) {
+                        self.window.rootViewController = chatViewController;
+                    }];
+    
+
+
 
     return YES;
 }
 
+- (NSString *)appNameAndVersionNumberDisplayString {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appDisplayName = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+    NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
 
+    return [NSString stringWithFormat:@"%@, Version %@ (%@)",
+            appDisplayName, majorVersion, minorVersion];
+}
 
 - (void)setupStream {
 
@@ -93,7 +119,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     xmppCapabilities.autoFetchHashedCapabilities = YES;
     xmppCapabilities.autoFetchNonHashedCapabilities = NO;
     [xmppRoster setAutoFetchRoster:YES];
-//    [xmppRoster setAutoRoster:YES];
+    //    [xmppRoster setAutoRoster:YES];
     [xmppStream setHostName:host];
     [xmppStream setHostPort:5222];
 
@@ -116,12 +142,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
 
+    xmppReconnect = [[XMPPReconnect alloc] init];
+    [xmppReconnect activate:xmppStream];
+    [xmppReconnect addDelegate:self delegateQueue:dispatch_get_main_queue()];
+
     allowSelfSignedCertificates = NO;
     allowSSLHostNameMismatch = NO;
 }
 
 - (void)goOnline {
-    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:device bundle:nil];
 
     chatViewController = [Main instantiateViewControllerWithIdentifier:@"chat"] ;
 
@@ -149,14 +179,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[self xmppStream] sendElement:presence];
 }
 
+
 - (BOOL)connect {
 
     [self setupStream];
 
-    NSString *jabberID = [[NSUserDefaults standardUserDefaults] stringForKey:@"userID"];
+    login = [[NSUserDefaults standardUserDefaults] stringForKey:@"userID"];
     NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:@"userPassword"];
 
-    login = [jabberID stringByAppendingString:@"@kampus_gid"];
+    NSString *jabberID = [login stringByAppendingString:@"@kampus_gid"];
     if (![xmppStream isDisconnected]) {
         return YES;
     }
@@ -166,13 +197,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         return NO;
     }
 
-    [xmppStream setMyJID:[XMPPJID jidWithString:login]];
+    [xmppStream setMyJID:[XMPPJID jidWithString:jabberID]];
     password = myPassword;
 
     NSError *error = nil;
 
     if (!
-       [xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]
+        [xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]
         )
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -233,18 +264,70 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 
 }
+
+- (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
+{
+
+
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        [format setDateFormat:@"E~EEE LLL dd yyyy hh:mm:ss"];
+
+
+    NSXMLElement *queryElement = [iq elementForName:@"query" xmlns:@"geo:list:messages"];
+    if(queryElement){
+        NSArray *items = [queryElement elementsForName:@"message"];
+        NSMutableArray* messages = [[NSMutableArray alloc] init];
+
+        for (NSXMLElement *i in items) {
+
+
+            NSString* text = [[i elementForName:@"text"] stringValue];
+            NSString* user = [[i elementForName:@"user"] stringValue];
+
+            NSDate *date = [[NSDate alloc]init];
+
+            if([user isEqual:login]){
+                user = @"you";
+            }
+            NSInteger a = [[i elementForName:@"timestamp"] stringValueAsNSInteger];
+            a /= 1000;
+            date = [NSDate dateWithTimeIntervalSince1970:a];
+
+            NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
+            [m setObject:text forKey:@"msg"];
+            [m setObject:user forKey:@"sender"];
+            [m setObject:date forKey:@"date"];
+            [messages addObject:m];
+
+        }
+
+        [_messageDelegate newMessagesReceived:messages];
+
+    }
+
+
+
+
+    return YES;
+}
+
+
+
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
 
-    NSString *msg = [[message elementForName:@"body"] stringValue];
-    NSString *from = [[message attributeForName:@"from"] stringValue];
-//    UIImage * image  = [[message elementForName:@"img"] ];
+    NSString *msg = [[message elementForName:@"text"] stringValue];
+    NSString *from = [[message elementForName:@"user"] stringValue];
+    //    UIImage * image  = [[message elementForName:@"img"] ];
     NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
     [m setObject:msg forKey:@"msg"];
     [m setObject:from forKey:@"sender"];
 
-    [_messageDelegate newMessageReceived:m];
+    [_messageDelegate newMessageReceived:m animated:YES];
+
+
 
 }
+
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate: (NSXMLElement *)error;
 {
@@ -257,14 +340,28 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                   otherButtonTitles:nil];
         [alertView show];
     }
-    UIStoryboard * Main= [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:device bundle:nil];
     SMLoginView * loginView = [Main instantiateViewControllerWithIdentifier:@"login"] ;
-
-    self.window.rootViewController = loginView;
-//    [self.window.rootViewController presentViewController:loginViewController animated:YES completion:nil];
-
+    
+    //self.window.rootViewController = loginView;
+    //    [self.window.rootViewController presentViewController:loginViewController animated:YES completion:nil];
 }
 
+
+- (void)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(SCNetworkReachabilityFlags)connectionFlags
+{
+    NSLog(@"didDetectAccidentalDisconnect:%u",connectionFlags);
+    chatViewController.waitingConnection.alpha = 1;
+    
+}
+- (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkReachabilityFlags)reachabilityFlags
+{
+    NSLog(@"shouldAttemptAutoReconnect:%u",reachabilityFlags);
+    
+    
+    
+    return YES;
+}
 
 
 - (void)xmppStreamDidRegister:(XMPPStream *)sender{
@@ -280,7 +377,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error{
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration with XMPP   Failed!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-  
+
     DDXMLElement *errorXML = [error elementForName:@"error"];
     NSString *errorCode  = [[errorXML attributeForName:@"code"] stringValue];
 
@@ -298,7 +395,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     [alert show];
 }
-
 
 
 @end

@@ -10,11 +10,22 @@
 #import "SMMessageDelegate.h"   
 #import <CoreLocation/CoreLocation.h>
 
-#import "UIBubbleTableView.h"
-#import "UIBubbleTableViewDataSource.h"
-#import "NSBubbleData.h"
 
-@interface SMChatViewController : UIViewController<SMMessageDelegate, CLLocationManagerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIBubbleTableViewDataSource,UITableViewDelegate>{
+//#import "JSQMessages.h"
+#import <JSQMessagesViewController/JSQMessages.h>    // import all the things
+
+#import "DemoModelData.h"
+#import "NSUserDefaults+DemoSettings.h"
+
+@class SMChatViewController;
+@protocol JSQDemoViewControllerDelegate <NSObject>
+
+- (void)didDismissJSQDemoViewController:(SMChatViewController *)vc;
+
+@end
+
+
+@interface SMChatViewController : JSQMessagesViewController<SMMessageDelegate, CLLocationManagerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>{
 
     UITextField     *messageField;
     NSString        *chatWithUser;
@@ -23,18 +34,26 @@
     NSString        *GeoLtitude;
     NSString        *GeoLength;
     float           Radius;
-
+    bool            firstUpdateLocation;
     NSMutableArray *turnSockets;
 
-    IBOutlet UIBubbleTableView *bubbleTable;
-    IBOutlet UIView *textInputView;
-    IBOutlet UITextField *textField;
+//    IBOutlet UIView *textInputView;
+  //  IBOutlet UITextField *textField;
 
 
 
     
 
 }
+
+
+@property (weak, nonatomic) id<JSQDemoViewControllerDelegate> delegateModal;
+
+@property (strong, nonatomic) DemoModelData *demoData;
+
+
+
+@property (weak, nonatomic) IBOutlet UILabel *waitingConnection;
 
 @property (nonatomic,retain) NSString *chatWithUser;
 @property (nonatomic,retain) NSString *GeoLtitude;
@@ -45,11 +64,12 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
-
+-(void) sendQuery;
 - (id) initWithUser:(NSString *) userName;
 - (IBAction) sendMessage;
 - (IBAction) closeChat;
 - (IBAction)radiusChange:(id)sender;
 - (IBAction)openCamera: (id)sender;
+
 
 @end
