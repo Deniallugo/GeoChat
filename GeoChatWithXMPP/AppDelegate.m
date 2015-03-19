@@ -60,7 +60,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
     //    self.window.rootViewController = loginViewController;
 
     // Setup the XMPP stream
-    host = @"5.143.95.49";
+    host = @"5.143.74.248";
 
     [self setupStream];
     if (![CLLocationManager locationServicesEnabled]) {
@@ -253,10 +253,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
 {
 
 
-        NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        [format setDateFormat:@"E~EEE LLL dd yyyy hh:mm:ss"];
-
-
     NSXMLElement *queryElement = [iq elementForName:@"query" xmlns:@"geo:list:messages"];
     if(queryElement){
         NSArray *items = [queryElement elementsForName:@"message"];
@@ -267,20 +263,24 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
 
             NSString* text = [[i elementForName:@"text"] stringValue];
             NSString* user = [[i elementForName:@"user"] stringValue];
-
+            NSString *identificator = [[i elementForName:@"id"] stringValue];
+            if(!identificator){
+                identificator =@"1";
+            }
             NSDate *date = [[NSDate alloc]init];
 
             if([user isEqual:login]){
                 user = @"you";
             }
-            NSInteger a = [[i elementForName:@"timestamp"] stringValueAsNSInteger];
-            a /= 1000;
+            NSInteger a = [[i elementForName:@"time"] stringValueAsNSInteger];
             date = [NSDate dateWithTimeIntervalSince1970:a];
 
             NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
             [m setObject:text forKey:@"msg"];
             [m setObject:user forKey:@"sender"];
             [m setObject:date forKey:@"date"];
+            [m setObject:identificator forKey:@"id"];
+
             [messages addObject:m];
 
         }
@@ -298,13 +298,24 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
 
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
-
-    NSString *msg = [[message elementForName:@"text"] stringValue];
-    NSString *from = [[message elementForName:@"user"] stringValue];
-    //    UIImage * image  = [[message elementForName:@"img"] ];
     NSMutableDictionary *m = [[NSMutableDictionary alloc] init];
-    [m setObject:msg forKey:@"msg"];
-    [m setObject:from forKey:@"sender"];
+    NSXMLElement* mes;
+    if (!(mes = [message elementForName:@"received"])){
+        NSString *msg = [[message elementForName:@"text"] stringValue];
+        NSString *from = [[message elementForName:@"user"] stringValue];
+        NSString *identificator = [[message elementForName:@"id"] stringValue];
+        //  UIImage * image  = [[message elementForName:@"img"] ];
+        [m setObject:msg forKey:@"msg"];
+        [m setObject:from forKey:@"sender"];
+        [m setObject:identificator forKey:@"id"];
+
+    }
+    else{
+        NSString* s = [[mes attributeForName:@"id"] stringValue] ;
+        [m setObject:@"all is ok" forKey:@"msg"];
+        [m setObject:@"you" forKey:@"sender"];
+        [m setObject:s forKey:@"id"];
+    }
 
     [_messageDelegate newMessageReceived:m animated:YES];
 
@@ -373,11 +384,29 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
 
         [alert setMessage:@"Username Already Exists!"];
     }
-    if([errorCode isEqualToString:@"405"]){
+    if([errorCode isEqualToString:@"406"]){
 
         [alert setMessage:@"Bad login or password"];
     }
+    UIStoryboard * Main= [UIStoryboard storyboardWithName:device bundle:nil];
+
+    chatViewController = [Main instantiateViewControllerWithIdentifier:@"registration"] ;
+
+
+    [UIView transitionFromView:self.window.rootViewController.view
+                        toView:chatViewController.view
+                      duration:0.65f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+
+                    completion:^(BOOL finished) {
+                        self.window.rootViewController = chatViewController;
+                    }];
+    
+    
+    
+
     [alert show];
+    
 }
 
 

@@ -20,8 +20,8 @@
     NSString        *chatWithUser;
     UITableView     *tView;
     NSMutableArray  *messages;
-    NSString        *GeoLtitude;
-    NSString        *GeoLength;
+    NSString        *GeoLatitude;
+    NSString        *GeoLongtitude;
     float           Radius;
     bool            firstUpdateLocation;
     NSMutableArray *turnSockets;
@@ -38,8 +38,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *waitingConnection;
 
 @property (nonatomic,retain) NSString *chatWithUser;
-@property (nonatomic,retain) NSString *GeoLtitude;
-@property (nonatomic,retain) NSString *GeoLength;
+@property (nonatomic,retain) NSString *GeoLatitude;
+@property (nonatomic,retain) NSString *GeoLongtitude;
 @property (strong, nonatomic) CLLocation *currentLocation;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *radius1;

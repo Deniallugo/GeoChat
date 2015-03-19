@@ -42,16 +42,16 @@
 const UIEdgeInsets textInsetsMine = {5, 10, 11, 17};
 const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 
-+ (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
++ (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString *) identificator
 {
 #if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithText:text date:date type:type] autorelease];
+    return [[[NSBubbleData alloc] initWithText:text date:date type:type identificator:identificator ] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithText:text date:date type:type];
+    return [[NSBubbleData alloc] initWithText:text date:date type:type identificator:identificator];
 #endif    
 }
 
-- (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
+- (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString*)identificator
 {
     UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(220, 9999) lineBreakMode:NSLineBreakByWordWrapping];
@@ -68,7 +68,7 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
-    return [self initWithView:label date:date type:type insets:insets];
+    return [self initWithView:label date:date type:type insets:insets identificator:identificator];
 }
 
 #pragma mark - Image bubble
@@ -76,16 +76,16 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 const UIEdgeInsets imageInsetsMine = {11, 13, 16, 22};
 const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 
-+ (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
++ (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString*)identificator
 {
 #if !__has_feature(objc_arc)
     return [[[NSBubbleData alloc] initWithImage:image date:date type:type] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithImage:image date:date type:type];
+    return [[NSBubbleData alloc] initWithImage:image date:date type:type identificator:identificator];
 #endif    
 }
 
-- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
+- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString*)identificator
 {
     CGSize size = image.size;
     if (size.width > 220)
@@ -105,21 +105,21 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
-    return [self initWithView:imageView date:date type:type insets:insets];       
+    return [self initWithView:imageView date:date type:type insets:insets identificator:identificator];       
 }
 
 #pragma mark - Custom view bubble
 
-+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets
++ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets identificator:(NSString*)identificator
 {
 #if !__has_feature(objc_arc)
     return [[[NSBubbleData alloc] initWithView:view date:date type:type insets:insets] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithView:view date:date type:type insets:insets];
+    return [[NSBubbleData alloc] initWithView:view date:date type:type insets:insets identificator:identificator];
 #endif    
 }
 
-- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets  
+- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets identificator:(NSString*)identificator
 {
     self = [super init];
     if (self)
@@ -133,6 +133,7 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 #endif
         _type = type;
         _insets = insets;
+        _identificator = [[NSString alloc] initWithString:identificator];
     }
     return self;
 }

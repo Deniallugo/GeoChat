@@ -15,10 +15,10 @@
 @implementation SMChatViewController{
 
     CLLocationManager *locationManager;
-
+    NSInteger identificator;
 }
 
-@synthesize  chatWithUser, GeoLength,GeoLtitude,radius1,slider;
+@synthesize  chatWithUser, GeoLongtitude,GeoLatitude,radius1,slider;
 
 
 
@@ -29,7 +29,7 @@
     Radius = 500.0;
     //bubble view
     bubbleTable.bubbleDataSource = self;
-
+    identificator = 0 ;
 
     bubbleTable.showAvatars = NO;
 
@@ -61,10 +61,12 @@
     if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self->locationManager requestWhenInUseAuthorization];
     }
+    
     [self->locationManager startUpdatingLocation];
 
-    GeoLtitude = [NSString stringWithFormat:@"%.8f", [locationManager location].coordinate.longitude];
-    GeoLength = [NSString stringWithFormat:@"%.8f", [locationManager location].coordinate.latitude];
+    GeoLatitude =@"43,0288";
+    GeoLongtitude = @"131,9013";
+
 
     //open camera
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -114,8 +116,8 @@
     CLLocation *currentLocation = newLocation;
 
     if (currentLocation != nil) {
-        GeoLtitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        GeoLength = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        GeoLongtitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+       GeoLatitude  = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
     }
 
     if (firstUpdateLocation){
@@ -168,14 +170,14 @@
     NSString *msg = [messageContent valueForKey:@"msg"];
     NSString *sender = [messageContent valueForKey:@"sender"];
     NSDate *data = [messageContent valueForKey:@"date"];
-    NSDate * data1 = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSInteger identificator = [[messageContent valueForKey:@"id"] integerValue];
     NSBubbleData *m;
-
+    NSString* s  = [NSString stringWithFormat: @"%ld", (long)identificator];
     if([sender  isEqual: @"you"]){
-        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeMine];
+        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeMine identificator:s];
     }
     else
-        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeSomeoneElse];
+        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeSomeoneElse identificator:[NSString stringWithFormat: @"%ld", (long)identificator]];
     [messages addObject:m];
 
     [bubbleTable reloadData];
@@ -206,9 +208,11 @@
 - (IBAction)sendMessage {
 
     NSString *messageStr = textField.text;
+    NSBubbleData *mes =  [messages lastObject];
+   // = [[mes identificator] integerValue];
+    identificator++;
 
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-
     //NSString *f = [self getCurrentTime];
     if([messageStr length]) {
 
@@ -217,22 +221,27 @@
 
 
         NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+        [message addAttributeWithName:@"id" integerValue: identificator];
+        DDXMLElement *geoloc = [DDXMLElement elementWithName:@"geoloc" xmlns:@"http://jabber.org/protocol/geoloc"];
 
 
 
-        NSXMLElement * latitude = [NSXMLElement elementWithName:@"latitude" stringValue:GeoLtitude];
-        NSXMLElement * longitude = [NSXMLElement elementWithName:@"longitude" stringValue:GeoLength];
+        NSXMLElement * latitude = [NSXMLElement elementWithName:@"lat" stringValue:GeoLatitude];
+        NSXMLElement * longitude = [NSXMLElement elementWithName:@"lon" stringValue:GeoLongtitude];
+        DDXMLElement *request = [DDXMLElement elementWithName:@"request" xmlns:@"urn:xmpp:receipts"];
 
+        [geoloc addChild:latitude];
+        [geoloc addChild:longitude];
 
         [message addChild:body];
-        [message addChild:latitude];
-        [message addChild:longitude];
-
+        [message addChild:geoloc];
+        [message addChild:request];
 
         [self.xmppStream sendElement:message];
 
         textField.text = @"";
-        NSBubbleData *m = [NSBubbleData dataWithText:messageStr date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+        NSBubbleData *m = [NSBubbleData dataWithText:messageStr date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine identificator:[NSString stringWithFormat: @"%ld", (long)identificator]];
+
         [messages addObject:m];
 
     }
@@ -263,8 +272,8 @@
         [message addAttributeWithName:@"type"stringValue:@"chat"];
 
         [message addAttributeWithName:@"to"stringValue:nil];
-        [message addAttributeWithName:@"latitude" stringValue:GeoLtitude];
-        [message addAttributeWithName:@"length" stringValue:GeoLength];
+        [message addAttributeWithName:@"latitude" stringValue:GeoLatitude];
+        [message addAttributeWithName:@"length" stringValue:GeoLongtitude];
         [message addAttributeWithName:@"time" stringValue:f];
 
 
@@ -295,7 +304,7 @@
     }
     textField.text = @"";
 
-    NSBubbleData *m = [NSBubbleData dataWithImage:imagePic date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+    NSBubbleData *m = [NSBubbleData dataWithImage:imagePic date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine identificator:@"1"];
 
     [messages addObject:m];
 
@@ -310,12 +319,18 @@
 -(void) sendQuery{
     XMPPIQ *iq = [[XMPPIQ alloc] initWithType:@"get"];
     DDXMLElement *query = [DDXMLElement elementWithName:@"query" xmlns:@"geo:list:messages"];
-    NSXMLElement * latitude = [NSXMLElement elementWithName:@"latitude" stringValue:GeoLtitude];
-    NSXMLElement * longitude = [NSXMLElement elementWithName:@"longitude" stringValue:GeoLength];
+    DDXMLElement *geo = [DDXMLElement elementWithName:@"geoloc"];
+
+    NSXMLElement  * latitude = [NSXMLElement elementWithName:@"lat" stringValue:GeoLatitude];
+    NSXMLElement * longitude = [NSXMLElement elementWithName:@"lon" stringValue:GeoLongtitude];
     NSXMLElement * radius = [NSXMLElement elementWithName:@"radius" stringValue:[NSString stringWithFormat:@"%.20lf", Radius ] ];
-    [query addChild:latitude];
-    [query addChild:longitude];
+    NSXMLElement * number = [NSXMLElement elementWithName:@"number" stringValue:@"30"];
+
+    [query addChild:geo];
+    [geo addChild:latitude];
+    [geo addChild:longitude];
     [query addChild:radius];
+    [query addChild:number];
     [iq addChild:query];
 
 
