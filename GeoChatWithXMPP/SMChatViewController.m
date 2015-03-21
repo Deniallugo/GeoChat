@@ -15,26 +15,38 @@
 @implementation SMChatViewController{
 
     CLLocationManager *locationManager;
-
+    NSInteger identificator;
 }
 
-@synthesize  chatWithUser, GeoLength,GeoLtitude,radius1,slider,navigationItem;
+@synthesize  chatWithUser, GeoLongtitude,GeoLatitude,radius1,slider;
 
 
 
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    self.title = @"JSQMessages";
-//self.navigationItem.titleView =
-    
     messages = [[NSMutableArray alloc ] init];
     Radius = 500.0;
-    // Jsq
-    self.senderId = kJSQDemoAvatarIdSquires;
-    self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
-    self.demoData = [[DemoModelData alloc] init];
+    //bubble view
 
+    self.title = @"JSQMessages";
+
+    /**
+     *  You MUST set your senderId and display name
+     */
+    self.senderId = @"you";
+    self.senderDisplayName = kJSQDemoAvatarDisplayNameSquires;
+
+
+    /**
+     *  Load up our fake data for the demo
+     */
+ //   self.demoData = [[DemoModelData alloc] init];
+       self.demoData = [[DemoModelData alloc] init] ;
+
+    /**
+     *  You can set custom avatar sizes
+     */
     if (![NSUserDefaults incomingAvatarSetting]) {
         self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     }
@@ -44,13 +56,11 @@
     }
 
     self.showLoadEarlierMessagesHeader = YES;
-//
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage jsq_defaultTypingIndicatorImage]
-                                                                              style:UIBarButtonItemStyleDone
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage jsq_defaultTypingIndicatorImage]
+                                                                              style:UIBarButtonItemStyleBordered
                                                                              target:self
-                                                                             action:@selector(closeChat)];
-
-
+                                                                             action:nil];
 
 
 
@@ -59,9 +69,9 @@
     AppDelegate *del = [self appDelegate];
     del._messageDelegate = self;
     [self waitingConnection].alpha = 0;
-//      TURNSocket *turnSocket = [[TURNSocket alloc] initWithStream:[self xmppStream] toJID:jid];
-//      [turnSockets addObject:turnSocket];
-//      [turnSocket startWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    //  TURNSocket *turnSocket = [[TURNSocket alloc] initWithStream:[self xmppStream] toJID:jid];
+    //  [turnSockets addObject:turnSocket];
+    //  [turnSocket startWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 
 
     //  GeoLocation
@@ -72,60 +82,72 @@
     if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self->locationManager requestWhenInUseAuthorization];
     }
+    
     [self->locationManager startUpdatingLocation];
 
-    GeoLtitude = [NSString stringWithFormat:@"%.8f", [locationManager location].coordinate.longitude];
-    GeoLength = [NSString stringWithFormat:@"%.8f", [locationManager location].coordinate.latitude];
+    GeoLatitude =@"43.0288";
+    GeoLongtitude = @"131.9013";
+
 
     //open camera
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(20.0f, 186.0f, 280.0f, 88.0f);
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.tintColor = [UIColor darkGrayColor];
-    [button addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    button.frame = CGRectMake(20.0f, 186.0f, 280.0f, 88.0f);
+//    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    button.tintColor = [UIColor darkGrayColor];
+//    [button addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:button];
     firstUpdateLocation = true;
     [self sendQuery];
+//    NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 1
+//                                                  target: self
+//                                                selector:@selector(sendQuery)
+//                                                userInfo: nil repeats:YES];
+
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+
+    [super viewDidAppear:animated];
+
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //if (self.delegateModal) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
-                                                                                              target:self
-                                                                                            action:@selector(closeChat)];
-    //}
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                                                          target:self
+                                                                                          action:@selector(closeChat)];
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
+    UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:nil];
+
+    NSArray *actionButtonItems = @[shareItem, cameraItem];
+    self.navigationItem.rightBarButtonItems = actionButtonItems;
+//    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+//                                                                   style:UIBarButtonItemStyleBordered
+//                                                                  target:self
+//                                                                  action:nil];
+//    [self.navigationController.toolbar setItems:[NSArray arrayWithObjects: doneButton, nil] animated:YES];
+//    
+
+    
 }
 
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+- (void)turnSocket:(TURNSocket *)sender didSucceed:(GCDAsyncSocket *)socket {
 
-    /**
-     *  Enable/disable springy bubbles, default is NO.
-     *  You must set this from `viewDidAppear:`
-     *  Note: this feature is mostly stable, but still experimental
-     */
-    self.collectionView.collectionViewLayout.springinessEnabled = [NSUserDefaults springinessSetting];
+    NSLog(@"TURN Connection succeeded!");
+    NSLog(@"You now have a socket that you can use to send/receive data to/from the other person.");
+
+    [turnSockets removeObject:sender];
 }
 
-//- (void)turnSocket:(TURNSocket *)sender didSucceed:(GCDAsyncSocket *)socket {
-//
-//    NSLog(@"TURN Connection succeeded!");
-//    NSLog(@"You now have a socket that you can use to send/receive data to/from the other person.");
-//
-//    [turnSockets removeObject:sender];
-//}
-//
-//- (void)turnSocketDidFail:(TURNSocket *)sender {
-//
-//    NSLog(@"TURN Connection failed!");
-//    [turnSockets removeObject:sender];
-//
-//}
+- (void)turnSocketDidFail:(TURNSocket *)sender {
+
+    NSLog(@"TURN Connection failed!");
+    [turnSockets removeObject:sender];
+
+}
 
 
 
@@ -148,8 +170,8 @@
     CLLocation *currentLocation = newLocation;
 
     if (currentLocation != nil) {
-        GeoLtitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        GeoLength = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        GeoLongtitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+       GeoLatitude  = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
     }
 
     if (firstUpdateLocation){
@@ -192,20 +214,299 @@
 
 
 
+
+
+- (void)pushMainViewController
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *nc = [sb instantiateInitialViewController];
+    [self.navigationController pushViewController:nc.topViewController animated:YES];
+}
+
+
+
+
+
+-(JSQMessage*) foundIdMessage:(NSString*) identifier{
+
+    for(JSQMessage* i in self.demoData.messages){
+        if ( [i.identificator isEqualToString:identifier])
+            return i;
+    }
+    return nil;
+
+}
+
+- (void)newMessageReceived:(NSMutableDictionary *)messageContent animated:(BOOL)animated {
+
+    NSString *msg = [messageContent valueForKey:@"msg"];
+    NSString *sender = [messageContent valueForKey:@"sender"];
+    NSDate *data = [messageContent valueForKey:@"date"];
+    identificator = [[messageContent valueForKey:@"id"] integerValue];
+    NSString* s  = [NSString stringWithFormat: @"%ld", (long)identificator];
+
+
+    if([sender isEqual:@"okMsg" ]){
+
+        JSQMessage* okMsg = [self foundIdMessage:s];
+        if(okMsg)
+            okMsg.delivered = YES;
+        [self finishReceivingMessageAnimated:YES];
+        return;
+    }
+
+
+
+
+    JSQMessage *m = [[JSQMessage alloc] initWithSenderId:sender
+                                       senderDisplayName:sender
+                                                    date:data
+                                                    text:msg];
+
+    m.identificator = s;
+    if([[messageContent valueForKey:@"delivered"] isEqual:@"yes"] ){
+        m.delivered = YES;
+
+    }
+
+
+
+    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    [self.demoData.messages addObject:m];
+    [self finishReceivingMessageAnimated:YES];
+
+//
+//    if (m.isMediaMessage) {
+//        /**
+//         *  Simulate "downloading" media
+//         */
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            /**
+//             *  Media is "finished downloading", re-display visible cells
+//             *
+//             *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
+//             *
+//             *  Reload the specific item, or simply call `reloadData`
+//             */
+//
+//            if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
+//                ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachmentCopy;
+//                [self.collectionView reloadData];
+//            }
+//            else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
+//                [((JSQLocationMediaItem *)newMediaData)setLocation:newMediaAttachmentCopy withCompletionHandler:^{
+//                    [self.collectionView reloadData];
+//                }];
+//            }
+//            else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
+//                ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
+//                ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
+//                [self.collectionView reloadData];
+//            }
+//            else {
+//                NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
+//            }
+//
+//        });
+//    }
+
+//});
+
+
+
+
+
+}
+
+
+- (void)newMessagesReceived:(NSMutableArray *)messagesRecv {
+//    NSBubbleData* mes = [messages lastObject];
+
+    [messages removeAllObjects];
+    for(NSMutableDictionary* i in messagesRecv){
+
+        [self newMessageReceived:i animated:NO];
+    }
+//    if( [messages lastObject] != mes){
+      //  }
+
+}
+
+
+
+
+
+
+#pragma mark - JSQMessagesViewController method overrides
+
+- (void)didPressSendButton:(UIButton *)button
+           withMessageText:(NSString *)text
+                  senderId:(NSString *)senderId
+         senderDisplayName:(NSString *)senderDisplayName
+                      date:(NSDate *)date
+{
+
+    identificator++;
+
+    /**
+     *  Sending a message. Your implementation of this method should do *at least* the following:
+     *
+     *  1. Play sound (optional)
+     *  2. Add new id<JSQMessageData> object to your data source
+     *  3. Call `finishSendingMessage`
+     */
+
+        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+        [body setStringValue:text];
+
+
+        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+        [message addAttributeWithName:@"id" integerValue: identificator];
+        DDXMLElement *geoloc = [DDXMLElement elementWithName:@"geoloc" xmlns:@"http://jabber.org/protocol/geoloc"];
+
+
+
+        NSXMLElement * latitude = [NSXMLElement elementWithName:@"lat" stringValue:GeoLatitude];
+        NSXMLElement * longitude = [NSXMLElement elementWithName:@"lon" stringValue:GeoLongtitude];
+        DDXMLElement *request = [DDXMLElement elementWithName:@"request" xmlns:@"urn:xmpp:receipts"];
+
+        [geoloc addChild:latitude];
+        [geoloc addChild:longitude];
+
+        [message addChild:body];
+        [message addChild:geoloc];
+        [message addChild:request];
+
+        [self.xmppStream sendElement:message];
+
+        textField.text = @"";
+
+
+
+
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+
+    JSQMessage *m = [[JSQMessage alloc] initWithSenderId:senderId
+                                             senderDisplayName:senderDisplayName
+                                                          date:date
+                                                          text:text];
+
+
+
+    m.delivered = NO;
+    m.identificator = [NSString stringWithFormat: @"%ld", (long)identificator];
+    [messages addObject:m];
+
+
+
+
+
+
+
+
+
+
+
+    [self.demoData.messages addObject:m];
+
+    [self finishSendingMessageAnimated:YES];
+}
+
+
+
+
+
+-(void) sendImage: (UIImage*) imagePic{
+
+    NSString *messageStr =  textField.text;
+    NSString *f = [self getCurrentTime];
+
+
+    if([messageStr length] > 0 || [imagePic isKindOfClass:[UIImage class]] )
+
+    {
+
+
+
+        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+        [body setStringValue:messageStr];
+
+
+        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+
+        [message addAttributeWithName:@"id" integerValue: identificator];
+        DDXMLElement *geoloc = [DDXMLElement elementWithName:@"geoloc" xmlns:@"http://jabber.org/protocol/geoloc"];
+
+
+
+        NSXMLElement * latitude = [NSXMLElement elementWithName:@"lat" stringValue:GeoLatitude];
+        NSXMLElement * longitude = [NSXMLElement elementWithName:@"lon" stringValue:GeoLongtitude];
+        DDXMLElement *request = [DDXMLElement elementWithName:@"request" xmlns:@"urn:xmpp:receipts"];
+
+        [geoloc addChild:latitude];
+        [geoloc addChild:longitude];
+
+        [message addChild:body];
+        [message addChild:geoloc];
+        [message addChild:request];
+
+        if([imagePic isKindOfClass:[UIImage class]])
+
+        {
+
+            NSData *dataPic =  UIImagePNGRepresentation(imagePic);
+
+            NSXMLElement *photo = [NSXMLElement elementWithName:@"PHOTO"];
+
+            NSXMLElement *binval = [NSXMLElement elementWithName:@"BINVAL"];
+
+            [photo addChild:binval];
+
+            NSString *base64String = [dataPic base64EncodedStringWithOptions:0];
+
+            [binval setStringValue:base64String];
+
+            [message addChild:photo];
+
+        }
+
+//        [self.xmppStream sendElement:message];
+
+    }
+    textField.text = @"";
+
+    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:imagePic];
+    JSQMessage *photoMessage = [JSQMessage messageWithSenderId:@"you"
+                                                   displayName:kJSQDemoAvatarDisplayNameSquires
+                                                         media:photoItem];
+    [self.demoData.messages addObject:photoMessage];
+    [self finishSendingMessageAnimated:YES];
+
+}
+
+
 -(void) sendQuery{
     XMPPIQ *iq = [[XMPPIQ alloc] initWithType:@"get"];
     DDXMLElement *query = [DDXMLElement elementWithName:@"query" xmlns:@"geo:list:messages"];
-    NSXMLElement * latitude = [NSXMLElement elementWithName:@"latitude" stringValue:GeoLtitude];
-    NSXMLElement * longitude = [NSXMLElement elementWithName:@"longitude" stringValue:GeoLength];
+    DDXMLElement *geo = [DDXMLElement elementWithName:@"geoloc"];
+
+    NSXMLElement  * latitude = [NSXMLElement elementWithName:@"lat" stringValue:GeoLatitude];
+    NSXMLElement * longitude = [NSXMLElement elementWithName:@"lon" stringValue:GeoLongtitude];
     NSXMLElement * radius = [NSXMLElement elementWithName:@"radius" stringValue:[NSString stringWithFormat:@"%.20lf", Radius ] ];
-    [query addChild:latitude];
-    [query addChild:longitude];
+    NSXMLElement * number = [NSXMLElement elementWithName:@"number" stringValue:@"1"];
+
+    [query addChild:geo];
+    [geo addChild:latitude];
+    [geo addChild:longitude];
     [query addChild:radius];
+    [query addChild:number];
     [iq addChild:query];
 
 
     [[[self appDelegate] xmppStream] sendElement:iq];
 }
+
+
 
 #pragma mark Chat delegates
 
@@ -224,203 +525,10 @@
         chatWithUser = userName;
 
     }
-    
+
     return self;
-    
-}
-
-
-//- (void)newMessageReceived:(NSMutableArray*)messageContent animated:(BOOL)animated {
-//
-//    NSString *msg = [messageContent valueForKey:@"msg"];
-//    NSString *sender = [messageContent valueForKey:@"sender"];
-//    NSDate *data = [messageContent valueForKey:@"date"];
-//    NSDate * data1 = [NSDate dateWithTimeIntervalSinceNow:0];
-//    NSMutableArray *m;
-
-//    if([sender  isEqual: @"you"]){
-//        m = [NSMutableArray dataWithText:msg date:data type:BubbleTypeMine];
-//    }
-//    else
-//        m = [NSMutableArray dataWithText:msg date:data type:BubbleTypeSomeoneElse];
-//    [messages addObject:m];
-//
-//    [bubbleTable reloadData];
-//
-//   // NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
-//                             //                      inSection:0];
-//    [bubbleTable scrollBubbleViewToBottomAnimated:animated];
-//
-////    [bubbleTable scrollToRowAtIndexPath:topIndexPath
-////                       atScrollPosition:UITableViewScrollPositionTop
-////                               animated:YES];
-//}
-
-
-- (void)newMessagesReceived:(NSMutableArray *)messagesRecv {
-
-    [messages removeAllObjects];
-    for(NSMutableArray* i in messagesRecv){
-
-        [self newMessageReceived:i animated:NO];
-    }
 
 }
-
-
-
-- (void)newMessageReceived:(NSMutableArray*)messageContent animated:(BOOL)animated {
-
-
-
-    NSString *msg = [messageContent valueForKey:@"msg"];
-    NSString *sender = [messageContent valueForKey:@"sender"];
-    NSDate *data = [messageContent valueForKey:@"date"];
-    //NSDate * data1 = [NSDate dateWithTimeIntervalSinceNow:0];
-
-
-    /**
-     *  Show the typing indicator to be shown
-     */
-    self.showTypingIndicator = !self.showTypingIndicator;
-
-    /**
-     *  Scroll to actually view the indicator
-     */
-    [self scrollToBottomAnimated:animated];
-
-    /**
-     *  Copy last sent message, this will be the new "received" message
-     */
-
-    JSQMessage* message = [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdJobs senderDisplayName:sender date:data text:msg];
-
-    /**
-     *  Allow typing indicator to show
-     */
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
-
-            NSMutableArray *userIds = [[self.demoData.users allKeys] mutableCopy];
-            [userIds removeObject:self.senderId];
-    //        NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
-
-            id<JSQMessageMediaData> newMediaData = nil;
-            id newMediaAttachmentCopy = nil;
-            /**
-         *  Upon receiving a message, you should:
-         *
-         *  1. Play sound (optional)
-         *  2. Add new id<JSQMessageData> object to your data source
-         *  3. Call `finishReceivingMessage`
-         */
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-        [self.demoData.messages addObject:message];
-        [self finishReceivingMessageAnimated:YES];
-
-
-        if (message.isMediaMessage) {
-            /**
-             *  Simulate "downloading" media
-             */
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                /**
-                 *  Media is "finished downloading", re-display visible cells
-                 *
-                 *  If media cell is not visible, the next time it is dequeued the view controller will display its new attachment data
-                 *
-                 *  Reload the specific item, or simply call `reloadData`
-                 */
-
-                if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                    ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachmentCopy;
-                    [self.collectionView reloadData];
-                }
-                else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
-                    [((JSQLocationMediaItem *)newMediaData)setLocation:newMediaAttachmentCopy withCompletionHandler:^{
-                        [self.collectionView reloadData];
-                    }];
-                }
-                else if ([newMediaData isKindOfClass:[JSQVideoMediaItem class]]) {
-                    ((JSQVideoMediaItem *)newMediaData).fileURL = newMediaAttachmentCopy;
-                    ((JSQVideoMediaItem *)newMediaData).isReadyToPlay = YES;
-                    [self.collectionView reloadData];
-                }
-                else {
-                    NSLog(@"%s error: unrecognized media item", __PRETTY_FUNCTION__);
-                }
-
-            });
-        }
-
-    });
-}
-
-
-
-
-
-
-
-- (void)didPressSendButton:(UIButton *)button
-withMessageText:(NSString *)text
-senderId:(NSString *)senderId
-senderDisplayName:(NSString *)senderDisplayName
-date:(NSDate *)date
-    {
-        /**
-         *  Sending a message. Your implementation of this method should do *at least* the following:
-         *
-         *  1. Play sound (optional)
-         *  2. Add new id<JSQMessageData> object to your data source
-         *  3. Call `finishSendingMessage`
-         */
-        [JSQSystemSoundPlayer jsq_playMessageSentSound];
-
-        JSQMessage *message1 = [[JSQMessage alloc] initWithSenderId:senderId
-                                                 senderDisplayName:senderDisplayName
-                                                              date:date
-                                                              text:text];
-
-        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
-        [body setStringValue:text];
-
-
-        NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
-
-
-
-        NSXMLElement * latitude = [NSXMLElement elementWithName:@"latitude" stringValue:GeoLtitude];
-        NSXMLElement * longitude = [NSXMLElement elementWithName:@"longitude" stringValue:GeoLength];
-
-
-        [message addChild:body];
-        [message addChild:latitude];
-        [message addChild:longitude];
-        
-        
-        [self.xmppStream sendElement:message];
-        [self.demoData.messages addObject:message1];
-
-        [self finishSendingMessageAnimated:YES];
-    }
-
-
-
-- (void)didPressAccessoryButton:(UIButton *)sender
-    {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Выбор камеры"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"отмена"
-                                             destructiveButtonTitle:nil
-                                                  otherButtonTitles:@"Сфотографировать", @"Выбрать из галлереи",  nil];
-
-        [sheet showFromToolbar:self.inputToolbar];
-}
-
-
-
-
 
 #pragma mark -
 #pragma mark Chat delegates
@@ -436,10 +544,23 @@ date:(NSDate *)date
 - (void)viewDidUnload {
     [super viewDidUnload];
 }
+
+
+
+- (NSString *) getCurrentTime {
+
+    NSDate *nowUTC = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    return [dateFormatter stringFromDate:nowUTC];
+
+}
 #pragma mark - Send image method
 
 
-- (IBAction)openCamera:(id)sender {
+- (void)didPressAccessoryButton:(UIButton *)sender{
 
     NSString *actionSheetTitle = @"Выбор камеры"; //Action Sheet Title
     NSString *other1 = @"Сфотографировать";
@@ -460,7 +581,7 @@ date:(NSDate *)date
 }
 
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
 
 
@@ -524,23 +645,14 @@ date:(NSDate *)date
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:chosenImage];
-
-    JSQMessage *photoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                   displayName:kJSQDemoAvatarDisplayNameSquires
-                                                         media:photoItem];
-
-    [self.demoData.messages addObject:photoMessage];
-
-    [self finishSendingMessageAnimated:YES];
-
+    
+    [self sendImage:chosenImage];
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
     
     
 }
-
-
 
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -553,7 +665,12 @@ date:(NSDate *)date
     
 }
 
-#pragma mark - JSQMessages CollectionView DataSource
+
+
+
+#pragma mark - JSQVIEW
+
+
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -614,7 +731,7 @@ date:(NSDate *)date
     }
 
 
-    return [self.demoData.avatars objectForKey:message.senderId];
+    return nil;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -710,6 +827,10 @@ date:(NSDate *)date
 
 
 
+#pragma mark - JSQMessages collection view flow layout delegate
+
+#pragma mark - Adjusting cell label heights
+
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -762,7 +883,7 @@ date:(NSDate *)date
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView
                 header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
 {
-    [self sendQuery];
+    NSLog(@"Load earlier messages!");
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
@@ -780,9 +901,11 @@ date:(NSDate *)date
     NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
 }
 
+
+
+
+
+
+
+
 @end
-
-
-
-
-

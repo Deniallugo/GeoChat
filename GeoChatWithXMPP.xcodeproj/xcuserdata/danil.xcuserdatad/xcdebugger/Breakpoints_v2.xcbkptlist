@@ -1148,8 +1148,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "548"
             endingLineNumber = "548"
-            landmarkName = "-touchesBegan:withEvent:"
-            landmarkType = "5">
+            landmarkName = "@implementation SMChatViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1539,7 +1539,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "497"
             endingLineNumber = "497"
-            landmarkName = "-takePhoto"
+            landmarkName = "-sendQuery"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1555,7 +1555,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "496"
             endingLineNumber = "496"
-            landmarkName = "-takePhoto"
+            landmarkName = "-sendQuery"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1571,8 +1571,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "511"
             endingLineNumber = "511"
-            landmarkName = "-selectPhoto"
-            landmarkType = "5">
+            landmarkName = "@implementation SMChatViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1587,7 +1587,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "525"
             endingLineNumber = "525"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            landmarkName = "-initWithUser:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1635,7 +1635,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
             endingLineNumber = "212"
-            landmarkName = "-appDelegate"
+            landmarkName = "-radiusChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1651,7 +1651,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "168"
             endingLineNumber = "168"
-            landmarkName = "-stopUpdatingLocationWithMessage:"
+            landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1667,7 +1667,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "166"
             endingLineNumber = "166"
-            landmarkName = "-stopUpdatingLocationWithMessage:"
+            landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1875,7 +1875,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "@interface SMChatViewController"
+            landmarkName = "@protocol JSQDemoViewControllerDelegate"
             landmarkType = "2">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2003,7 +2003,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
-            landmarkName = "-viewWillAppear:"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
