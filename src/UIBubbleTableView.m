@@ -12,6 +12,8 @@
 #import "NSBubbleData.h"
 #import "UIBubbleHeaderTableViewCell.h"
 #import "UIBubbleTypingTableViewCell.h"
+#import <UIKit/UIKit.h>
+
 
 @interface UIBubbleTableView ()
 
@@ -174,7 +176,7 @@
     // Now typing
 	if (indexPath.section >= [self.bubbleSection count])
     {
-        return MAX([UIBubbleTypingTableViewCell height], self.showAvatars ? 52 : 0);
+        return MAX([UIBubbleTypingTableViewCell height], self.showAvatars ? 0 : 0);
     }
     
     // Header
@@ -184,7 +186,7 @@
     }
     
     NSBubbleData *data = [[self.bubbleSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
-    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? 52 : 0);
+    return data.insets.top + data.view.frame.size.height + data.insets.bottom;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -212,11 +214,11 @@
         
         if (cell == nil) cell = [[UIBubbleHeaderTableViewCell alloc] init];
 
-        cell.date = data.date;
+  //      cell.date = data.date;
        
         return cell;
     }
-    
+
     // Standard bubble    
     static NSString *cellId = @"tblBubbleCell";
     UIBubbleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -225,7 +227,7 @@
     if (cell == nil) cell = [[UIBubbleTableViewCell alloc] init];
     
     cell.data = data;
-    cell.showAvatar = self.showAvatars;
+    cell.showAvatar = [data delivered];
     
     return cell;
 }
@@ -241,6 +243,19 @@
     	[self scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:([self numberOfRowsInSection:lastSectionIdx] - 1) inSection:lastSectionIdx] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
     }
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+
+    UIBubbleTableViewCell *cell = (UIBubbleTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    if(cell.data.isImage){
+        NSLog(@"touch on image ");
+    }
+    NSLog(@"touch");
+}
+
+
 
 
 @end

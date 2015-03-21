@@ -31,8 +31,10 @@
     bubbleTable.bubbleDataSource = self;
     identificator = 0 ;
 
-    bubbleTable.showAvatars = NO;
+    bubbleTable.showAvatars = YES;
 
+
+ //   bubbleTable.delegate=self;
 
 
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
@@ -64,8 +66,8 @@
     
     [self->locationManager startUpdatingLocation];
 
-    GeoLatitude =@"43,0288";
-    GeoLongtitude = @"131,9013";
+    GeoLatitude =@"43.0288";
+    GeoLongtitude = @"131.9013";
 
 
     //open camera
@@ -77,6 +79,11 @@
     [self.view addSubview:button];
     firstUpdateLocation = true;
     [self sendQuery];
+    NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 1
+                                                  target: self
+                                                selector:@selector(sendQuery)
+                                                userInfo: nil repeats:YES];
+
 }
 
 
@@ -164,42 +171,63 @@
 
 }
 
+-(NSBubbleData*) foundIdMessage:(NSString*) identifier{
 
-- (void)newMessageReceived:(NSBubbleData *)messageContent animated:(BOOL)animated {
+    for(NSBubbleData* i in messages){
+        if ( [i.identificator isEqualToString:identifier])
+            return i;
+    }
+    return nil;
+
+}
+
+- (void)newMessageReceived:(NSMutableDictionary *)messageContent animated:(BOOL)animated {
 
     NSString *msg = [messageContent valueForKey:@"msg"];
     NSString *sender = [messageContent valueForKey:@"sender"];
     NSDate *data = [messageContent valueForKey:@"date"];
-    NSInteger identificator = [[messageContent valueForKey:@"id"] integerValue];
+    identificator = [[messageContent valueForKey:@"id"] integerValue];
     NSBubbleData *m;
     NSString* s  = [NSString stringWithFormat: @"%ld", (long)identificator];
+    if([sender isEqual:@"okMsg" ]){
+
+        NSBubbleData* okMsg = [self foundIdMessage:s];
+        if(okMsg)
+            okMsg.delivered = YES;
+        [bubbleTable reloadData];
+        return;
+    }
+
     if([sender  isEqual: @"you"]){
-        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeMine identificator:s];
+        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeMine ];
     }
     else
-        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeSomeoneElse identificator:[NSString stringWithFormat: @"%ld", (long)identificator]];
+        m = [NSBubbleData dataWithText:msg date:data type:BubbleTypeSomeoneElse ];
+    m.identificator = s;
+    if([[messageContent valueForKey:@"delivered"] isEqual:@"yes"] ){
+        m.delivered = YES;
+
+    }
     [messages addObject:m];
 
     [bubbleTable reloadData];
 
-   // NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:messages.count - 1
-                             //                      inSection:0];
     [bubbleTable scrollBubbleViewToBottomAnimated:animated];
 
-//    [bubbleTable scrollToRowAtIndexPath:topIndexPath
-//                       atScrollPosition:UITableViewScrollPositionTop
-//                               animated:YES];
+
 }
 
 
 - (void)newMessagesReceived:(NSMutableArray *)messagesRecv {
+//    NSBubbleData* mes = [messages lastObject];
 
     [messages removeAllObjects];
-    for(NSBubbleData* i in messagesRecv){
+    for(NSMutableDictionary* i in messagesRecv){
 
         [self newMessageReceived:i animated:NO];
     }
-   // [bubbleTable reloadData];
+//    if( [messages lastObject] != mes){
+      //  }
 
 }
 
@@ -208,12 +236,9 @@
 - (IBAction)sendMessage {
 
     NSString *messageStr = textField.text;
-    NSBubbleData *mes =  [messages lastObject];
-   // = [[mes identificator] integerValue];
     identificator++;
 
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-    //NSString *f = [self getCurrentTime];
     if([messageStr length]) {
 
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -240,10 +265,12 @@
         [self.xmppStream sendElement:message];
 
         textField.text = @"";
-        NSBubbleData *m = [NSBubbleData dataWithText:messageStr date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine identificator:[NSString stringWithFormat: @"%ld", (long)identificator]];
-
+        NSBubbleData *m = [NSBubbleData dataWithText:messageStr date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine ];
+        m.delivered = NO;
+        m.identificator = [NSString stringWithFormat: @"%ld", (long)identificator];
         [messages addObject:m];
-
+        
+        
     }
 
     [bubbleTable reloadData];
@@ -262,22 +289,30 @@
     if([messageStr length] > 0 || [imagePic isKindOfClass:[UIImage class]] )
 
     {
-        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
 
+
+
+        NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
         [body setStringValue:messageStr];
 
 
         NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
 
-        [message addAttributeWithName:@"type"stringValue:@"chat"];
+        [message addAttributeWithName:@"id" integerValue: identificator];
+        DDXMLElement *geoloc = [DDXMLElement elementWithName:@"geoloc" xmlns:@"http://jabber.org/protocol/geoloc"];
 
-        [message addAttributeWithName:@"to"stringValue:nil];
-        [message addAttributeWithName:@"latitude" stringValue:GeoLatitude];
-        [message addAttributeWithName:@"length" stringValue:GeoLongtitude];
-        [message addAttributeWithName:@"time" stringValue:f];
 
+
+        NSXMLElement * latitude = [NSXMLElement elementWithName:@"lat" stringValue:GeoLatitude];
+        NSXMLElement * longitude = [NSXMLElement elementWithName:@"lon" stringValue:GeoLongtitude];
+        DDXMLElement *request = [DDXMLElement elementWithName:@"request" xmlns:@"urn:xmpp:receipts"];
+
+        [geoloc addChild:latitude];
+        [geoloc addChild:longitude];
 
         [message addChild:body];
+        [message addChild:geoloc];
+        [message addChild:request];
 
         if([imagePic isKindOfClass:[UIImage class]])
 
@@ -299,12 +334,12 @@
 
         }
 
-        [self.xmppStream sendElement:message];
+//        [self.xmppStream sendElement:message];
 
     }
     textField.text = @"";
 
-    NSBubbleData *m = [NSBubbleData dataWithImage:imagePic date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine identificator:@"1"];
+    NSBubbleData *m = [NSBubbleData dataWithImage:imagePic date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
 
     [messages addObject:m];
 
@@ -551,6 +586,7 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
+
 
 
 

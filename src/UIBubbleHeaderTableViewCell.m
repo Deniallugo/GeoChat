@@ -21,7 +21,7 @@
 
 + (CGFloat)height
 {
-    return 28.0;
+    return 0;
 }
 
 - (void)setDate:(NSDate *)value
@@ -49,7 +49,7 @@
     self.label.shadowColor = [UIColor whiteColor];
     self.label.textColor = [UIColor darkGrayColor];
     self.label.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.label];
+  //  [self addSubview:self.label];
 }
 
 

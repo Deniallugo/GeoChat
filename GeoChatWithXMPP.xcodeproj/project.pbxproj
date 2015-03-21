@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8316C31F1AAF1FC90090A993 /* Iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8316C31E1AAF1FC90090A993 /* Iphone4.storyboard */; };
 		83268F371AA7C900005A3B3C /* bubbleMine.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2D1AA7C900005A3B3C /* bubbleMine.png */; };
 		83268F381AA7C900005A3B3C /* bubbleMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2E1AA7C900005A3B3C /* bubbleMine@2x.png */; };
 		83268F391AA7C900005A3B3C /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = 83268F2F1AA7C900005A3B3C /* bubbleSomeone.png */; };
@@ -23,11 +22,13 @@
 		832F6A341AA83CC100A8DA6B /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2C1AA83CC100A8DA6B /* UIBubbleTableView.m */; };
 		832F6A351AA83CC100A8DA6B /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A2E1AA83CC100A8DA6B /* UIBubbleTableViewCell.m */; };
 		832F6A361AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */; };
+		83867C3A1ABB0A1F003AE534 /* ok.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 83867C391ABB0A1F003AE534 /* ok.jpg */; };
 		838CB1351AA734F300552E87 /* NSString + Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 838CB1341AA734F300552E87 /* NSString + Utils.m */; };
+		83B9FCC21ABBE59F00B16D76 /* WebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B9FCC11ABBE59F00B16D76 /* WebView.m */; };
+		83B9FCC41ABBF9D600B16D76 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B9FCC31ABBF9D600B16D76 /* WebKit.framework */; };
 		83D268BF1AA5556900305C3A /* SMRegistrationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D268BE1AA5556900305C3A /* SMRegistrationView.m */; };
 		83E6EC981A9F51CB00E004E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC971A9F51CB00E004E1 /* main.m */; };
 		83E6EC9B1A9F51CB00E004E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC9A1A9F51CB00E004E1 /* AppDelegate.m */; };
-		83E6EC9E1A9F51CB00E004E1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E6EC9D1A9F51CB00E004E1 /* ViewController.m */; };
 		83E6ECA11A9F51CB00E004E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E6EC9F1A9F51CB00E004E1 /* Main.storyboard */; };
 		83E6ECA31A9F51CB00E004E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E6ECA21A9F51CB00E004E1 /* Images.xcassets */; };
 		83E6ECA61A9F51CB00E004E1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E6ECA41A9F51CB00E004E1 /* LaunchScreen.xib */; };
@@ -196,7 +197,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8316C31E1AAF1FC90090A993 /* Iphone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Iphone4.storyboard; sourceTree = "<group>"; };
 		83268F2D1AA7C900005A3B3C /* bubbleMine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleMine.png; sourceTree = "<group>"; };
 		83268F2E1AA7C900005A3B3C /* bubbleMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleMine@2x.png"; sourceTree = "<group>"; };
 		83268F2F1AA7C900005A3B3C /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
@@ -218,8 +218,12 @@
 		832F6A2F1AA83CC100A8DA6B /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
 		832F6A301AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
 		832F6A311AA83CC100A8DA6B /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
+		83867C391ABB0A1F003AE534 /* ok.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ok.jpg; path = images/ok.jpg; sourceTree = "<group>"; };
 		838CB1331AA734F300552E87 /* NSString + Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString + Utils.h"; sourceTree = "<group>"; };
 		838CB1341AA734F300552E87 /* NSString + Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString + Utils.m"; sourceTree = "<group>"; };
+		83B9FCC01ABBE59F00B16D76 /* WebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebView.h; sourceTree = "<group>"; };
+		83B9FCC11ABBE59F00B16D76 /* WebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebView.m; sourceTree = "<group>"; };
+		83B9FCC31ABBF9D600B16D76 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		83D268BD1AA5556900305C3A /* SMRegistrationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMRegistrationView.h; sourceTree = "<group>"; };
 		83D268BE1AA5556900305C3A /* SMRegistrationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMRegistrationView.m; sourceTree = "<group>"; };
 		83E6EC921A9F51CB00E004E1 /* GeoChatWithXMPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoChatWithXMPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,8 +231,6 @@
 		83E6EC971A9F51CB00E004E1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E6EC991A9F51CB00E004E1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		83E6EC9A1A9F51CB00E004E1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		83E6EC9C1A9F51CB00E004E1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		83E6EC9D1A9F51CB00E004E1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		83E6ECA01A9F51CB00E004E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83E6ECA21A9F51CB00E004E1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		83E6ECA51A9F51CB00E004E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B9FCC41ABBF9D600B16D76 /* WebKit.framework in Frameworks */,
 				83E6EEC71A9F52BC00E004E1 /* CoreGraphics.framework in Frameworks */,
 				83E6EEC51A9F529700E004E1 /* UIKit.framework in Frameworks */,
 				83E6EEC31A9F527D00E004E1 /* CFNetwork.framework in Frameworks */,
@@ -649,6 +652,7 @@
 		83E6EC891A9F51CB00E004E1 = {
 			isa = PBXGroup;
 			children = (
+				83B9FCC31ABBF9D600B16D76 /* WebKit.framework */,
 				838CB1311AA72FB800552E87 /* XMPP */,
 				838CB1301AA72FA300552E87 /* Framework */,
 				83E6EC941A9F51CB00E004E1 /* GeoChatWithXMPP */,
@@ -673,8 +677,6 @@
 				838CB1321AA72FD900552E87 /* Resourses */,
 				83E6EC991A9F51CB00E004E1 /* AppDelegate.h */,
 				83E6EC9A1A9F51CB00E004E1 /* AppDelegate.m */,
-				83E6EC9C1A9F51CB00E004E1 /* ViewController.h */,
-				83E6EC9D1A9F51CB00E004E1 /* ViewController.m */,
 				83E6EEC81A9F592A00E004E1 /* SMLoginView.h */,
 				83E6EEC91A9F592A00E004E1 /* SMLoginView.m */,
 				83E6EECB1A9F59B500E004E1 /* SMChatViewController.h */,
@@ -683,13 +685,14 @@
 				83E6EECF1A9F5ADE00E004E1 /* SMMessageDelegate.h */,
 				83D268BD1AA5556900305C3A /* SMRegistrationView.h */,
 				83D268BE1AA5556900305C3A /* SMRegistrationView.m */,
-				8316C31E1AAF1FC90090A993 /* Iphone4.storyboard */,
 				83E6EC9F1A9F51CB00E004E1 /* Main.storyboard */,
 				83E6ECA21A9F51CB00E004E1 /* Images.xcassets */,
 				83E6ECA41A9F51CB00E004E1 /* LaunchScreen.xib */,
 				83E6EC951A9F51CB00E004E1 /* Supporting Files */,
 				838CB1331AA734F300552E87 /* NSString + Utils.h */,
 				838CB1341AA734F300552E87 /* NSString + Utils.m */,
+				83B9FCC01ABBE59F00B16D76 /* WebView.h */,
+				83B9FCC11ABBE59F00B16D76 /* WebView.m */,
 			);
 			path = GeoChatWithXMPP;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 		83E6EC951A9F51CB00E004E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				83867C391ABB0A1F003AE534 /* ok.jpg */,
 				83E6EC961A9F51CB00E004E1 /* Info.plist */,
 				83E6EC971A9F51CB00E004E1 /* main.m */,
 			);
@@ -1644,7 +1648,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8316C31F1AAF1FC90090A993 /* Iphone4.storyboard in Resources */,
+				83867C3A1ABB0A1F003AE534 /* ok.jpg in Resources */,
 				83E6EEB11A9F51DA00E004E1 /* build-libidn.sh in Resources */,
 				83268F3C1AA7C900005A3B3C /* missingAvatar@2x.png in Resources */,
 				83268F3B1AA7C900005A3B3C /* missingAvatar.png in Resources */,
@@ -1706,7 +1710,6 @@
 				83E6EE911A9F51DA00E004E1 /* XMPPTime.m in Sources */,
 				83E6EE5B1A9F51DA00E004E1 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
 				83E6EE401A9F51DA00E004E1 /* XMPPProcessOne.m in Sources */,
-				83E6EC9E1A9F51CB00E004E1 /* ViewController.m in Sources */,
 				83E6EE4D1A9F51DA00E004E1 /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				83E6EE7F1A9F51DA00E004E1 /* XMPPCapabilities.m in Sources */,
 				83E6EE961A9F51DA00E004E1 /* XMPPMessage+XEP_0280.m in Sources */,
@@ -1719,6 +1722,7 @@
 				83E6EE541A9F51DA00E004E1 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				83E6EE411A9F51DA00E004E1 /* XMPPReconnect.m in Sources */,
 				83E6EE3D1A9F51DA00E004E1 /* XMPPIncomingFileTransfer.m in Sources */,
+				83B9FCC21ABBE59F00B16D76 /* WebView.m in Sources */,
 				83E6EE581A9F51DA00E004E1 /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
 				83E6EE741A9F51DA00E004E1 /* XMPPRegistration.m in Sources */,
 				83E6EE431A9F51DA00E004E1 /* XMPPResourceCoreDataStorageObject.m in Sources */,

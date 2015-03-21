@@ -263,7 +263,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
 
             NSString* text = [[i elementForName:@"text"] stringValue];
             NSString* user = [[i elementForName:@"user"] stringValue];
-            NSString *identificator = [[i elementForName:@"id"] stringValue];
+            NSString* identificator = [[i elementForName:@"id"] stringValue];
+            NSString* delivered ;
             if(!identificator){
                 identificator =@"1";
             }
@@ -271,6 +272,11 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
 
             if([user isEqual:login]){
                 user = @"you";
+                delivered =@"yes";
+
+            }
+            else{
+                delivered = @"no";
             }
             NSInteger a = [[i elementForName:@"time"] stringValueAsNSInteger];
             date = [NSDate dateWithTimeIntervalSince1970:a];
@@ -280,6 +286,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
             [m setObject:user forKey:@"sender"];
             [m setObject:date forKey:@"date"];
             [m setObject:identificator forKey:@"id"];
+            [m setObject:delivered forKey:@"delivered"];
 
             [messages addObject:m];
 
@@ -303,17 +310,17 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE;
     if (!(mes = [message elementForName:@"received"])){
         NSString *msg = [[message elementForName:@"text"] stringValue];
         NSString *from = [[message elementForName:@"user"] stringValue];
-        NSString *identificator = [[message elementForName:@"id"] stringValue];
+       // NSString *identificator = [[message elementForName:@"id"] stringValue];
         //  UIImage * image  = [[message elementForName:@"img"] ];
         [m setObject:msg forKey:@"msg"];
         [m setObject:from forKey:@"sender"];
-        [m setObject:identificator forKey:@"id"];
+        [m setObject:@"0" forKey:@"id"];
 
     }
     else{
         NSString* s = [[mes attributeForName:@"id"] stringValue] ;
         [m setObject:@"all is ok" forKey:@"msg"];
-        [m setObject:@"you" forKey:@"sender"];
+        [m setObject:@"okMsg" forKey:@"sender"];
         [m setObject:s forKey:@"id"];
     }
 

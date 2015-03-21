@@ -42,16 +42,16 @@
 const UIEdgeInsets textInsetsMine = {5, 10, 11, 17};
 const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 
-+ (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString *) identificator
++ (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type  
 {
 #if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithText:text date:date type:type identificator:identificator ] autorelease];
+    return [[[NSBubbleData alloc] initWithText:text date:date type:type   ] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithText:text date:date type:type identificator:identificator];
+    return [[NSBubbleData alloc] initWithText:text date:date type:type  ];
 #endif    
 }
 
-- (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString*)identificator
+- (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type  
 {
     UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(220, 9999) lineBreakMode:NSLineBreakByWordWrapping];
@@ -62,13 +62,14 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
     label.text = (text ? text : @"");
     label.font = font;
     label.backgroundColor = [UIColor clearColor];
-    
+    self.isImage = NO;
+
 #if !__has_feature(objc_arc)
     [label autorelease];
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
-    return [self initWithView:label date:date type:type insets:insets identificator:identificator];
+    return [self initWithView:label date:date type:type insets:insets  ];
 }
 
 #pragma mark - Image bubble
@@ -76,16 +77,16 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 const UIEdgeInsets imageInsetsMine = {11, 13, 16, 22};
 const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 
-+ (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString*)identificator
++ (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type  
 {
 #if !__has_feature(objc_arc)
     return [[[NSBubbleData alloc] initWithImage:image date:date type:type] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithImage:image date:date type:type identificator:identificator];
+    return [[NSBubbleData alloc] initWithImage:image date:date type:type  ];
 #endif    
 }
 
-- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type identificator:(NSString*)identificator
+- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type  
 {
     CGSize size = image.size;
     if (size.width > 220)
@@ -98,28 +99,28 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
     imageView.image = image;
     imageView.layer.cornerRadius = 5.0;
     imageView.layer.masksToBounds = YES;
-
+    self.isImage = YES;
     
 #if !__has_feature(objc_arc)
     [imageView autorelease];
 #endif
     
     UIEdgeInsets insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
-    return [self initWithView:imageView date:date type:type insets:insets identificator:identificator];       
+    return [self initWithView:imageView date:date type:type insets:insets  ];       
 }
 
 #pragma mark - Custom view bubble
 
-+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets identificator:(NSString*)identificator
++ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets  
 {
 #if !__has_feature(objc_arc)
     return [[[NSBubbleData alloc] initWithView:view date:date type:type insets:insets] autorelease];
 #else
-    return [[NSBubbleData alloc] initWithView:view date:date type:type insets:insets identificator:identificator];
+    return [[NSBubbleData alloc] initWithView:view date:date type:type insets:insets  ];
 #endif    
 }
 
-- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets identificator:(NSString*)identificator
+- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets  
 {
     self = [super init];
     if (self)
@@ -133,7 +134,6 @@ const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 #endif
         _type = type;
         _insets = insets;
-        _identificator = [[NSString alloc] initWithString:identificator];
     }
     return self;
 }
